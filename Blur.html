@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Primary meta -->
+<title>blur — Know them before you see them</title>
+<meta name="description" content="Blur is a relationship app built for the generation that's done performing for strangers. Photos stay blurred until access is earned — discovery begins with who someone is, not what they look like.">
+<meta name="theme-color" content="#1A1714">
+<link rel="canonical" href="https://blurmeet.com/">
+
+<!-- Favicons -->
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon-180.png">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Blur">
+<meta property="og:url" content="https://blurmeet.com/">
+<meta property="og:title" content="blur — Know them before you see them">
+<meta property="og:description" content="A relationship app for the generation that's done performing for strangers. Photos stay blurred until access is earned.">
+<meta property="og:image" content="https://blurmeet.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Blur — Know them. Before you see them.">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="blur — Know them before you see them">
+<meta name="twitter:description" content="A relationship app for the generation that's done performing for strangers. Photos stay blurred until access is earned.">
+<meta name="twitter:image" content="https://blurmeet.com/og-image.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="blur.css">
+</head>
+<body>
+
+<template id="__bundler_thumbnail">
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100" height="100" fill="#1A1714"/>
+  <text x="50" y="60" text-anchor="middle" font-family="Georgia,serif" font-size="34" font-weight="300" fill="#F5F0E8">blur<tspan fill="#C9A96E">.</tspan></text>
+</svg>
+</template>
+
+<!-- fixed wordmark -->
+<div class="topbar">
+  <span class="wordmark">blur<span class="dot">.</span></span>
+</div>
+
+<!-- ============================================================
+     01 — HERO
+     ============================================================ -->
+<header class="hero" data-screen-label="01 Hero">
+  <div class="hero__portrait" id="heroPortrait">
+    <img src="portrait.png" alt="">
+  </div>
+  <div class="hero__copy">
+    <h1 class="display" data-reveal>Know them.<br><span class="nowrap">Before you <em>see</em> them.</span></h1>
+    <p class="lede hero__sub" data-reveal data-delay="1">For thirty years,<br>online relationships started with a photograph.<br>That was the mistake.</p>
+    <a class="cta" data-reveal data-delay="2">Request Early Access <span class="arrow">→</span></a>
+  </div>
+  <div class="scrollcue" data-reveal data-delay="3">
+    <span class="scrollcue__txt">scroll to <em>unblur</em></span>
+    <i class="scrollcue__line"><b></b></i>
+  </div>
+</header>
+
+<!-- ============================================================
+     02 — THE FEELING
+     ============================================================ -->
+<section class="section feeling" data-screen-label="02 The Feeling">
+  <div class="wrap">
+    <div class="row">
+      <p class="stmt" data-reveal>She received four hundred likes.<br><span class="q">Trusted none of them.</span></p>
+    </div>
+    <div class="row right">
+      <p class="stmt" data-reveal>He spent three years on dating apps.<br><span class="q">Still unsure.</span></p>
+    </div>
+    <div class="row">
+      <p class="stmt stmt--wide" data-reveal>A family filters two thousand<br>matrimony profiles.<br><span class="q">Still feels anxious.</span></p>
+    </div>
+    <div class="row resolve">
+      <p class="stmt resolve__stmt" data-reveal><span class="nowrap">The next generation won't choose partners</span><br><span class="nowrap">the way the last generation scrolled.</span> <em>blur is what comes after the swipe.</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     03 — TODAY FEELS LIKE
+     ============================================================ -->
+<section class="section living tall" data-screen-label="03 Living Profile">
+  <div class="wrap">
+    <div class="living__grid">
+      <div class="living__text manifesto">
+        <p class="mf-sub" data-reveal>Attraction was never the problem.</p>
+        <h2 class="mf-hero" data-reveal><em>Knowing</em> them was.</h2>
+      </div>
+
+      <div class="phone__stage" data-reveal data-delay="1">
+        <div class="phone">
+          <div class="phone__screen disc is-living">
+            <div class="disc__top">
+              <span class="disc__mark">blur<span class="disc__mark-2"> dating</span></span>
+              <span class="disc__moon"></span>
+            </div>
+            <div class="disc__vibe">
+              <div class="disc__vibe-label" id="livingLabel">Today feels like</div>
+              <p class="disc__typing"><span id="livingVibe">monday — chasing something bigger than myself</span></p>
+            </div>
+            <div class="disc__card lp-card" id="lpCard">
+              <div class="lp-track" id="lpTrack">
+                <div class="lp-photo" id="lpPhoto">
+                  <div class="disc__photo"></div>
+                  <div class="disc__badges">
+                    <span class="disc__pill">Silhouette only</span>
+                    <span class="disc__live"><i></i>just now</span>
+                  </div>
+                  <div class="lp-profile">
+                    <div class="lp-name">King<span>, 34</span></div>
+                    <div class="lp-loc">Bengaluru · India</div>
+                    <div class="lp-group">
+                      <div class="lp-label">Looking for</div>
+                      <div class="lp-chips">
+                        <span class="lp-chip">Casual dating</span>
+                        <span class="lp-chip">Open conversations</span>
+                        <span class="lp-chip">Fun experiences</span>
+                      </div>
+                    </div>
+                    <div class="lp-group">
+                      <div class="lp-label">Interests</div>
+                      <div class="lp-chips">
+                        <span class="lp-chip"><em>✦</em>Live concerts</span>
+                        <span class="lp-chip"><em>✦</em>Lo-fi / chill</span>
+                        <span class="lp-chip"><em>✦</em>Old Bollywood</span>
+                        <span class="lp-chip"><em>✦</em>Indie music</span>
+                        <span class="lp-chip"><em>✦</em>Anime</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="lp-hint" id="lpHint">Scroll to know more<span class="lp-chev">⌄</span></div>
+                </div>
+                <div class="lp-reflect">
+                  <div class="lp-btl">Between the lines</div>
+                  <p class="lp-quote">“I'm more honest about what I don't know than most people are comfortable with.”</p>
+                  <div class="lp-qa">
+                    <p class="lp-q">What makes talking to someone instantly feel easy?</p>
+                    <p class="lp-a">When it doesn't feel like an interview.</p>
+                  </div>
+                  <div class="lp-qa">
+                    <p class="lp-q">What makes attraction disappear instantly?</p>
+                    <p class="lp-a">When the whole conversation feels like a performance.</p>
+                  </div>
+                  <div class="lp-qa">
+                    <p class="lp-q">A tiny red flag that's weirdly important to you?</p>
+                    <p class="lp-a">Still very close friends with their ex since 2019.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="phone__notch"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     04 — DISCOVER  (the product, shown — not explained)
+     ============================================================ -->
+<section class="thresh" data-screen-label="04 Discover">
+  <div class="wrap thresh__grid">
+    <div class="thresh__stage" data-reveal>
+      <div class="phone">
+        <div class="phone__screen disc">
+          <div class="disc__top">
+            <span class="disc__mark">blur<span class="disc__mark-2"> dating</span></span>
+            <span class="disc__moon"></span>
+          </div>
+          <div class="disc__vibe">
+            <div class="disc__vibe-label">Your vibe · just now</div>
+            <p class="disc__typing"><span id="discType"></span><span class="disc__caret"></span></p>
+          </div>
+          <div class="disc__card">
+            <div class="disc__photo"></div>
+            <div class="disc__badges">
+              <span class="disc__pill">Silhouette only</span>
+              <span class="disc__live"><i></i>just now</span>
+            </div>
+            <div class="disc__body">
+              <div class="disc__btl">Between the lines</div>
+              <p class="disc__quote">“I'm more honest about what I don't know than most people are comfortable with.”</p>
+              <div class="disc__tags">
+                <span class="disc__tag">Open conversations</span>
+                <span class="disc__tag">Real depth</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="phone__notch"></div>
+      </div>
+    </div>
+
+    <div class="thresh__text belief">
+      <p class="bf-eyebrow" data-reveal>The Living Profile</p>
+      <h2 class="bf-hero" data-reveal>People are not static.</h2>
+      <p class="bf-q" data-reveal>Why are profiles?</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     05 — HOW BLUR WORKS  (light)
+     ============================================================ -->
+<section class="order light-section" data-screen-label="05 The Order of Things" id="order">
+  <div class="order__track">
+    <div class="order__pin">
+      <p class="eyebrow order__eyebrow" data-reveal>The Order of Things</p>
+
+      <div class="order__intro">
+        <div class="order__intro-inner">
+          <p class="order__intro-l2">There's a <em>better</em> way to meet someone.</p>
+        </div>
+      </div>
+
+      <div class="order__stage">
+        <div class="order__beats">
+          <div class="order__beat" data-beat="1">
+            <span class="order__word">Silhouette</span>
+            <span class="order__before">before the face.</span>
+          </div>
+          <div class="order__beat" data-beat="2">
+            <span class="order__word">Curiosity</span>
+            <span class="order__before">before appearance.</span>
+          </div>
+          <div class="order__beat" data-beat="3">
+            <span class="order__word">Connection</span>
+            <span class="order__before">before attraction.</span>
+          </div>
+          <div class="order__beat" data-beat="4">
+            <span class="order__word">Trust</span>
+            <span class="order__before">before visibility.</span>
+          </div>
+          <div class="order__beat order__beat--final" data-beat="5">
+            <p class="order__final">By the time you see them,<br>they're no longer a <em>stranger</em>.</p>
+          </div>
+        </div>
+
+        <div class="order__device">
+          <div class="phone">
+            <div class="phone__screen disc order__phone">
+              <div class="disc__top">
+                <span class="disc__mark">blur<span class="disc__mark-2"> dating</span></span>
+                <span class="disc__moon"></span>
+              </div>
+              <div class="disc__vibe">
+                <div class="disc__vibe-label">Your vibe · just now</div>
+                <p class="disc__typing"><span id="orderVibe">here for the kind of quiet that doesn't need filling</span></p>
+              </div>
+              <div class="disc__card order__card">
+                <div class="order__img"></div>
+
+                <div class="ophase ophase--journey is-active" data-phase="0">
+                  <div class="ojourney">
+                    <div class="ophase__top">
+                      <span class="disc__pill">Silhouette only</span>
+                      <span class="disc__live"><i></i>just now</span>
+                    </div>
+                    <div class="ophase__profile">
+                      <div class="lp-name">King<span>, 34</span></div>
+                      <div class="lp-loc">Bengaluru · India</div>
+                      <div class="lp-group">
+                        <div class="lp-label">Looking for</div>
+                        <div class="lp-chips lp-chips--row">
+                          <span class="lp-chip">Casual dating</span>
+                          <span class="lp-chip">Open conversations</span>
+                        </div>
+                      </div>
+                      <div class="lp-group">
+                        <div class="lp-label">Interests</div>
+                        <div class="lp-chips">
+                          <span class="lp-chip"><em>✦</em>Live concerts</span>
+                          <span class="lp-chip"><em>✦</em>Lo-fi / chill</span>
+                          <span class="lp-chip"><em>✦</em>Old Bollywood</span>
+                          <span class="lp-chip"><em>✦</em>Indie music</span>
+                          <span class="lp-chip"><em>✦</em>Anime</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="oreflect">
+                      <div class="oreflect__eyebrow">Between the lines</div>
+                      <p class="oreflect__quote">“I'm more honest about what I don't know than most people are comfortable with.”</p>
+                      <div class="oreflect__qa">
+                        <p class="oreflect__q">What makes talking to someone instantly feel easy?</p>
+                        <p class="oreflect__a">When it doesn't feel like an interview.</p>
+                      </div>
+                      <div class="oreflect__qa">
+                        <p class="oreflect__q">What makes attraction disappear instantly?</p>
+                        <p class="oreflect__a">When the whole conversation feels like a performance.</p>
+                      </div>
+                      <div class="oreflect__qa">
+                        <p class="oreflect__q">A tiny red flag that's weirdly important to you?</p>
+                        <p class="oreflect__a">Still very close friends with their ex since 2019.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="ophase ophase--chat" data-phase="2">
+                <div class="chat__head">
+                  <span class="chat__back">‹</span>
+                  <span class="chat__avatar">k</span>
+                  <span class="chat__id">
+                    <span class="chat__name">King <em>✦</em></span>
+                    <span class="chat__sub">Tap to view profile</span>
+                  </span>
+                </div>
+                <div class="chat__scroll">
+                  <div class="chat__reveal">
+                    <div class="chat__reveal-h">Photo reveal stays mutual</div>
+                    <p class="chat__reveal-p">Keep talking until both of you are ready to unlock more.</p>
+                    <span class="chat__reveal-btn">Request reveal</span>
+                  </div>
+                  <div class="chat__date"><span>Wed, 13 May</span></div>
+                  <div class="chat__thread">
+                    <span class="chat__bubble chat__bubble--them">What are you chasing these days?</span>
+                    <span class="chat__bubble">Less noise.</span>
+                    <span class="chat__bubble chat__bubble--them">And finding it?</span>
+                    <span class="chat__bubble">For the first time in this conversation.</span>
+                    <span class="chat__bubble chat__bubble--them">That's a dangerous answer.</span>
+                    <span class="chat__bubble">Better than a boring one.</span>
+                    <span class="chat__time">09:50</span>
+                  </div>
+                </div>
+                <div class="chat__bar">
+                  <span class="chat__field">Message…</span>
+                  <span class="chat__once"><i></i>Once</span>
+                  <span class="chat__mic"></span>
+                </div>
+              </div>
+
+              <div class="ophase ophase--chat" data-phase="3">
+                <div class="chat__head">
+                  <span class="chat__back">‹</span>
+                  <span class="chat__avatar">k</span>
+                  <span class="chat__id">
+                    <span class="chat__name">King <em>✦</em></span>
+                    <span class="chat__sub">Tap to view profile</span>
+                  </span>
+                </div>
+                <div class="chat__scroll">
+                  <div class="chat__thread">
+                    <span class="chat__bubble chat__bubble--them">And finding it?</span>
+                    <span class="chat__bubble">For the first time in this conversation.</span>
+                    <span class="chat__bubble chat__bubble--them">That's a dangerous answer.</span>
+                    <span class="chat__bubble">Better than a boring one.</span>
+                    <span class="chat__time">09:50</span>
+                  </div>
+                  <div class="chat__date"><span>Wed, 20 May</span></div>
+                  <div class="chat__thread">
+                    <span class="chat__bubble chat__bubble--them">I keep forgetting I don't know your face.</span>
+                    <span class="chat__bubble">Same. It stopped mattering days ago.</span>
+                    <span class="chat__bubble chat__bubble--them">Want to find out together?</span>
+                    <span class="chat__bubble">Yeah. I trust that.</span>
+                    <span class="chat__time">21:14</span>
+                  </div>
+                </div>
+                <div class="chat__bar">
+                  <span class="chat__field">Message…</span>
+                  <span class="chat__once"><i></i>Once</span>
+                  <span class="chat__mic"></span>
+                </div>
+              </div>
+
+              <div class="ophase ophase--chat" data-phase="4">
+                <div class="chat__head">
+                  <span class="chat__back">‹</span>
+                  <span class="chat__avatar chat__avatar--photo"></span>
+                  <span class="chat__id">
+                    <span class="chat__name">King <em>✦</em></span>
+                    <span class="chat__sub">Revealed · just now</span>
+                  </span>
+                </div>
+                <div class="chat__scroll">
+                  <div class="chat__reveal chat__reveal--ready">
+                    <div class="chat__reveal-h">Photos unlocked 📷</div>
+                    <p class="chat__reveal-p">Both of you agreed to reveal. You can now see each other's photos.</p>
+                  </div>
+                  <div class="chat__date"><span>Wed, 20 May</span></div>
+                  <div class="chat__thread">
+                    <span class="chat__bubble chat__bubble--them">I keep forgetting I don't know your face.</span>
+                    <span class="chat__bubble">Same. It stopped mattering days ago.</span>
+                    <span class="chat__bubble chat__bubble--them">Want to find out together?</span>
+                    <span class="chat__bubble">Yeah. I trust that.</span>
+                    <span class="chat__time">21:14</span>
+                  </div>
+                  <div class="chat__date"><span>Thu, 21 May</span></div>
+                  <div class="chat__thread">
+                    <span class="chat__bubble chat__bubble--them">So. Hi.</span>
+                    <span class="chat__bubble">Hi. No longer a stranger. 🙂</span>
+                    <span class="chat__time">21:16</span>
+                  </div>
+                </div>
+                <div class="chat__bar">
+                  <span class="chat__field">Message…</span>
+                  <span class="chat__once"><i></i>Once</span>
+                  <span class="chat__mic"></span>
+                </div>
+              </div>
+            </div>
+            <div class="phone__notch"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="order__progress"><span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     08 — DOWNLOAD
+     ============================================================ -->
+<section class="download" id="download" data-screen-label="06 Download">
+  <div class="download__inner">
+    <div class="bigmark" data-reveal>blur<span class="dot">.</span></div>
+    <p class="download__tag" data-reveal data-delay="1">Know them. Before you <em>see</em> them.</p>
+
+    <div class="stores" data-reveal data-delay="2">
+      <a class="store">
+        <svg viewBox="0 0 24 24"><path d="M16.5 1.6c0 1.1-.4 2.1-1.2 3-.9 1-2 1.5-3 1.4-.1-1.1.4-2.2 1.2-3 .8-.9 2-1.5 3-1.4zM20 17.3c-.5 1.2-.8 1.7-1.5 2.8-1 1.5-2.4 3.4-4.1 3.4-1.5 0-1.9-1-4-1-2 0-2.5 1-4 1-1.7 0-3-1.7-4-3.2-2.8-4.2-3.1-9.2-1.4-11.8 1.2-1.9 3.1-3 4.9-3 1.8 0 3 1 4.5 1 1.5 0 2.4-1 4.5-1 1.6 0 3.3.9 4.5 2.4-4 2.2-3.3 7.8.6 9.6z"/></svg>
+        <span><span class="s1">Download on the</span><span class="s2">App Store</span></span>
+      </a>
+      <a class="store">
+        <svg viewBox="0 0 24 24"><path d="M3.6 1.8c-.3.3-.5.8-.5 1.4v17.6c0 .6.2 1.1.5 1.4l.1.1L13.5 12v-.2L3.7 1.7l-.1.1zM17 15.3l-3.3-3.3L17 8.7l4 2.3c1.1.7 1.1 1.7 0 2.3l-4 2zM13.5 12.2 17 15.7l-9.8 5.6c-.5.3-1 .3-1.4 0l8-8.5zM5.8 2.4c-.4-.3-.9-.3-1.4 0L13.5 11l3.5-3.5-11.2-5z"/></svg>
+        <span><span class="s1">Get it on</span><span class="s2">Google Play</span></span>
+      </a>
+    </div>
+
+  </div>
+  <footer>
+    <div class="foot__card">
+      <div class="foot__grid">
+
+        <div class="foot__col">
+          <h4 class="foot__h">Get in touch</h4>
+          <p class="foot__desc">We're building Blur with intention and care. Reach out.</p>
+          <ul class="foot__emails">
+            <li><a href="mailto:hello@blurmeet.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 7.5 8.5 6 8.5-6"/></svg>
+              hello@blurmeet.com</a></li>
+            <li><a href="mailto:support@blurmeet.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 13v-1a8 8 0 0 1 16 0v1"/><rect x="2.5" y="13" width="4" height="6.5" rx="1.5"/><rect x="17.5" y="13" width="4" height="6.5" rx="1.5"/><path d="M20 19.5a4 4 0 0 1-4 3"/></svg>
+              support@blurmeet.com</a></li>
+            <li><a href="mailto:press@blurmeet.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/><path d="M8.5 12.5h7M8.5 16h7"/></svg>
+              press@blurmeet.com</a></li>
+            <li><a href="mailto:partners@blurmeet.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m12 7 2-1.6a3 3 0 0 1 4 .4l3 3.2M12 7 9.5 5.5a3 3 0 0 0-3.6.2L3 9"/><path d="m3 9 4 4 2-1.5 3 3 2-1 3 3"/><path d="m18 9-3.5 3"/></svg>
+              partnerships@blurmeet.com</a></li>
+          </ul>
+        </div>
+
+        <div class="foot__col">
+          <h4 class="foot__h">For</h4>
+          <div class="foot__spacer" aria-hidden="true"></div>
+          <ul class="foot__links">
+            <li><a href="mailto:hello@blurmeet.com">General Inquiries</a></li>
+            <li><a href="mailto:support@blurmeet.com">Support</a></li>
+            <li><a href="mailto:press@blurmeet.com">Press &amp; Media</a></li>
+            <li><a href="mailto:partners@blurmeet.com">Partnerships</a></li>
+          </ul>
+        </div>
+
+        <div class="foot__col">
+          <h4 class="foot__h">Follow</h4>
+          <div class="foot__social">
+            <a class="soc" href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a class="soc" href="#" aria-label="X">
+              <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18.9 3H22l-7.1 8.1L23 21h-6.5l-5-6.6L5.7 21H2.6l7.6-8.7L1.5 3H8l4.6 6.1L18.9 3Zm-1.1 16h1.7L7.3 4.8H5.5L17.8 19Z"/></svg>
+            </a>
+            <a class="soc" href="#" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M6.2 8.5H3.5V21h2.7V8.5ZM4.85 3.5A1.6 1.6 0 1 0 4.85 6.7a1.6 1.6 0 0 0 0-3.2ZM21 13.7c0-3-1.6-4.4-3.8-4.4a3.3 3.3 0 0 0-3 1.6V8.5H11.6V21h2.7v-6.6c0-1.7.8-2.4 1.9-2.4s1.9.7 1.9 2.4V21H21v-7.3Z"/></svg>
+            </a>
+            <a class="soc" href="mailto:hello@blurmeet.com" aria-label="Email us">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/><path d="m4 7.5 8 5.5 8-5.5"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="foot__col">
+          <h4 class="foot__h">Privacy first</h4>
+          <p class="foot__desc">Your stories are yours. We protect them.</p>
+          <a class="foot__row" href="mailto:privacy@blurmeet.com">Privacy Policy <span class="chev">›</span></a>
+          <a class="foot__row" href="mailto:legal@blurmeet.com">Legal <span class="chev">›</span></a>
+        </div>
+
+      </div>
+
+      <div class="foot__base">
+        <div class="foot__base-l">
+          <span class="wordmark">blur<span class="dot">.</span></span>
+          <a href="mailto:privacy@blurmeet.com">Privacy</a>
+          <a href="mailto:legal@blurmeet.com">Legal</a>
+          <span class="foot__copy">© 2026 blurmeet.com</span>
+        </div>
+        <span class="foot__intention">Made with intention. <span class="heart">♥</span></span>
+      </div>
+    </div>
+  </footer>
+</section>
+
+<!-- ============================================================
+     EARLY ACCESS MODAL
+     ============================================================ -->
+<div class="ea" id="ea" aria-hidden="true">
+  <div class="ea__scrim" data-ea-close></div>
+  <div class="ea__dialog" role="dialog" aria-modal="true" aria-labelledby="eaTitle">
+    <button class="ea__close" type="button" aria-label="Close" data-ea-close>×</button>
+
+    <div class="ea__body">
+      <h2 class="ea__title" id="eaTitle">Join the First Reveal</h2>
+      <p class="ea__sub">Know them before you see them. Be among the first to experience Blur when we launch.</p>
+
+      <form class="ea__form" id="eaForm" novalidate>
+        <div class="ea__field">
+          <span class="ea__label">I'm looking for</span>
+          <div class="ea__seg" role="radiogroup" aria-label="I'm looking for">
+            <input class="ea__seg-input" type="radio" name="intent" id="intentDating" value="Dating" checked>
+            <label class="ea__seg-opt" for="intentDating">Dating</label>
+            <input class="ea__seg-input" type="radio" name="intent" id="intentMarriage" value="Marriage">
+            <label class="ea__seg-opt" for="intentMarriage">Marriage</label>
+            <span class="ea__seg-glow" aria-hidden="true"></span>
+          </div>
+        </div>
+        <label class="ea__field">
+          <span class="ea__label">Name</span>
+          <input class="ea__input" type="text" name="name" autocomplete="name" required>
+        </label>
+        <label class="ea__field">
+          <span class="ea__label">Email</span>
+          <input class="ea__input" type="email" name="email" autocomplete="email" required>
+        </label>
+        <label class="ea__field">
+          <span class="ea__label">Mobile <span class="ea__opt">optional</span></span>
+          <input class="ea__input" type="tel" name="mobile" autocomplete="tel">
+        </label>
+        <p class="ea__error" id="eaError" hidden></p>
+        <button class="ea__submit" type="submit">Request Early Access <span class="arrow">→</span></button>
+      </form>
+
+      <p class="ea__fine">No spam. No waitlist rankings. We'll simply let you know when it's time.</p>
+    </div>
+
+    <div class="ea__done" id="eaDone" hidden>
+      <div class="ea__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h2 class="ea__title">You're on the list.</h2>
+      <p class="ea__sub" id="eaDoneSub">The first conversations begin soon.</p>
+
+      <div class="ea__invite">
+        <p class="ea__invite-h">Invite someone you'd want to meet here.</p>
+        <button class="ea__copy" type="button" id="eaCopy" data-url="https://blurmeet.com">
+          <span class="ea__copy-url">blurmeet.com</span>
+          <span class="ea__copy-act" id="eaCopyAct">Copy</span>
+        </button>
+      </div>
+
+      <button class="ea__submit ea__submit--ghost" type="button" data-ea-close>Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- tweaks island -->
+<div id="tweaks-root"></div>
+
+<script src="image-slot.js"></script>
+<script src="blur.js"></script>
+
+<!-- React + Babel (tweaks panel only) -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="blur-tweaks.jsx"></script>
+
+</body>
+</html>
