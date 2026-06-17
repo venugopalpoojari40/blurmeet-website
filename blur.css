@@ -617,8 +617,8 @@ body{
   font-size:clamp(2.8rem,5.8vw,5.2rem);line-height:1.14;
   letter-spacing:-.025em;color:var(--dark);text-wrap:balance;max-width:16ch;
 }
-.order__intro-l2{margin-top:.16em;}
-.order__intro-l2 em{font-style:italic;color:#9a7b3e;}
+.order__intro-l2{margin-top:.16em;white-space:nowrap;}
+.order__intro-gold{color:#9a7b3e;}
 
 .order__stage{
   width:100%;max-width:var(--maxw);margin:0 auto;
