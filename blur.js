@@ -329,9 +329,45 @@
     var eaSubmitting = false;
     var eaSubmitBtn = eaForm.querySelector(".ea__submit");
 
+    function isAlreadyRegistered(email) {
+      try {
+        var list = JSON.parse(localStorage.getItem("blur_early_access_list") || "[]");
+        return list.some(function (e) { return e.email.toLowerCase() === email.toLowerCase(); });
+      } catch (err) { return false; }
+    }
+
+    function showSuccess(firstName) {
+      var sub = document.getElementById("eaDoneSub");
+      if (sub) sub.textContent = "The first conversations begin soon, " + firstName + ".";
+      if (eaBody && eaDone) { eaBody.hidden = true; eaDone.hidden = false; }
+      var done = eaDone && eaDone.querySelector("button");
+      if (done) done.focus();
+      setTimeout(closeEA, 2800);
+    }
+
+    // if modal is opened and this device already submitted, skip straight to success
+    function openEAWithDupeCheck() {
+      openEA();
+      try {
+        var last = JSON.parse(localStorage.getItem("blur_early_access") || "null");
+        if (last && last.email) {
+          setTimeout(function () { showSuccess(last.name.split(" ")[0]); }, 80);
+        }
+      } catch (err) {}
+    }
+
+    // re-wire CTA buttons to use the dupe-aware open
+    document.querySelectorAll(".cta, .store").forEach(function (b) {
+      b.style.cursor = "pointer";
+      // remove previous listener by cloning; then re-attach
+      var fresh = b.cloneNode(true);
+      b.parentNode.replaceChild(fresh, b);
+      fresh.addEventListener("click", function (e) { e.preventDefault(); openEAWithDupeCheck(); });
+    });
+
     eaForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      if (eaSubmitting) return; // prevent duplicate submissions
+      if (eaSubmitting) return;
 
       var name   = eaForm.name.value.trim();
       var email  = eaForm.email.value.trim();
@@ -348,6 +384,12 @@
       }
       eaError.hidden = true;
 
+      // already registered on this device — show success without re-submitting
+      if (isAlreadyRegistered(email)) {
+        showSuccess(name.split(" ")[0]);
+        return;
+      }
+
       // disable button + loading state
       eaSubmitting = true;
       if (eaSubmitBtn) {
@@ -357,7 +399,7 @@
 
       var entry = { name: name, email: email, mobile: mobile, intent: intent, at: new Date().toISOString() };
 
-      // 1) local backup — never lose a lead even if Google is down
+      // 1) persist locally first — deduplication source of truth
       try {
         localStorage.setItem("blur_early_access", JSON.stringify(entry));
         var all = JSON.parse(localStorage.getItem("blur_early_access_list") || "[]");
@@ -365,23 +407,17 @@
         localStorage.setItem("blur_early_access_list", JSON.stringify(all));
       } catch (err) {}
 
-      // 2) send to Google Form (no-cors — response is always opaque; show success regardless)
+      // 2) send to Google Form (no-cors — response is opaque; show success regardless)
       submitToGoogleForm(entry);
 
-      // 3) brief delay so user sees "Sending…" feedback, then show success
+      // 3) brief delay for "Sending…" feedback, then show success
       setTimeout(function () {
         eaSubmitting = false;
         if (eaSubmitBtn) {
           eaSubmitBtn.disabled = false;
           eaSubmitBtn.innerHTML = "Request Early Access <span class=\"arrow\">→</span>";
         }
-        var sub = document.getElementById("eaDoneSub");
-        if (sub) sub.textContent = "The first conversations begin soon, " + name.split(" ")[0] + ".";
-        if (eaBody && eaDone) { eaBody.hidden = true; eaDone.hidden = false; }
-        var done = eaDone && eaDone.querySelector("button");
-        if (done) done.focus();
-        // close modal after a moment so user sees the success screen
-        setTimeout(closeEA, 2800);
+        showSuccess(name.split(" ")[0]);
       }, 600);
     });
   }
