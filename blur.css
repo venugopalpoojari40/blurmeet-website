@@ -17,7 +17,7 @@
   --blur:22px;            /* signature portrait blur */
   --reveal-dur:760ms;     /* base motion duration */
   --gold-strength:1;      /* decorative gold prominence 0..1 */
-  --serif:"Instrument Serif",Georgia,serif;
+  --serif:"Bodoni Moda",Georgia,serif;
 
   --ease:cubic-bezier(.22,.61,.36,1);   /* soft, no bounce */
   --maxw:min(1440px,92vw);
@@ -42,6 +42,7 @@ body{
   font-weight:400;
   letter-spacing:-.01em;
   line-height:1.08;
+  font-optical-sizing:auto;
   color:var(--light);
 }
 .display em{font-style:italic;color:var(--gold)}
