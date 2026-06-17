@@ -368,9 +368,9 @@ body{
    02 — THE FEELING
    ============================================================ */
 .feeling .stmt{
-  font-family:var(--serif);font-weight:500;
+  font-family:var(--serif);font-weight:300;
   font-size:clamp(2rem,4.6vw,4.3rem);line-height:1.14;color:var(--light);
-  letter-spacing:-.015em;max-width:18ch;
+  letter-spacing:-.01em;max-width:18ch;
 }
 .feeling .stmt .q{color:var(--muted)}
 .feeling .row{padding:clamp(60px,11vh,150px) 0;border-top:1px solid rgba(138,130,120,.14)}
@@ -651,9 +651,9 @@ body{
 }
 .order__final{
   margin:0;max-width:none;
-  font-family:var(--serif);font-style:italic;font-weight:500;
+  font-family:var(--serif);font-style:italic;font-weight:300;
   font-size:clamp(3rem,6vw,5.2rem);
-  line-height:1.14;letter-spacing:-.02em;
+  line-height:1.14;letter-spacing:-.01em;
   color:var(--dark);text-wrap:balance;
 }
 .order__final em{font-style:italic;color:#9a7b3e;}
