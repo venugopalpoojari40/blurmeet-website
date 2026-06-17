@@ -370,7 +370,7 @@ body{
 .feeling .stmt{
   font-family:var(--serif);font-weight:300;
   font-size:clamp(2rem,4.6vw,4.3rem);line-height:1.14;color:var(--light);
-  letter-spacing:-.01em;max-width:18ch;
+  letter-spacing:-.01em;white-space:nowrap;
 }
 .feeling .stmt .q{color:var(--muted)}
 .feeling .row{padding:clamp(60px,11vh,150px) 0;border-top:1px solid rgba(138,130,120,.14)}
@@ -1096,6 +1096,7 @@ footer{
   .spine__d{grid-column:1/-1;text-align:left;margin-left:54px}
   .feeling .row.right{justify-content:flex-start;text-align:left}
   .feeling .row.right .stmt{text-align:left}
+  .feeling .stmt{white-space:normal;}
   .feeling .row.resolve{justify-content:center;text-align:center}
 }
 @media (max-width:760px){
