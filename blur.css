@@ -551,6 +551,40 @@ body{
 .whynow__turn em{font-style:italic;color:var(--gold)}
 
 /* ============================================================
+   04b — HOW IT WORKS
+   ============================================================ */
+.how{
+  background:var(--dark-2);
+  padding:clamp(72px,11vh,120px) var(--gutter);
+}
+.how .eyebrow{margin-bottom:clamp(40px,6vh,64px)}
+.how__steps{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:clamp(32px,5vw,72px);
+  max-width:var(--maxw);margin:0 auto;
+}
+.how__n{
+  display:block;font-family:var(--serif);font-weight:300;
+  font-size:1rem;color:var(--gold);letter-spacing:.06em;
+  margin-bottom:18px;
+}
+.how__h{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(1.3rem,1.9vw,1.65rem);
+  color:var(--light);line-height:1.2;
+  margin-bottom:12px;letter-spacing:-.005em;
+}
+.how__p{
+  font-family:"Inter",sans-serif;font-weight:300;
+  font-size:.91rem;line-height:1.68;color:var(--muted);
+  max-width:28ch;text-wrap:pretty;
+}
+@media(max-width:720px){
+  .how__steps{grid-template-columns:1fr;gap:clamp(32px,5vh,48px)}
+  .how__p{max-width:none}
+}
+
+/* ============================================================
    05 — THE ORDER OF THINGS  (light)
    A scroll-scrubbed reveal. One silhouette resolves into a face
    as you scroll. The beats land in sequence; the unblur is the
@@ -877,7 +911,13 @@ body{
   color:var(--text);margin-top:.5em;line-height:1.2;
 }
 .download__tag em{font-style:italic;color:var(--gold)}
-.stores{display:flex;gap:16px;margin-top:clamp(40px,6vh,64px);margin-bottom:clamp(56px,10vh,110px);flex-wrap:wrap;justify-content:center}
+.stores{display:flex;gap:16px;margin-top:clamp(40px,6vh,64px);margin-bottom:clamp(20px,3vh,28px);flex-wrap:wrap;justify-content:center}
+.download__note{
+  font-family:"Inter",sans-serif;font-weight:300;
+  font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(138,130,120,.55);
+  margin-bottom:clamp(48px,8vh,96px);
+}
 .store{
   display:flex;align-items:center;gap:12px;
   padding:.95em 1.6em;border:1px solid rgba(232,226,217,.26);border-radius:3px;
@@ -1009,6 +1049,33 @@ footer{
 .foot__copy{color:rgba(138,130,120,.7)}
 .foot__intention{display:inline-flex;align-items:center;gap:9px;white-space:nowrap;font-style:italic;font-family:var(--serif);font-size:1rem;color:var(--muted)}
 .foot__intention .heart{color:var(--gold);font-style:normal}
+
+.foot__founder{
+  display:flex;align-items:flex-start;gap:18px;
+  padding:clamp(26px,3.5vh,36px) 0;
+  border-top:1px solid rgba(138,130,120,.12);
+  margin-bottom:clamp(24px,3vh,32px);
+}
+.foot__founder-img{
+  width:52px;height:52px;border-radius:50%;object-fit:cover;flex:none;
+  border:1px solid rgba(201,169,110,.2);
+  background:var(--dark-2);
+}
+.foot__founder-text{flex:1;min-width:0}
+.foot__founder-name{
+  font-family:"Inter",sans-serif;font-weight:400;font-size:.9rem;
+  color:var(--text);margin-bottom:8px;line-height:1;
+}
+.foot__founder-name span{color:var(--muted);font-weight:300}
+.foot__founder-bio{
+  font-family:"Inter",sans-serif;font-weight:300;font-size:.86rem;
+  line-height:1.65;color:var(--muted);max-width:54ch;margin-bottom:10px;text-wrap:pretty;
+}
+.foot__founder-link{
+  font-family:"Inter",sans-serif;font-weight:400;font-size:.78rem;letter-spacing:.04em;
+  color:var(--gold);text-decoration:none;transition:opacity .25s;
+}
+.foot__founder-link:hover{opacity:.7}
 
 /* ============================================================
    RESPONSIVE
@@ -1316,6 +1383,8 @@ html[data-display="playfair"]{--serif:"Playfair Display",Georgia,serif}
   font-family:"Inter",sans-serif;font-weight:300;font-size:.74rem;line-height:1.5;
   color:rgba(138,130,120,.85);margin-top:18px;text-align:center;text-wrap:pretty;
 }
+.ea__fine-link{color:rgba(201,169,110,.75);text-decoration:underline;text-underline-offset:2px;transition:color .2s}
+.ea__fine-link:hover{color:var(--gold)}
 .ea__done{text-align:center;display:flex;flex-direction:column;align-items:center;}
 .ea__done[hidden],.ea__body[hidden]{display:none;}
 .ea__done .ea__title{margin-top:6px;}
