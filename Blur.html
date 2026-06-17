@@ -38,13 +38,6 @@
 </head>
 <body>
 
-<template id="__bundler_thumbnail">
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <rect width="100" height="100" fill="#1A1714"/>
-  <text x="50" y="60" text-anchor="middle" font-family="Georgia,serif" font-size="34" font-weight="300" fill="#F5F0E8">blur<tspan fill="#C9A96E">.</tspan></text>
-</svg>
-</template>
-
 <!-- fixed wordmark -->
 <div class="topbar">
   <span class="wordmark">blur<span class="dot">.</span></span>
@@ -208,6 +201,32 @@
       <p class="bf-eyebrow" data-reveal>The Living Profile</p>
       <h2 class="bf-hero" data-reveal>People are not static.</h2>
       <p class="bf-q" data-reveal>Why are profiles?</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     04b — HOW IT WORKS  (plain product explanation)
+     ============================================================ -->
+<section class="how" data-screen-label="04b How It Works">
+  <div class="wrap">
+    <p class="eyebrow" data-reveal>How it works</p>
+    <div class="how__steps">
+      <div class="how__step" data-reveal data-delay="1">
+        <span class="how__n">01</span>
+        <h3 class="how__h">Match on who they are</h3>
+        <p class="how__p">You see a silhouette. Profiles show answers, interests, and honest writing — no face. You decide based on what someone says, not what they look like.</p>
+      </div>
+      <div class="how__step" data-reveal data-delay="2">
+        <span class="how__n">02</span>
+        <h3 class="how__h">Talk until it matters</h3>
+        <p class="how__p">Chat freely. No time limits, no pressure. The conversation builds before any photo does.</p>
+      </div>
+      <div class="how__step" data-reveal data-delay="3">
+        <span class="how__n">03</span>
+        <h3 class="how__h">Reveal when you're both ready</h3>
+        <p class="how__p">When both of you agree, photos unlock. By then, you already know who you're looking at.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -433,15 +452,9 @@
     <p class="download__tag" data-reveal data-delay="1">Know them. Before you <em>see</em> them.</p>
 
     <div class="stores" data-reveal data-delay="2">
-      <a class="store">
-        <svg viewBox="0 0 24 24"><path d="M16.5 1.6c0 1.1-.4 2.1-1.2 3-.9 1-2 1.5-3 1.4-.1-1.1.4-2.2 1.2-3 .8-.9 2-1.5 3-1.4zM20 17.3c-.5 1.2-.8 1.7-1.5 2.8-1 1.5-2.4 3.4-4.1 3.4-1.5 0-1.9-1-4-1-2 0-2.5 1-4 1-1.7 0-3-1.7-4-3.2-2.8-4.2-3.1-9.2-1.4-11.8 1.2-1.9 3.1-3 4.9-3 1.8 0 3 1 4.5 1 1.5 0 2.4-1 4.5-1 1.6 0 3.3.9 4.5 2.4-4 2.2-3.3 7.8.6 9.6z"/></svg>
-        <span><span class="s1">Download on the</span><span class="s2">App Store</span></span>
-      </a>
-      <a class="store">
-        <svg viewBox="0 0 24 24"><path d="M3.6 1.8c-.3.3-.5.8-.5 1.4v17.6c0 .6.2 1.1.5 1.4l.1.1L13.5 12v-.2L3.7 1.7l-.1.1zM17 15.3l-3.3-3.3L17 8.7l4 2.3c1.1.7 1.1 1.7 0 2.3l-4 2zM13.5 12.2 17 15.7l-9.8 5.6c-.5.3-1 .3-1.4 0l8-8.5zM5.8 2.4c-.4-.3-.9-.3-1.4 0L13.5 11l3.5-3.5-11.2-5z"/></svg>
-        <span><span class="s1">Get it on</span><span class="s2">Google Play</span></span>
-      </a>
+      <a class="cta">Request Early Access <span class="arrow">→</span></a>
     </div>
+    <p class="download__note" data-reveal data-delay="3">Launching in Bangalore first · 2026</p>
 
   </div>
   <footer>
@@ -481,13 +494,13 @@
         <div class="foot__col">
           <h4 class="foot__h">Follow</h4>
           <div class="foot__social">
-            <a class="soc" href="#" aria-label="Instagram">
+            <a class="soc" href="https://instagram.com/blurmeet" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
             </a>
-            <a class="soc" href="#" aria-label="X">
+            <a class="soc" href="https://x.com/blurmeet" target="_blank" rel="noopener noreferrer" aria-label="X">
               <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18.9 3H22l-7.1 8.1L23 21h-6.5l-5-6.6L5.7 21H2.6l7.6-8.7L1.5 3H8l4.6 6.1L18.9 3Zm-1.1 16h1.7L7.3 4.8H5.5L17.8 19Z"/></svg>
             </a>
-            <a class="soc" href="#" aria-label="LinkedIn">
+            <a class="soc" href="https://linkedin.com/company/blurmeet" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M6.2 8.5H3.5V21h2.7V8.5ZM4.85 3.5A1.6 1.6 0 1 0 4.85 6.7a1.6 1.6 0 0 0 0-3.2ZM21 13.7c0-3-1.6-4.4-3.8-4.4a3.3 3.3 0 0 0-3 1.6V8.5H11.6V21h2.7v-6.6c0-1.7.8-2.4 1.9-2.4s1.9.7 1.9 2.4V21H21v-7.3Z"/></svg>
             </a>
             <a class="soc" href="mailto:hello@blurmeet.com" aria-label="Email us">
@@ -499,17 +512,28 @@
         <div class="foot__col">
           <h4 class="foot__h">Privacy first</h4>
           <p class="foot__desc">Your stories are yours. We protect them.</p>
-          <a class="foot__row" href="mailto:privacy@blurmeet.com">Privacy Policy <span class="chev">›</span></a>
-          <a class="foot__row" href="mailto:legal@blurmeet.com">Legal <span class="chev">›</span></a>
+          <a class="foot__row" href="/privacy">Privacy Policy <span class="chev">›</span></a>
+          <a class="foot__row" href="/terms">Terms of Use <span class="chev">›</span></a>
         </div>
 
       </div>
 
+      <!-- FOUNDER SECTION — uncomment and fill in real details before launch
+      <div class="foot__founder">
+        <img src="founder.jpg" class="foot__founder-img" alt="[Founder Name], Founder of Blur" width="52" height="52">
+        <div class="foot__founder-text">
+          <p class="foot__founder-name">[Your Name] <span>· Founder</span></p>
+          <p class="foot__founder-bio">I spent three years on dating apps and kept meeting people who looked great in photos and felt like strangers in person. There is a better order to how people should meet. Blur is that order.</p>
+          <a href="https://linkedin.com/in/[your-profile]" class="foot__founder-link" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+        </div>
+      </div>
+      -->
+
       <div class="foot__base">
         <div class="foot__base-l">
           <span class="wordmark">blur<span class="dot">.</span></span>
-          <a href="mailto:privacy@blurmeet.com">Privacy</a>
-          <a href="mailto:legal@blurmeet.com">Legal</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
           <span class="foot__copy">© 2026 blurmeet.com</span>
         </div>
         <span class="foot__intention">Made with intention. <span class="heart">♥</span></span>
@@ -528,7 +552,7 @@
 
     <div class="ea__body">
       <h2 class="ea__title" id="eaTitle">Join the First Reveal</h2>
-      <p class="ea__sub">Know them before you see them. Be among the first to experience Blur when we launch.</p>
+      <p class="ea__sub">Blur launches in Bangalore first. Leave your details and we'll reach out personally when you're in.</p>
 
       <form class="ea__form" id="eaForm" novalidate>
         <div class="ea__field">
@@ -550,14 +574,14 @@
           <input class="ea__input" type="email" name="email" autocomplete="email" required>
         </label>
         <label class="ea__field">
-          <span class="ea__label">Mobile <span class="ea__opt">optional</span></span>
+          <span class="ea__label">WhatsApp <span class="ea__opt">optional · get your invite first</span></span>
           <input class="ea__input" type="tel" name="mobile" autocomplete="tel">
         </label>
         <p class="ea__error" id="eaError" hidden></p>
         <button class="ea__submit" type="submit">Request Early Access <span class="arrow">→</span></button>
       </form>
 
-      <p class="ea__fine">No spam. No waitlist rankings. We'll simply let you know when it's time.</p>
+      <p class="ea__fine">We'll only contact you about Blur. <a href="/privacy" class="ea__fine-link" target="_blank">Privacy Policy</a></p>
     </div>
 
     <div class="ea__done" id="eaDone" hidden>
@@ -578,18 +602,7 @@
   </div>
 </div>
 
-<!-- tweaks island -->
-<div id="tweaks-root"></div>
-
-<script src="image-slot.js"></script>
 <script src="blur.js"></script>
-
-<!-- React + Babel (tweaks panel only) -->
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-<script type="text/babel" src="tweaks-panel.jsx"></script>
-<script type="text/babel" src="blur-tweaks.jsx"></script>
 
 </body>
 </html>
