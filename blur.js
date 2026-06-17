@@ -271,24 +271,23 @@
      are still captured locally as a backup (nothing is lost).
      ============================================================ */
   var GFORM = {
-    id: "",          // the long token between /d/e/  and  /viewform  (or /formResponse)
+    id: "1FAIpQLSdyU_V6pYsv4uoDJvO3zkF2JJicBh0Gb_5fcOwzZTgh5wi0NQ",
     entry: {
-      name:   "",    // e.g. "entry.1234567890"
-      email:  "",
-      mobile: "",
-      intent: ""
+      name:   "entry.1236505130",
+      email:  "entry.1658026701",
+      mobile: "entry.1081336978",
+      intent: "entry.1375619699"
     }
   };
   function submitToGoogleForm(entry) {
-    if (!GFORM.id || !GFORM.entry.name) return; // not configured yet
     try {
       var url = "https://docs.google.com/forms/d/e/" + GFORM.id + "/formResponse";
       var data = new URLSearchParams();
-      if (GFORM.entry.name)   data.append(GFORM.entry.name, entry.name);
-      if (GFORM.entry.email)  data.append(GFORM.entry.email, entry.email);
-      if (GFORM.entry.mobile) data.append(GFORM.entry.mobile, entry.mobile);
-      if (GFORM.entry.intent) data.append(GFORM.entry.intent, entry.intent);
-      // fire-and-forget: cross-origin, response is opaque (we can't read success)
+      data.append(GFORM.entry.intent, entry.intent);
+      data.append(GFORM.entry.name,   entry.name);
+      data.append(GFORM.entry.email,  entry.email);
+      if (entry.mobile) data.append(GFORM.entry.mobile, entry.mobile);
+      // no-cors: response is opaque — fire-and-forget is intentional
       fetch(url, { method: "POST", mode: "no-cors", body: data }).catch(function () {});
     } catch (err) {}
   }
@@ -327,13 +326,19 @@
   }
 
   if (eaForm) {
+    var eaSubmitting = false;
+    var eaSubmitBtn = eaForm.querySelector(".ea__submit");
+
     eaForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      var name = eaForm.name.value.trim();
-      var email = eaForm.email.value.trim();
+      if (eaSubmitting) return; // prevent duplicate submissions
+
+      var name   = eaForm.name.value.trim();
+      var email  = eaForm.email.value.trim();
       var mobile = eaForm.mobile.value.trim();
       var intent = (eaForm.intent && eaForm.intent.value) || "Dating";
       var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
       eaForm.email.classList.toggle("is-invalid", !emailOk && email.length > 0);
       eaForm.name.classList.toggle("is-invalid", name.length === 0);
       if (!name || !emailOk) {
@@ -342,22 +347,42 @@
         return;
       }
       eaError.hidden = true;
+
+      // disable button + loading state
+      eaSubmitting = true;
+      if (eaSubmitBtn) {
+        eaSubmitBtn.disabled = true;
+        eaSubmitBtn.textContent = "Sending…";
+      }
+
       var entry = { name: name, email: email, mobile: mobile, intent: intent, at: new Date().toISOString() };
-      // 1) local backup first — never lose a lead even if Google is down
+
+      // 1) local backup — never lose a lead even if Google is down
       try {
         localStorage.setItem("blur_early_access", JSON.stringify(entry));
         var all = JSON.parse(localStorage.getItem("blur_early_access_list") || "[]");
         all.push(entry);
         localStorage.setItem("blur_early_access_list", JSON.stringify(all));
       } catch (err) {}
-      // 2) send to Google Form (fire-and-forget; confirmation shows regardless)
+
+      // 2) send to Google Form (no-cors — response is always opaque; show success regardless)
       submitToGoogleForm(entry);
-      // 3) confirmation
-      var sub = document.getElementById("eaDoneSub");
-      if (sub) sub.textContent = "The first conversations begin soon, " + name.split(" ")[0] + ".";
-      if (eaBody && eaDone) { eaBody.hidden = true; eaDone.hidden = false; }
-      var done = eaDone && eaDone.querySelector("button");
-      if (done) done.focus();
+
+      // 3) brief delay so user sees "Sending…" feedback, then show success
+      setTimeout(function () {
+        eaSubmitting = false;
+        if (eaSubmitBtn) {
+          eaSubmitBtn.disabled = false;
+          eaSubmitBtn.innerHTML = "Request Early Access <span class=\"arrow\">→</span>";
+        }
+        var sub = document.getElementById("eaDoneSub");
+        if (sub) sub.textContent = "The first conversations begin soon, " + name.split(" ")[0] + ".";
+        if (eaBody && eaDone) { eaBody.hidden = true; eaDone.hidden = false; }
+        var done = eaDone && eaDone.querySelector("button");
+        if (done) done.focus();
+        // close modal after a moment so user sees the success screen
+        setTimeout(closeEA, 2800);
+      }, 600);
     });
   }
 
