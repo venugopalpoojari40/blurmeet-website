@@ -252,13 +252,13 @@ body{
 .thresh__text h2{font-size:clamp(2rem,3.4vw,3rem);max-width:none;line-height:1.1;margin:.4em 0 .7em}
 @media (max-width:900px){.thresh__text h2{font-size:clamp(1.9rem,6vw,2.4rem)}}
 .thresh__lead{
-  font-family:var(--serif);font-weight:400;
+  font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;
   font-size:clamp(1.3rem,2vw,1.7rem);line-height:1.3;color:var(--muted);
   margin-top:.7em;
 }
 .thresh__text .lede{max-width:34ch;margin-bottom:1.6em}
 .thresh__close{
-  font-family:var(--serif);font-style:italic;font-weight:400;
+  font-family:"Plus Jakarta Sans",sans-serif;font-style:italic;font-weight:400;
   font-size:clamp(1.25rem,1.7vw,1.6rem);color:var(--gold);line-height:1.4;
   margin-bottom:.55em;
   max-width:none;white-space:nowrap;
@@ -442,7 +442,7 @@ body{
   max-width:none;margin-bottom:.55em;
 }
 .living__close{
-  font-family:var(--serif);font-style:italic;font-weight:400;
+  font-family:"Plus Jakarta Sans",sans-serif;font-style:italic;font-weight:400;
   font-size:clamp(1.25rem,1.7vw,1.6rem);color:var(--gold);line-height:1.4;
   max-width:none;white-space:nowrap;
 }
@@ -542,14 +542,14 @@ body{
 .whynow .eyebrow{justify-content:center;margin-bottom:clamp(40px,7vh,70px)}
 .whynow__list{display:flex;flex-direction:column;gap:.15em;align-items:center}
 .whynow__list p{
-  font-family:var(--serif);font-weight:400;
+  font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;
   font-size:clamp(1.5rem,3.2vw,3rem);line-height:1.22;color:var(--muted);
   transition:color var(--reveal-dur) var(--ease);
 }
 .whynow__list p.lit{color:var(--light)}
 .whynow__turn{
   margin-top:clamp(56px,9vh,110px);max-width:24ch;margin-left:auto;margin-right:auto;
-  font-family:var(--serif);font-weight:400;font-size:clamp(1.6rem,3.2vw,2.8rem);
+  font-family:"Plus Jakarta Sans",sans-serif;font-weight:500;font-size:clamp(1.6rem,3.2vw,2.8rem);
   line-height:1.24;color:var(--light);
 }
 .whynow__turn em{font-style:italic;color:var(--gold)}
@@ -956,8 +956,8 @@ body{
 }
 .murmur__line{max-width:22ch;margin:0 auto}
 .murmur__line span{
-  display:block;font-family:var(--serif);font-weight:400;
-  font-size:clamp(1.8rem,4.1vw,3.5rem);line-height:1.18;letter-spacing:-.02em;
+  display:block;font-family:"Plus Jakarta Sans",sans-serif;font-weight:300;
+  font-size:clamp(1.5rem,3.4vw,2.8rem);line-height:1.28;letter-spacing:-.01em;
 }
 .murmur__line .s{color:var(--muted)}
 .murmur__line .t{color:var(--light);margin-top:.14em}
@@ -1229,7 +1229,7 @@ html[data-display="playfair"]{--serif:"Plus Jakarta Sans",system-ui,sans-serif}
 /* — the contradiction (a challenge, not a question) — */
 .belief .bf-q{
   margin:clamp(40px,6vh,84px) 0 0;
-  font-family:var(--serif);
+  font-family:"Plus Jakarta Sans",sans-serif;
   font-style:italic;
   font-weight:400;
   font-size:clamp(1.6rem,3vw,2.6rem);
