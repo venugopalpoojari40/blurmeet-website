@@ -651,9 +651,9 @@ body{
 }
 .order__final{
   margin:0;max-width:none;
-  font-family:var(--serif);font-style:italic;font-weight:700;
+  font-family:var(--serif);font-style:italic;font-weight:500;
   font-size:clamp(3rem,6vw,5.2rem);
-  line-height:1.14;letter-spacing:-.025em;
+  line-height:1.14;letter-spacing:-.02em;
   color:var(--dark);text-wrap:balance;
 }
 .order__final em{font-style:italic;color:#9a7b3e;}
