@@ -404,17 +404,20 @@ body{
 .feeling .resolve__stmt{
   font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;
   font-size:clamp(.92rem,1.2vw,1.1rem);line-height:1.75;
-  color:rgba(245,240,232,.46);max-width:40ch;
+  color:rgba(245,240,232,.46);
 }
 .resolve__stmt .nowrap{white-space:nowrap}
 .resolve__stmt em{
   font-family:var(--serif);font-style:italic;
   color:var(--gold);display:block;
-  margin-top:.8em;font-size:clamp(1.9rem,3.8vw,3.4rem);
-  line-height:1.16;letter-spacing:-.01em;
+  margin-top:.8em;
+  font-size:clamp(2.6rem,5.6vw,5rem);
+  line-height:1.14;letter-spacing:-.02em;
+  white-space:nowrap;
 }
 @media (max-width:640px){
   .resolve__stmt .nowrap{white-space:normal}
+  .resolve__stmt em{white-space:normal}
 }
 
 /* ============================================================
