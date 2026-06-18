@@ -65,6 +65,15 @@ body{
 }
 .eyebrow.center{justify-content:center}
 
+/* narrative chapter markers — quiet orientation, no decorative line */
+.chapter-mark{
+  font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;
+  font-size:.66rem;letter-spacing:.34em;text-transform:uppercase;
+  color:rgba(232,226,217,.36);margin-bottom:1.8em;
+}
+.chapter-mark[data-reveal]{transform:none;transition:opacity var(--reveal-dur) var(--ease)}
+.chapter-mark[data-reveal].in{opacity:1}
+
 .lede{
   font-size:clamp(1.05rem,1.55vw,1.32rem);
   font-weight:400;
@@ -102,6 +111,8 @@ body{
 @media (prefers-reduced-motion:reduce){
   [data-reveal]{opacity:1;transform:none;transition:none}
   html{scroll-behavior:auto}
+  .feeling .stmt[data-reveal] .q{opacity:1;transform:none;transition:none}
+  .feeling .resolve__stmt[data-reveal] em{opacity:1;transform:none;transition:none}
 }
 
 /* ============================================================
@@ -273,7 +284,7 @@ body{
 /* discover screen */
 .disc{background:#0d0b09;display:flex;flex-direction:column;padding:0}
 .disc__top{display:flex;align-items:center;justify-content:space-between;padding:46px 20px 14px}
-.disc__mark{font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;font-size:1.15rem;color:var(--light);letter-spacing:.01em}
+.disc__mark{font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;font-size:clamp(.9rem,5.4cqi,1.15rem);color:var(--light);letter-spacing:.01em}
 .disc__mark-2{color:var(--gold)}
 .disc__moon{width:14px;height:14px;border-radius:50%;box-shadow:inset -4px -1px 0 0 var(--muted);transform:rotate(18deg)}
 .disc__vibe{
@@ -286,7 +297,7 @@ body{
 }
 .disc__typing{
   font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;font-style:italic;
-  font-size:.9rem;line-height:1.45;color:var(--text);min-height:3.9em;
+  font-size:clamp(.72rem,4.2cqi,.9rem);line-height:1.45;color:var(--text);min-height:3.9em;
 }
 .disc__caret{
   display:inline-block;width:2px;height:1em;background:var(--gold);
@@ -310,7 +321,7 @@ body{
 .disc__live i{width:6px;height:6px;border-radius:50%;background:#6fae7a;box-shadow:0 0 8px #6fae7a}
 .disc__body{position:relative;z-index:2;margin-top:auto;padding:18px 18px 20px}
 .disc__btl{font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;font-size:.58rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:11px}
-.disc__quote{font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;font-style:italic;font-size:.86rem;line-height:1.5;color:var(--light)}
+.disc__quote{font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;font-style:italic;font-size:clamp(.7rem,4cqi,.86rem);line-height:1.5;color:var(--light)}
 .disc__tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
 .disc__tag{font-family:"Plus Jakarta Sans",sans-serif;font-weight:500;font-size:.66rem;color:var(--text);padding:.4em .85em;border:1px solid rgba(232,226,217,.2);border-radius:999px;background:rgba(255,255,255,.03)}
 
@@ -330,15 +341,15 @@ body{
 
 /* static profile details on the silhouette */
 .lp-profile{position:relative;z-index:2;margin-top:auto;padding:0 18px}
-.lp-name{font-family:"Plus Jakarta Sans",sans-serif;font-weight:700;font-size:2rem;line-height:1;color:var(--light)}
-.lp-name span{color:var(--muted);font-size:1.35rem}
-.lp-loc{font-family:"Plus Jakarta Sans",sans-serif;font-size:.78rem;font-weight:400;color:rgba(232,226,217,.82);margin-top:6px}
+.lp-name{font-family:"Plus Jakarta Sans",sans-serif;font-weight:700;font-size:clamp(1.35rem,9.4cqi,2rem);line-height:1;color:var(--light)}
+.lp-name span{color:var(--muted);font-size:clamp(1rem,6.4cqi,1.35rem)}
+.lp-loc{font-family:"Plus Jakarta Sans",sans-serif;font-size:clamp(.62rem,3.7cqi,.78rem);font-weight:400;color:rgba(232,226,217,.82);margin-top:6px}
 .lp-group{margin-top:13px}
 .lp-label{font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;font-size:.54rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:9px}
 .lp-chips{display:flex;flex-wrap:wrap;gap:7px}
 .lp-chip{
   display:inline-flex;align-items:center;gap:5px;
-  font-family:"Plus Jakarta Sans",sans-serif;font-size:.72rem;font-weight:500;color:var(--text);
+  font-family:"Plus Jakarta Sans",sans-serif;font-size:clamp(.6rem,3.4cqi,.72rem);font-weight:500;color:var(--text);
   padding:.5em 1em;border:1px solid rgba(232,226,217,.28);border-radius:999px;
   background:rgba(16,13,11,.34);backdrop-filter:blur(5px);
 }
@@ -356,11 +367,11 @@ body{
 @keyframes lpBob{0%,100%{transform:translateY(-3px)}50%{transform:translateY(2px)}}
 .lp-reflect{background:var(--light);color:var(--dark);padding:24px 19px 44px;min-height:100%}
 .lp-btl{font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;font-size:.56rem;letter-spacing:.24em;text-transform:uppercase;color:#9a7b3e;margin-bottom:14px}
-.lp-quote{font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;font-size:.86rem;line-height:1.5;color:var(--dark);margin-bottom:16px}
+.lp-quote{font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;font-size:clamp(.7rem,4cqi,.86rem);line-height:1.58;color:var(--dark);margin-bottom:16px}
 .lp-qa{margin-bottom:18px}
 .lp-qa:last-child{margin-bottom:0}
-.lp-q{font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;font-size:.72rem;line-height:1.45;color:#8a8278;margin-bottom:5px}
-.lp-a{font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;font-size:1.1rem;line-height:1.3;color:var(--dark);letter-spacing:-.01em}
+.lp-q{font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;font-size:clamp(.6rem,3.4cqi,.72rem);line-height:1.45;color:#8a8278;margin-bottom:5px}
+.lp-a{font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;font-size:clamp(.82rem,5.2cqi,1.1rem);line-height:1.42;color:var(--dark);letter-spacing:-.01em}
 
 @media (max-width:900px){
   .thresh__grid{grid-template-columns:1fr;gap:54px}
@@ -630,6 +641,12 @@ body{
 }
 .order__eyebrow{
   position:absolute;top:clamp(34px,7vh,72px);left:var(--gutter);margin:0;
+  font-size:11px;letter-spacing:.28em;gap:1em;
+}
+.light-section .order__eyebrow{color:#B8945A}
+.light-section .order__eyebrow::before{
+  flex:none;width:30px;
+  background:linear-gradient(90deg,rgba(184,148,90,0),#B8945A);
 }
 
 /* — the opening statement, before the beats resolve — */
@@ -805,8 +822,8 @@ body{
   margin:0;font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;
   font-size:1rem;line-height:1.32;color:var(--dark);text-wrap:pretty;
 }
-.ophase__profile .lp-name{font-size:1.7rem;}
-.ophase__profile .lp-name span{font-size:1.2rem;}
+.ophase__profile .lp-name{font-size:clamp(1.2rem,8cqi,1.7rem);}
+.ophase__profile .lp-name span{font-size:clamp(.9rem,5.5cqi,1.2rem);}
 .ophase__profile .lp-group{margin-top:10px;}
 .ophase__profile .lp-label{margin-bottom:7px;}
 .ophase__profile .lp-chips{gap:6px;}
@@ -882,7 +899,7 @@ body{
   background:url("portrait.webp") 50% 24%/cover;
 }
 .chat__reveal-meta{padding:11px 14px 13px;}
-.chat__reveal-name{font-family:"Plus Jakarta Sans",sans-serif;font-weight:700;font-size:1.35rem;color:var(--light);line-height:1;}
+.chat__reveal-name{font-family:"Plus Jakarta Sans",sans-serif;font-weight:700;font-size:clamp(1.05rem,5.8cqi,1.35rem);color:var(--light);line-height:1;}
 .chat__reveal-name span{color:var(--muted);}
 .chat__reveal-loc{font-family:"Plus Jakarta Sans",sans-serif;font-size:.66rem;letter-spacing:.04em;color:rgba(232,226,217,.6);margin-top:4px;}
 .chat__bar{
@@ -930,16 +947,13 @@ body{
   .chat__field{font-size:.62rem;padding:.58em .82em;}
   .chat__once{font-size:.58rem;padding:.48em .72em;}
   .chat__mic{width:32px;height:32px;}
-  /* discovery screen */
+  /* discovery screen — layout only; fonts scale via cqi in base rules */
   .disc__top{padding:36px 14px 10px;}
-  .disc__mark{font-size:.95rem;}
   .disc__vibe{margin:0 12px 10px;padding:10px 12px;}
   .disc__vibe-label{font-size:.46rem;}
-  .disc__typing{font-size:.74rem;}
   .disc__card{margin:0 12px 12px;}
   .disc__body{padding:14px 14px 15px;}
   .disc__btl{font-size:.48rem;}
-  .disc__quote{font-size:.70rem;}
   .disc__pill,.disc__live{font-size:.50rem;}
   .disc__tag{font-size:.54rem;}
 }
@@ -1010,8 +1024,8 @@ body{
 }
 .download__inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
 .download .bigmark{
-  font-family:var(--serif);font-weight:400;
-  font-size:clamp(4.5rem,15vw,12rem);line-height:.98;letter-spacing:-.02em;color:var(--light);
+  font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;
+  font-size:clamp(4.5rem,15vw,12rem);line-height:.98;letter-spacing:.02em;color:var(--light);
 }
 .download .bigmark .dot{color:var(--gold)}
 .download__tag{
@@ -1094,7 +1108,7 @@ footer{
   background:linear-gradient(180deg,rgba(255,255,255,.012),transparent);
 }
 .foot__grid{
-  display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:clamp(28px,4vw,56px);
+  display:grid;grid-template-columns:2fr 1fr 2fr;gap:clamp(28px,4vw,56px);
   padding-bottom:clamp(34px,4.5vh,52px);
 }
 .foot__h{
@@ -1114,15 +1128,19 @@ footer{
 .foot__emails svg{width:17px;height:17px;flex:none;color:var(--gold);opacity:.9;transition:opacity var(--reveal-dur) var(--ease)}
 .foot__emails a:hover{opacity:.72}
 
-.foot__links{list-style:none;display:flex;flex-direction:column;gap:16px}
-.foot__spacer{height:50px}
-@media (max-width:760px){.foot__spacer{display:none}}
-.foot__links a{
-  display:flex;align-items:center;min-height:24px;
-  font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;font-size:.92rem;line-height:1.2;color:var(--muted);
-  text-decoration:none;transition:color var(--reveal-dur) var(--ease);
+/* label + email contact pairs */
+.foot__contacts{list-style:none;display:flex;flex-direction:column;gap:16px}
+.foot__contact{display:flex;flex-direction:column;gap:3px}
+.foot__contact-lbl{
+  font-family:"Plus Jakarta Sans",sans-serif;font-weight:500;font-size:.7rem;
+  color:rgba(232,226,217,.52);letter-spacing:.01em;
 }
-.foot__links a:hover{color:var(--text)}
+.foot__contact a{
+  font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;font-size:.88rem;
+  color:var(--gold);text-decoration:none;
+  transition:opacity var(--reveal-dur) var(--ease);
+}
+.foot__contact a:hover{opacity:.72}
 
 .foot__social{display:flex;flex-wrap:nowrap;gap:13px;margin-bottom:13px}
 .soc{
@@ -1204,23 +1222,46 @@ footer{
   .feeling .row.right .stmt{text-align:left}
   .feeling .row.resolve{justify-content:center;text-align:center}
   .thresh__grid{gap:68px}
+
+  /* ---- feeling: mobile spacing — ~45% reduction from desktop rhythm ---- */
+  .feeling.section{padding-top:clamp(56px,9vh,120px);padding-bottom:clamp(56px,9vh,120px)}
+  .feeling .row{padding:clamp(44px,9vh,110px) 0}
+  .feeling .row.resolve{padding-top:clamp(44px,8vh,100px);padding-bottom:clamp(52px,9vh,120px)}
+
+  /* ---- feeling: step emotional lines clearly below hero h1 ---- */
+  .feeling .stmt .q{font-size:clamp(1.9rem,6.5vw,2.6rem)}
+  .resolve__stmt em{font-size:clamp(1.9rem,6.5vw,2.6rem)}
+
+  /* ---- feeling: staggered reveal — fact fades, emotion lifts in after ---- */
+  .feeling .stmt[data-reveal]{transform:none;transition:opacity var(--reveal-dur) var(--ease)}
+  .feeling .stmt[data-reveal] .q{
+    opacity:0;transform:translateY(14px);
+    transition:opacity 720ms var(--ease) 150ms,transform 720ms var(--ease) 150ms;
+  }
+  .feeling .stmt[data-reveal].in .q{opacity:1;transform:none}
+  .feeling .resolve__stmt[data-reveal] em{
+    opacity:0;transform:translateY(12px);
+    transition:opacity 900ms var(--ease) 200ms,transform 900ms var(--ease) 200ms;
+  }
+  .feeling .resolve__stmt[data-reveal].in em{opacity:1;transform:none}
 }
 @media (max-width:760px){
-  .foot__grid{grid-template-columns:1fr 1fr;gap:34px 28px}
+  .foot__grid{grid-template-columns:1fr;gap:27px}
   .foot__base{justify-content:flex-start}
 }
 @media (max-width:560px){
-  .foot__contact{grid-template-columns:1fr 1fr;gap:22px}
-  .foot__grid{grid-template-columns:1fr;gap:34px}
+  .foot__grid{grid-template-columns:1fr;gap:27px}
+  .foot__col--social{text-align:center}
+  .foot__col--social .foot__social{justify-content:center}
   .hero h1{font-size:clamp(2rem,9.5vw,3rem)}
   .hero h1 .nowrap{white-space:normal}
   .hero__copy{padding:88px 0 60px}
   .cta{width:100%;justify-content:center}
   .stores{flex-direction:column;width:100%}
   .store{justify-content:center}
-  /* phone sizing: constrain to at most 55vh equivalent so it never crowds viewport */
-  .phone{width:min(64vw,234px)}
-  .order__device .phone{width:min(50vw,196px)}
+  /* phone sizing: wider presence, cqi typography scales down proportionally */
+  .phone{width:min(78vw,300px)}
+  .order__device .phone{width:min(58vw,220px)}
   /* notch/header area: reduce top padding on smaller phones */
   .disc__top{padding:32px 16px 12px}
 }
@@ -1236,6 +1277,15 @@ html[data-display="playfair"]{--serif:"Plus Jakarta Sans",system-ui,sans-serif}
 .manifesto{
   max-width:440px;
   will-change:transform;
+}
+
+/* ============================================================
+   Narrative whitespace — desktop opening reduction (~25%)
+   Targets only the entry dead zone; internal rhythm untouched.
+   ============================================================ */
+@media(min-width:901px){
+  .feeling .row:first-of-type{padding-top:clamp(32px,4vh,52px)}
+  .living.section{padding-top:clamp(64px,9vh,130px)}
 }
 
 /* — setup line (quiet, subordinate) — */
