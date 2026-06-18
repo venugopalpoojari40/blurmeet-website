@@ -306,7 +306,7 @@ body{
 .disc__live i{width:6px;height:6px;border-radius:50%;background:#6fae7a;box-shadow:0 0 8px #6fae7a}
 .disc__body{position:relative;z-index:2;margin-top:auto;padding:18px 18px 20px}
 .disc__btl{font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;font-size:.58rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:11px}
-.disc__quote{font-family:var(--serif);font-weight:400;font-size:.98rem;line-height:1.42;color:var(--light)}
+.disc__quote{font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;font-style:italic;font-size:.86rem;line-height:1.5;color:var(--light)}
 .disc__tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
 .disc__tag{font-family:"Plus Jakarta Sans",sans-serif;font-weight:500;font-size:.66rem;color:var(--text);padding:.4em .85em;border:1px solid rgba(232,226,217,.2);border-radius:999px;background:rgba(255,255,255,.03)}
 
@@ -352,7 +352,7 @@ body{
 @keyframes lpBob{0%,100%{transform:translateY(-3px)}50%{transform:translateY(2px)}}
 .lp-reflect{background:var(--light);color:var(--dark);padding:24px 19px 44px;min-height:100%}
 .lp-btl{font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;font-size:.56rem;letter-spacing:.24em;text-transform:uppercase;color:#9a7b3e;margin-bottom:14px}
-.lp-quote{font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;font-size:1.12rem;line-height:1.38;color:var(--dark);margin-bottom:22px}
+.lp-quote{font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;font-size:.86rem;line-height:1.5;color:var(--dark);margin-bottom:16px}
 .lp-qa{margin-bottom:18px}
 .lp-qa:last-child{margin-bottom:0}
 .lp-q{font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;font-size:.72rem;line-height:1.45;color:#8a8278;margin-bottom:5px}
@@ -371,13 +371,13 @@ body{
    ============================================================ */
 .feeling .stmt{
   font-family:var(--serif);font-weight:400;
-  font-size:clamp(2rem,4.6vw,4.3rem);line-height:1.14;color:var(--light);
+  font-size:clamp(1.65rem,4vw,4.3rem);line-height:1.18;color:var(--light);
   letter-spacing:-.01em;white-space:nowrap;
 }
 .feeling .stmt .q{color:var(--muted)}
-/* size cascade: first statement dominates, each subsequent steps back */
-.feeling .row:nth-child(1) .stmt{font-size:clamp(2.5rem,5.8vw,5.6rem)}
-.feeling .row:nth-child(2) .stmt{font-size:clamp(2.2rem,5.1vw,5rem)}
+/* visible cascade: 3 distinct sizes from dominant → subordinate */
+.feeling .row:nth-child(1) .stmt{font-size:clamp(2.6rem,5.8vw,5.6rem)}
+.feeling .row:nth-child(2) .stmt{font-size:clamp(2.1rem,5vw,5rem)}
 .feeling .row{padding:clamp(60px,11vh,150px) 0;border-top:1px solid rgba(138,130,120,.14)}
 .feeling .row:first-of-type{border-top:0}
 .feeling .row.right{display:flex;justify-content:flex-end;text-align:right}
@@ -385,7 +385,7 @@ body{
 .feeling .stmt--wide{max-width:none}
 
 /* resolution — full-width answer to the two problems */
-.feeling .row.resolve{display:flex;justify-content:center;text-align:center;padding-top:clamp(100px,18vh,240px);padding-bottom:clamp(100px,18vh,240px)}
+.feeling .row.resolve{display:flex;justify-content:center;text-align:center;padding-top:clamp(72px,12vh,160px);padding-bottom:clamp(72px,12vh,160px)}
 .feeling .resolve__stmt{
   max-width:none;
   font-size:clamp(2rem,4.6vw,4.3rem);line-height:1.14;
@@ -618,9 +618,9 @@ body{
 }
 .order__intro-inner{width:100%;max-width:var(--maxw);margin:0 auto;}
 .order__intro p{
-  margin:0;font-family:var(--serif);font-style:italic;font-weight:400;
-  font-size:clamp(2.8rem,5.8vw,5.2rem);line-height:1.14;
-  letter-spacing:-.025em;color:var(--dark);text-wrap:balance;max-width:16ch;
+  margin:0;font-family:"Plus Jakarta Sans",sans-serif;font-style:italic;font-weight:400;
+  font-size:clamp(2.4rem,5vw,4.6rem);line-height:1.2;
+  letter-spacing:-.02em;color:var(--dark);text-wrap:balance;max-width:18ch;
 }
 .order__intro-l2{margin-top:.16em;white-space:nowrap;}
 .order__intro-gold{color:#9a7b3e;}
@@ -648,10 +648,10 @@ body{
   color:var(--dark);
 }
 .order__before{
-  display:block;margin-top:.6em;text-align:right;
-  font-family:var(--serif);font-style:italic;font-weight:400;
-  font-size:clamp(1.6rem,3.2vw,2.8rem);
-  line-height:1.3;letter-spacing:-.01em;
+  display:block;margin-top:.55em;text-align:right;
+  font-family:"Plus Jakarta Sans",sans-serif;font-style:italic;font-weight:400;
+  font-size:clamp(.95rem,1.6vw,1.4rem);
+  line-height:1.4;letter-spacing:0;
   color:#7a7064;
 }
 .order__final{
@@ -736,8 +736,8 @@ body{
   color:#9a7b3e;margin-bottom:11px;
 }
 .oreflect__quote{
-  margin:0 0 16px;font-family:"Plus Jakarta Sans",sans-serif;font-style:italic;font-weight:400;
-  font-size:1.1rem;line-height:1.42;color:var(--dark);text-wrap:pretty;
+  margin:0 0 12px;font-family:"Plus Jakarta Sans",sans-serif;font-style:italic;font-weight:400;
+  font-size:.86rem;line-height:1.5;color:var(--dark);text-wrap:pretty;
 }
 .oreflect__qa{margin-bottom:13px;}
 .oreflect__qa:last-child{margin-bottom:0;}
@@ -1055,7 +1055,7 @@ footer{
 .foot__base-l a{color:var(--muted);text-decoration:none;letter-spacing:.02em;transition:color var(--reveal-dur) var(--ease)}
 .foot__base-l a:hover{color:var(--text)}
 .foot__copy{color:rgba(138,130,120,.7)}
-.foot__intention{display:inline-flex;align-items:center;gap:9px;white-space:nowrap;font-style:italic;font-family:var(--serif);font-size:1rem;color:var(--muted)}
+.foot__intention{display:inline-flex;align-items:center;gap:9px;white-space:nowrap;font-style:italic;font-family:"Plus Jakarta Sans",sans-serif;font-size:.9rem;color:var(--muted)}
 .foot__intention .heart{color:var(--gold);font-style:normal}
 
 .foot__founder{
@@ -1090,11 +1090,12 @@ footer{
    ============================================================ */
 @media (max-width:900px){
   .hero{grid-template-columns:1fr;min-height:100vh}
-  .hero__copy{padding:140px 0 90px;max-width:none}
+  .hero__copy{padding:108px 0 72px;max-width:none}
+  .hero h1{font-size:clamp(2.6rem,6vw,4.8rem)}
   .hero__portrait{width:100%;opacity:.5}
   .hero__portrait::after{background:linear-gradient(0deg,var(--dark) 18%,rgba(26,23,20,.5) 60%,rgba(26,23,20,.7))}
   .belief__grid{grid-template-columns:1fr}
-  .living__grid{grid-template-columns:1fr;gap:60px}
+  .living__grid{grid-template-columns:1fr;gap:72px}
   .works__steps{grid-template-columns:1fr}
   .trust__head{grid-template-columns:1fr;gap:24px}
   .spine__row{grid-template-columns:40px 1fr;gap:14px}
@@ -1103,6 +1104,7 @@ footer{
   .feeling .row.right .stmt{text-align:left}
   .feeling .stmt{white-space:normal;}
   .feeling .row.resolve{justify-content:center;text-align:center}
+  .thresh__grid{gap:68px}
 }
 @media (max-width:760px){
   .foot__grid{grid-template-columns:1fr 1fr;gap:34px 28px}
@@ -1111,7 +1113,9 @@ footer{
 @media (max-width:560px){
   .foot__contact{grid-template-columns:1fr 1fr;gap:22px}
   .foot__grid{grid-template-columns:1fr;gap:34px}
-  .hero h1{font-size:clamp(2.8rem,13vw,4.6rem)}
+  .hero h1{font-size:clamp(2rem,9.5vw,3rem)}
+  .hero h1 .nowrap{white-space:normal}
+  .hero__copy{padding:88px 0 60px}
   .cta{width:100%;justify-content:center}
   .stores{flex-direction:column;width:100%}
   .store{justify-content:center}
