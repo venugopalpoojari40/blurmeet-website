@@ -326,6 +326,7 @@ body{
 .disc__live{font-family:"Plus Jakarta Sans",sans-serif;font-size:.6rem;color:rgba(232,226,217,.8);display:inline-flex;align-items:center;gap:5px}
 .disc__live i{width:6px;height:6px;border-radius:50%;background:#6fae7a;box-shadow:0 0 8px #6fae7a}
 .disc__body{position:relative;z-index:2;margin-top:auto;padding:18px 18px 20px}
+.disc__body--profile{background:#0d0b09;padding-top:12px;}
 .disc__btl{font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;font-size:.58rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:11px}
 .disc__quote{font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;font-style:italic;font-size:clamp(.7rem,4cqi,.86rem);line-height:1.5;color:var(--light)}
 .disc__tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
