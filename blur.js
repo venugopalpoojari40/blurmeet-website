@@ -124,6 +124,26 @@
     lpHint.style.opacity = p > 0.05 ? "0" : "1";
   }
 
+  /* ---- thresh (static profile problem): scroll to reveal profile ---- */
+  var threshSection = document.querySelector(".thresh");
+  var threshCard = document.getElementById("threshCard");
+  var threshTrack = document.getElementById("threshTrack");
+  var threshPhoto = threshCard ? threshCard.querySelector(".lp-photo") : null;
+  function sizeThresh() {
+    if (!threshCard || !threshPhoto) return;
+    threshPhoto.style.height = threshCard.clientHeight + "px";
+  }
+  function updateThresh() {
+    if (!threshCard || !threshSection) return;
+    if (!threshPhoto.style.height || threshPhoto.offsetHeight < threshCard.clientHeight - 1) sizeThresh();
+    var vhh = vh();
+    var r = threshSection.getBoundingClientRect();
+    var p = (vhh * 0.42 - r.top) / (vhh * 0.7);
+    p = Math.max(0, Math.min(1, p));
+    var maxScroll = Math.max(0, threshTrack.scrollHeight - threshCard.clientHeight);
+    threshTrack.style.transform = "translateY(" + (-p * maxScroll).toFixed(1) + "px)";
+  }
+
   /* ---- editorial parallax: the words drift; devices stay still ---- */
   var mfWrap = document.querySelector(".manifesto");
   var mfSection = document.querySelector(".living");
@@ -263,6 +283,7 @@
     if (th && inView(th, 0.45)) startTyping();
     if (dl && inView(dl, 0.55)) revealDownload();
     updateLP();
+    updateThresh();
     updateOrder();
     manifestoParallax();
     firstPass = false;
