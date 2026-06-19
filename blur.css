@@ -341,7 +341,7 @@ body{
 /* scroll-to-know-more reflections */
 .lp-card{position:relative;flex:1;margin:0 16px 16px;border-radius:17px;overflow:hidden;background:#0d0b09}
 .lp-track{position:relative;will-change:transform;transition:transform .18s linear}
-.lp-photo{position:relative;width:100%;min-height:640px;overflow:hidden;display:flex;flex-direction:column}
+.lp-photo{position:relative;width:100%;min-height:800px;overflow:hidden;display:flex;flex-direction:column}
 .lp-photo .disc__photo{position:absolute;inset:0;background:url("portrait.webp") 50% 26%/cover;filter:blur(26px) brightness(.7);transform:scale(1.18)}
 .lp-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,11,9,.34) 0%,rgba(13,11,9,.08) 24%,rgba(13,11,9,.5) 52%,rgba(13,11,9,.95) 100%)}
 
