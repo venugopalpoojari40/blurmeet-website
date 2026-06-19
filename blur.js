@@ -169,6 +169,7 @@
   }
   function updateOrder() {
     if (!orderTrack || !orderImg) return;
+    if (window.matchMedia("(max-width:860px)").matches) return; // handled by beatObserver on mobile
     if (reduce) { orderImg.style.filter = "blur(0) brightness(.96)"; orderImg.style.transform = "scale(1)"; return; }
     var r = orderTrack.getBoundingClientRect();
     var total = r.height - vh();
@@ -216,6 +217,43 @@
       if (orderVibeEl && orderVibes[phase]) orderVibeEl.textContent = orderVibes[phase];
       if (orderVibeBox) orderVibeBox.style.opacity = (phase === 2 ? "0" : "1");
     }
+  }
+
+  /* ---- mobile: IntersectionObserver drives beat → phone transitions ---- */
+  if (window.matchMedia("(max-width:860px)").matches && orderBeats.length) {
+    var mobilePhase = -1;
+    var beatObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var idx = orderBeats.indexOf(entry.target);
+        if (idx < 0 || idx === mobilePhase) return;
+        mobilePhase = idx;
+        for (var i = 0; i < orderBeats.length; i++) {
+          orderBeats[i].classList.toggle("is-active", i === idx);
+        }
+        var phase = idx <= 1 ? 0 : idx;
+        for (var k = 0; k < orderPhases.length; k++) {
+          orderPhases[k].classList.toggle("is-active", +orderPhases[k].getAttribute("data-phase") === phase);
+        }
+        if (orderVibeEl && orderVibes[phase]) orderVibeEl.textContent = orderVibes[phase];
+        if (orderVibeBox) orderVibeBox.style.opacity = (phase === 2 ? "0" : "1");
+        // portrait blur/brightness steps with each beat
+        if (orderImg) {
+          var rev = idx / 4;
+          orderImg.style.filter = "blur(" + ((1 - rev) * 34).toFixed(1) + "px) brightness(" + (0.46 + rev * 0.5).toFixed(2) + ")";
+          orderImg.style.transform = "scale(" + (1.08 - rev * 0.08).toFixed(3) + ")";
+        }
+        // ojourney scroll: show profile at curiosity beat (idx 1), reset for others
+        if (orderJourney && orderCard) {
+          var over = Math.max(0, orderJourney.scrollHeight - orderCard.clientHeight);
+          orderJourney.style.transform = idx === 1 ? "translateY(-" + over.toFixed(1) + "px)" : "translateY(0)";
+        }
+      });
+    }, { threshold: 0.45 });
+    for (var bi = 0; bi < orderBeats.length; bi++) beatObs.observe(orderBeats[bi]);
+    // show device immediately on mobile
+    if (orderPortrait) orderPortrait.style.opacity = "1";
+    if (orderIntro) { orderIntro.style.opacity = "0"; orderIntro.style.transform = "translateY(-16px)"; }
   }
 
   /* ---- single scroll pass ---- */

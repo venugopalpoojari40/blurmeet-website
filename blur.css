@@ -980,18 +980,50 @@ body{
 }
 
 @media (max-width:860px){
-  .order__track{height:195vh;}
+  /* Sequential beats: disable scroll-pin, phone sticks at top, each beat is its own full-height section */
+  .order__track{height:auto;}
+  .order__pin{position:static;height:auto;overflow:visible;padding:clamp(48px,8vh,80px) var(--gutter) 0;}
+  .order__eyebrow{position:static;margin-bottom:clamp(20px,4vh,36px);}
+  .order__intro{position:static;opacity:1!important;transform:none!important;margin-bottom:clamp(32px,6vh,56px);padding:0;pointer-events:auto;}
   .order__intro p{text-align:center;}
-  .order__intro-inner{text-align:center;}
-  .order__stage{grid-template-columns:1fr;gap:clamp(24px,4vh,42px);justify-items:start;text-align:left;}
-  .order__beats{order:2;min-height:auto;}
-  .order__device{order:1;}
+  .order__intro-inner{text-align:center;max-width:none;}
+  .order__stage{
+    display:flex;flex-direction:column;gap:0;
+    grid-template-columns:unset;justify-items:unset;
+    max-width:none;width:100%;margin:0;
+  }
+  /* Phone stays sticky at the top while beats scroll behind it */
+  .order__device{
+    order:1;position:sticky;top:0;z-index:2;
+    background:var(--dark);
+    padding:clamp(10px,2svh,20px) 0 clamp(6px,1.2svh,14px);
+    display:flex;justify-content:center;
+    opacity:1!important;
+  }
   .order__device .phone{width:min(52vw,220px);}
-  /* reset per-beat vertical offsets — mobile is linear */
+  .order__beats{order:2;display:flex;flex-direction:column;min-height:auto;}
+  /* Each beat is a full-height section; override desktop cross-fade opacity/transform */
+  .order__beat{
+    min-height:80svh;
+    display:flex;flex-direction:column;
+    align-items:flex-start;justify-content:center;
+    padding:clamp(24px,5svh,48px) var(--gutter);
+    grid-area:unset;width:100%;
+    opacity:1!important;transform:none!important;pointer-events:auto;
+  }
   .order__beat[data-beat="1"],.order__beat[data-beat="2"],
-  .order__beat[data-beat="3"],.order__beat[data-beat="4"]{padding-top:clamp(8px,2vh,20px)}
+  .order__beat[data-beat="3"],.order__beat[data-beat="4"]{padding-top:clamp(24px,5svh,48px);}
+  .order__beat--final{min-height:60svh;}
   .order__before{font-size:clamp(1.8rem,6.5vw,2.8rem);}
-  .order__final{font-size:clamp(2.6rem,6.5vw,3.8rem);}
+  .order__final{font-size:clamp(2.6rem,6.5vw,3.8rem);text-align:center;}
+  .order__progress{display:none;}
+  /* Override desktop final-beat absolute-stage trick */
+  .order__stage:has(.order__beat--final.is-active){
+    position:static;display:flex;flex-direction:column;
+    align-items:unset;justify-content:unset;max-width:none;margin:0;gap:0;
+  }
+  .order__stage:has(.order__beat--final.is-active) .order__device{display:flex;}
+  .order__stage:has(.order__beat--final.is-active) .order__beats{width:100%;min-height:0;}
 }
 
 @media(min-width:1200px){
