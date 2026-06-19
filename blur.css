@@ -1001,6 +1001,9 @@ body{
     gap:clamp(32px,3vw,60px);
   }
   .order__device .phone{width:clamp(280px,30vw,360px);}
+  .living__grid{grid-template-columns:1.3fr 0.7fr;}
+  .manifesto .mf-hero{white-space:nowrap;text-wrap:nowrap;}
+  .belief .bf-q{white-space:nowrap;text-wrap:nowrap;}
 }
 
 /* reduced motion / no-scrub fallback: a calm static reveal */
