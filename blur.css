@@ -756,6 +756,16 @@ body{
   z-index:0;
 }
 .order__card::after{display:none;}
+
+/* mobile-only phone slides — hidden on desktop */
+.order__mslide{display:none;}
+.omc-blur-hi{filter:blur(34px) brightness(.46)!important;transform:scale(1.08)!important;}
+.omc-blur-mid{filter:blur(20px) brightness(.62)!important;transform:scale(1.08)!important;}
+.omc-btlview{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;}
+.omc-btlview__peek{padding:6px 18px 10px;display:flex;flex-wrap:wrap;gap:6px;}
+.omc-btlview .oreflect{margin:0 10px 10px;flex:0 1 auto;overflow:hidden;}
+.order__mslide .ojourney__spacer{height:130px;}
+
 /* per-beat states, cross-faded */
 .ophase{
   position:absolute;inset:0;z-index:2;
@@ -1007,16 +1017,11 @@ body{
     grid-template-columns:unset;justify-items:unset;
     max-width:none;width:100%;margin:0;
   }
-  /* Phone stays sticky at the top while beats scroll behind it */
-  .order__device{
-    order:1;position:sticky;top:0;z-index:2;
-    background:var(--dark);
-    padding:clamp(32px,5.5svh,56px) 0 clamp(6px,1.2svh,14px);
-    display:flex;justify-content:center;
-    opacity:1!important;
-  }
-  .order__device .phone{width:min(78vw,300px);}
-  .order__beats{order:2;display:flex;flex-direction:column;min-height:auto;}
+  /* Desktop phone hidden; interleaved phone slides take over */
+  .order__device{display:none!important;}
+  .order__mslide{display:flex;justify-content:center;align-items:flex-start;padding:clamp(32px,5.5svh,56px) 0 clamp(6px,1.2svh,14px);min-height:80svh;}
+  .order__mslide .phone{width:min(78vw,300px);}
+  .order__beats{display:flex;flex-direction:column;min-height:auto;}
   /* Each beat is a full-height section; override desktop cross-fade opacity/transform */
   .order__beat{
     min-height:80svh;
@@ -1332,7 +1337,6 @@ footer{
   .store{justify-content:center}
   /* phone sizing: wider presence, cqi typography scales down proportionally */
   .phone{width:min(78vw,300px)}
-  .order__device .phone{width:min(78vw,300px)}
   /* notch/header area: reduce top padding on smaller phones */
   .disc__top{padding:32px 16px 12px}
 }
