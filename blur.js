@@ -220,6 +220,32 @@
   }
 
 
+  /* ---- mobile order: horizontal carousel + dot sync ---- */
+  if (window.matchMedia("(max-width:860px)").matches) {
+    var carousel = document.querySelector(".order__beats");
+    var dotsEl   = document.querySelector(".order__dots");
+    if (carousel && dotsEl) {
+      var slides   = carousel.children;
+      var slideN   = slides.length;
+      for (var di = 0; di < slideN; di++) {
+        var dot = document.createElement("span");
+        dot.className = "order__dot" + (di === 0 ? " is-active" : "");
+        dotsEl.appendChild(dot);
+      }
+      var dotNodes = dotsEl.children;
+      var lastDot  = 0;
+      function syncDots() {
+        var idx = Math.round(carousel.scrollLeft / carousel.offsetWidth);
+        idx = Math.max(0, Math.min(slideN - 1, idx));
+        if (idx === lastDot) return;
+        dotNodes[lastDot].classList.remove("is-active");
+        dotNodes[idx].classList.add("is-active");
+        lastDot = idx;
+      }
+      carousel.addEventListener("scroll", syncDots, { passive: true });
+    }
+  }
+
   /* ---- single scroll pass ---- */
   var firstPass = true;
   function check() {
