@@ -1078,6 +1078,24 @@ body{
   }
   .order__dot.is-active{background:var(--gold);width:18px;border-radius:3px;}
   .order__progress{display:none;}
+  /* Compress chat content inside carousel slide phones so everything fits */
+  .order__mslide .chat__head{padding:30px 13px 9px;}
+  .order__mslide .chat__name{font-size:.72rem;}
+  .order__mslide .chat__sub{font-size:.54rem;}
+  .order__mslide .chat__scroll{padding:10px 12px 14px;}
+  .order__mslide .chat__reveal{padding:9px 11px;margin-bottom:8px;}
+  .order__mslide .chat__reveal-h{font-size:.60rem;}
+  .order__mslide .chat__reveal-p{font-size:.54rem;margin-bottom:7px;}
+  .order__mslide .chat__reveal-btn{font-size:.54rem;}
+  .order__mslide .chat__date{margin:10px 0 8px;}
+  .order__mslide .chat__date span{font-size:.48rem;}
+  .order__mslide .chat__thread{gap:5px;}
+  .order__mslide .chat__bubble{font-size:.64rem;padding:5px 10px;}
+  .order__mslide .chat__time{font-size:.48rem;margin-top:2px;}
+  .order__mslide .chat__bar{padding:7px 11px 9px;gap:7px;}
+  .order__mslide .chat__field{font-size:.60rem;padding:.52em .82em;}
+  .order__mslide .chat__once{font-size:.58rem;padding:.42em .72em;}
+  .order__mslide .chat__mic{width:30px;height:30px;}
 }
 
 @media(min-width:1200px){
