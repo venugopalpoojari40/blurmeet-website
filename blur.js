@@ -144,12 +144,12 @@
 
   /* ---- THE ORDER OF THINGS: scroll-scrubbed unblur ---- */
   var orderTrack = document.querySelector(".order__track");
-  var orderImg = document.querySelector(".order__img");
-  var orderIntro = document.querySelector(".order__intro");
   var orderPortrait = document.querySelector(".order__device");
-  var orderPhases = Array.prototype.slice.call(document.querySelectorAll(".ophase"));
+  var orderImg = orderPortrait ? orderPortrait.querySelector(".order__img") : null;
+  var orderIntro = document.querySelector(".order__intro");
+  var orderPhases = orderPortrait ? Array.prototype.slice.call(orderPortrait.querySelectorAll(".ophase")) : [];
   var orderVibeEl = document.getElementById("orderVibe");
-  var orderVibeBox = document.querySelector(".order__phone .disc__vibe");
+  var orderVibeBox = orderPortrait ? orderPortrait.querySelector(".order__phone .disc__vibe") : null;
   var orderVibes = [
     "here for the kind of quiet that doesn't need filling",
     "ask me the question you're actually curious about",
@@ -158,8 +158,8 @@
     "no longer a stranger"
   ];
   var orderBeats = Array.prototype.slice.call(document.querySelectorAll(".order__beat"));
-  var orderJourney = document.querySelector(".ojourney");
-  var orderCard = document.querySelector(".order__card");
+  var orderJourney = orderPortrait ? orderPortrait.querySelector(".ojourney") : null;
+  var orderCard = orderPortrait ? orderPortrait.querySelector(".order__card") : null;
   var orderProg = document.querySelector(".order__progress span");
   var orderActive = -1;
   function smoothstep(a, b, t) {
