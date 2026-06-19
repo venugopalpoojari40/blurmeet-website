@@ -209,8 +209,8 @@
       for (var i = 0; i < orderBeats.length; i++) {
         orderBeats[i].classList.toggle("is-active", i === beat);
       }
-      // the phone screen advances with the beat (intro + silhouette + curiosity share the scrolling journey)
-      var phase = beat <= 1 ? 0 : beat;
+      // each beat maps to its own phase (0=silhouette, 1=curiosity/btl, 2=connection, 3=trust)
+      var phase = beat;
       for (var k = 0; k < orderPhases.length; k++) {
         orderPhases[k].classList.toggle("is-active", +orderPhases[k].getAttribute("data-phase") === phase);
       }
