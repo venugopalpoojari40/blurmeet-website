@@ -766,7 +766,7 @@ body{
 .omc-btlview__peek{padding:6px 18px 10px;display:flex;flex-wrap:wrap;gap:6px;}
 .omc-btlview .oreflect{margin:0 10px 10px;flex:0 1 auto;overflow:hidden;}
 .order__mslide .ojourney__spacer{height:130px;}
-.order__device .ojourney__spacer{height:190px;}
+.order__device .ojourney__spacer{height:130px;}
 
 /* per-beat states, cross-faded */
 .ophase{
