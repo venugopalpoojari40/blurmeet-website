@@ -933,6 +933,21 @@ body{
 .chat__mic::after{content:"";position:absolute;bottom:9px;left:50%;transform:translateX(-50%);width:12px;height:6px;border:1.4px solid var(--gold);border-top:none;border-radius:0 0 7px 7px;}
 
 /* — phone interior scales with container width on mobile — */
+@container (max-width:320px){
+  /* mobile phone (300px): scale down chat text to feel proportionate */
+  .chat__head{padding:38px 14px 11px;}
+  .chat__name{font-size:.78rem;}
+  .chat__sub{font-size:.58rem;}
+  .chat__bubble{font-size:.74rem;padding:7px 11px;}
+  .chat__time{font-size:.52rem;}
+  .chat__date span{font-size:.54rem;}
+  .chat__reveal-h{font-size:.68rem;}
+  .chat__reveal-p{font-size:.60rem;}
+  .chat__reveal-btn{font-size:.62rem;}
+  .chat__bar{padding:9px 12px 12px;gap:8px;}
+  .chat__field{font-size:.68rem;padding:.62em .9em;}
+  .chat__once{font-size:.64rem;}
+}
 @container (max-width:248px){
   /* chat header */
   .chat__head{padding:34px 12px 10px;}
