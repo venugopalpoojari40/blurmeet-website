@@ -1552,6 +1552,11 @@ html[data-display="playfair"]{--serif:"Plus Jakarta Sans",system-ui,sans-serif}
 }
 .belief .bf-q[data-reveal].in{transform:translateY(0);}
 
+@media(min-width:1200px){
+  .manifesto .mf-hero{white-space:nowrap;text-wrap:nowrap;}
+  .belief .bf-q{white-space:nowrap;text-wrap:nowrap;}
+}
+
 @media (prefers-reduced-motion:reduce){
   .belief{transform:none !important;}
   .belief [data-reveal]{opacity:1;transform:none;transition:none;}
