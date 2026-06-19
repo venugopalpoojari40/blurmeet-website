@@ -1000,7 +1000,7 @@ body{
     display:flex;justify-content:center;
     opacity:1!important;
   }
-  .order__device .phone{width:min(52vw,220px);}
+  .order__device .phone{width:min(78vw,300px);}
   .order__beats{order:2;display:flex;flex-direction:column;min-height:auto;}
   /* Each beat is a full-height section; override desktop cross-fade opacity/transform */
   .order__beat{
@@ -1317,7 +1317,7 @@ footer{
   .store{justify-content:center}
   /* phone sizing: wider presence, cqi typography scales down proportionally */
   .phone{width:min(78vw,300px)}
-  .order__device .phone{width:min(58vw,220px)}
+  .order__device .phone{width:min(78vw,300px)}
   /* notch/header area: reduce top padding on smaller phones */
   .disc__top{padding:32px 16px 12px}
 }
