@@ -143,6 +143,21 @@ body{
 }
 .topbar .wordmark{pointer-events:auto}
 
+.chapter-indicator{
+  position:fixed;top:calc(26px + 1.6rem);left:var(--gutter);z-index:50;
+  display:flex;align-items:center;gap:.8em;
+  pointer-events:none;
+  font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;
+  font-size:clamp(9px,.95vw,11px);letter-spacing:.28em;text-transform:uppercase;
+  color:#B8945A;
+  opacity:0;transition:opacity .35s ease;
+}
+.chapter-indicator.is-visible{opacity:1}
+.chapter-indicator::before{
+  content:"";flex:none;width:22px;height:1.5px;
+  background:linear-gradient(90deg,rgba(184,148,90,0),#B8945A);
+}
+
 /* ============================================================
    01 — HERO
    ============================================================ */

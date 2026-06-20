@@ -267,6 +267,50 @@
     }
   }
 
+  /* ---- chapter indicator ---- */
+  var chapterIndicator = document.getElementById("chapterIndicator");
+  var chapterLabel = document.getElementById("chapterLabel");
+  var chapterSections = [
+    { el: document.querySelector(".thresh"),   label: "Seeing"  },
+    { el: document.querySelector(".living"),   label: "Knowing" },
+    { el: document.querySelector(".feeling"),  label: "Feeling" },
+    { el: document.querySelector(".order"),    label: "Meeting" },
+    { el: document.querySelector(".download"), label: ""        }
+  ];
+  var activeChapter = "";
+  var chapterSwapTimer = null;
+
+  function setChapter(label) {
+    if (label === activeChapter || !chapterIndicator) return;
+    activeChapter = label;
+    if (chapterSwapTimer) { clearTimeout(chapterSwapTimer); chapterSwapTimer = null; }
+    if (!label) { chapterIndicator.classList.remove("is-visible"); return; }
+    var wasVisible = chapterIndicator.classList.contains("is-visible");
+    if (wasVisible) {
+      chapterIndicator.classList.remove("is-visible");
+      chapterSwapTimer = setTimeout(function () {
+        chapterLabel.textContent = label;
+        chapterIndicator.classList.add("is-visible");
+      }, 300);
+    } else {
+      chapterLabel.textContent = label;
+      chapterIndicator.classList.add("is-visible");
+    }
+  }
+
+  function updateChapter() {
+    if (!chapterIndicator) return;
+    var mid = vh() * 0.5;
+    var found = "";
+    for (var ci = 0; ci < chapterSections.length; ci++) {
+      if (!chapterSections[ci].el) continue;
+      if (chapterSections[ci].el.getBoundingClientRect().top < mid) {
+        found = chapterSections[ci].label;
+      }
+    }
+    setChapter(found);
+  }
+
   /* ---- single scroll pass ---- */
   var firstPass = true;
   function check() {
@@ -287,6 +331,7 @@
     updateThresh();
     updateOrder();
     manifestoParallax();
+    updateChapter();
     firstPass = false;
   }
 
