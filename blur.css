@@ -377,6 +377,25 @@ body{
 .lp-quote{font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;font-size:clamp(.7rem,4cqi,.86rem);line-height:1.58;color:var(--dark);margin-bottom:16px}
 .lp-qa{margin-bottom:18px}
 .lp-qa:last-child{margin-bottom:0}
+
+/* ---- static profile card — thresh phone (fresh, sp-*) ---- */
+.sp-card{position:relative;flex:1;margin:0 16px 16px;border-radius:17px;overflow:hidden;background:#0d0b09;display:flex;flex-direction:column}
+.sp-photo{position:absolute;inset:0;background:url("portrait.webp") 50% 26%/cover;filter:blur(26px) brightness(.65);transform:scale(1.18)}
+.sp-grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,11,9,.3) 0%,rgba(13,11,9,.06) 22%,rgba(13,11,9,.48) 50%,rgba(13,11,9,.96) 100%)}
+.sp-top{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:14px 14px 0}
+.sp-badge{font-family:"Plus Jakarta Sans",sans-serif;font-size:clamp(.54rem,3cqi,.66rem);font-weight:500;color:rgba(232,226,217,.9);padding:.35em .85em;border:1px solid rgba(232,226,217,.35);border-radius:999px;background:rgba(13,11,9,.5)}
+.sp-live{display:inline-flex;align-items:center;gap:5px;font-family:"Plus Jakarta Sans",sans-serif;font-size:clamp(.54rem,3cqi,.66rem);color:rgba(232,226,217,.7)}
+.sp-live i{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:spPulse 2s ease-in-out infinite}
+@keyframes spPulse{0%,100%{opacity:1}50%{opacity:.4}}
+.sp-body{position:relative;z-index:2;margin-top:auto;padding:0 16px 16px;display:flex;flex-direction:column;gap:10px}
+.sp-name{font-family:"Plus Jakarta Sans",sans-serif;font-weight:700;font-size:clamp(1.2rem,8.5cqi,1.75rem);line-height:1;color:#e8e2d9}
+.sp-name span{font-weight:400;color:rgba(232,226,217,.65)}
+.sp-loc{font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;font-size:clamp(.58rem,3.4cqi,.74rem);color:rgba(232,226,217,.6);margin-top:-4px}
+.sp-section{display:flex;flex-direction:column;gap:7px}
+.sp-label{font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;font-size:clamp(.48rem,2.8cqi,.58rem);letter-spacing:.2em;text-transform:uppercase;color:rgba(201,169,110,.85)}
+.sp-pills{display:flex;flex-wrap:wrap;gap:6px}
+.sp-pill{display:inline-flex;align-items:center;gap:4px;font-family:"Plus Jakarta Sans",sans-serif;font-size:clamp(.54rem,3.2cqi,.68rem);font-weight:500;color:#e8e2d9;padding:.42em .95em;border:1px solid rgba(232,226,217,.5);border-radius:999px;background:rgba(13,11,9,.6);backdrop-filter:blur(4px)}
+.sp-pill em{font-style:normal;color:rgba(201,169,110,.8);font-size:.85em}
 .lp-q{font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;font-size:clamp(.6rem,3.4cqi,.72rem);line-height:1.45;color:#8a8278;margin-bottom:5px}
 .lp-a{font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;font-size:clamp(.82rem,5.2cqi,1.1rem);line-height:1.42;color:var(--dark);letter-spacing:-.01em}
 
