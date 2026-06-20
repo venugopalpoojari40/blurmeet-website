@@ -156,14 +156,34 @@ body{
   overflow:hidden;
 }
 .hero__copy{position:relative;z-index:3;max-width:580px;padding:96px 0}
-.hero h1{
-  font-size:clamp(3.6rem,7vw,7.2rem);
-  margin-bottom:.9em;
-  font-style:italic;font-weight:500;
-  text-rendering:geometricPrecision;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
+
+/* Hero brand: logo mark + wordmark */
+.hero__brand{
+  display:flex;align-items:center;
+  gap:clamp(12px,1.8vw,20px);
+  margin-bottom:clamp(16px,2.8vh,26px);
 }
+.hero__mark{
+  width:clamp(40px,5.2vw,72px);height:auto;
+  color:var(--light);flex-shrink:0;
+}
+.hero__name{
+  font-family:"Plus Jakarta Sans",sans-serif;
+  font-weight:600;letter-spacing:.02em;
+  font-size:clamp(2.8rem,5.2vw,5.2rem);
+  line-height:1;color:var(--light);
+}
+
+/* Sub caption below the brand block */
+.hero__tagline{
+  font-family:var(--serif);font-style:italic;font-weight:400;
+  font-size:clamp(1rem,1.45vw,1.35rem);
+  line-height:1.45;letter-spacing:.01em;
+  color:rgba(245,240,232,.68);
+  margin-bottom:.9em;
+}
+.hero__tagline em{color:var(--gold);font-style:italic;}
+
 .hero h1 .line{display:block;overflow:hidden}
 .hero .lede{font-size:clamp(.88rem,1.1vw,1.05rem);max-width:30ch;opacity:.72}
 .hero__sub{margin-bottom:2.6em;max-width:none;white-space:nowrap}
@@ -1381,7 +1401,8 @@ footer{
 @media (max-width:900px){
   .hero{grid-template-columns:1fr;min-height:100vh}
   .hero__copy{padding:108px 0 72px;max-width:none}
-  .hero h1{font-size:clamp(2.6rem,6vw,4.8rem);font-weight:500}
+  .hero__name{font-size:clamp(2.4rem,8vw,4rem)}
+  .hero__tagline{font-size:clamp(1rem,2.8vw,1.2rem)}
   .hero__portrait{width:100%;opacity:.5}
   .hero__portrait::after{background:linear-gradient(0deg,var(--dark) 18%,rgba(26,23,20,.5) 60%,rgba(26,23,20,.7))}
   .belief__grid{grid-template-columns:1fr}
@@ -1425,8 +1446,8 @@ footer{
   .foot__grid{grid-template-columns:1fr;gap:27px}
   .foot__col--social{text-align:center}
   .foot__col--social .foot__social{justify-content:center}
-  .hero h1{font-size:clamp(2rem,9.5vw,3rem)}
-  .hero h1 .nowrap{white-space:normal}
+  .hero__name{font-size:clamp(2.2rem,10vw,3.2rem)}
+  .hero__tagline{font-size:clamp(.95rem,3.5vw,1.1rem)}
   .hero__copy{padding:88px 0 60px}
   .cta{width:100%;justify-content:center}
   .stores{flex-direction:column;width:100%}
