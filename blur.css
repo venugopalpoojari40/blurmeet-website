@@ -899,7 +899,8 @@ body{
 .chat__name{font-family:"Plus Jakarta Sans",sans-serif;font-weight:700;font-size:.92rem;color:var(--light);display:flex;align-items:center;gap:6px;}
 .chat__name em{font-style:normal;color:var(--gold);font-size:.82em;}
 .chat__sub{font-family:"Plus Jakarta Sans",sans-serif;font-size:.66rem;color:rgba(232,226,217,.5);}
-.chat__scroll{flex:1;overflow:hidden;padding:15px 16px clamp(80px,16cqi,140px);display:flex;flex-direction:column;justify-content:flex-start;}
+.chat__scroll{flex:1;overflow:hidden;padding:15px 16px clamp(80px,16cqi,140px);display:flex;flex-direction:column;justify-content:flex-end;}
+.chat__scroll:has(.chat__reveal){justify-content:flex-start;}
 .ophase--chat[data-phase="4"] .chat__reveal{padding:11px 14px;margin-bottom:8px;}
 .ophase--chat[data-phase="4"] .chat__date{margin:10px 0 9px;}
 .ophase--chat[data-phase="4"] .chat__thread{gap:6px;}
