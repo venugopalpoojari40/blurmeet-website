@@ -561,4 +561,26 @@
     if (!down && !up) return;
     if (goStop(down ? 1 : -1)) e.preventDefault();
   });
+
+  /* ---- wheel snap: one scroll = one beat inside the Order pinned section ---- */
+  (function () {
+    if (!orderTrack) return;
+    var lock = false;
+    var acc = 0;
+    window.addEventListener("wheel", function (e) {
+      if (window.matchMedia("(max-width:860px)").matches) return;
+      var r = orderTrack.getBoundingClientRect();
+      /* only active while the track is pinned (spans the full viewport) */
+      if (r.top > 4 || r.bottom < vh() - 4) { acc = 0; return; }
+      e.preventDefault();
+      if (lock) return;
+      acc += e.deltaY;
+      if (Math.abs(acc) < 40) return; /* ignore tiny trackpad drift */
+      var dir = acc > 0 ? 1 : -1;
+      acc = 0;
+      if (!goStop(dir)) return; /* at a boundary — no lock, let next scroll exit */
+      lock = true;
+      setTimeout(function () { lock = false; }, 750);
+    }, { passive: false });
+  }());
 })();
