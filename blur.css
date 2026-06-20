@@ -1281,6 +1281,8 @@ footer{
   font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;font-size:.86rem;line-height:1.65;
   color:var(--muted);max-width:none;margin-bottom:28px;
 }
+.mob-br{display:none;}
+@media(max-width:860px){.mob-br{display:block;}}
 .foot__emails{list-style:none;display:flex;flex-direction:column;gap:16px}
 .foot__emails a{
   display:flex;align-items:center;gap:13px;min-height:24px;text-decoration:none;
