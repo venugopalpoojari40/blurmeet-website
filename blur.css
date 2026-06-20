@@ -357,8 +357,8 @@ body{
 .lp-chip{
   display:inline-flex;align-items:center;gap:5px;
   font-family:"Plus Jakarta Sans",sans-serif;font-size:clamp(.6rem,3.4cqi,.72rem);font-weight:500;color:var(--text);
-  padding:.5em 1em;border:1px solid rgba(232,226,217,.28);border-radius:999px;
-  background:rgba(16,13,11,.34);backdrop-filter:blur(5px);
+  padding:.5em 1em;border:1px solid rgba(232,226,217,.48);border-radius:999px;
+  background:rgba(16,13,11,.55);backdrop-filter:blur(5px);
 }
 .lp-chip em{font-style:normal;color:var(--gold);font-size:.82em}
 .lp-hint{

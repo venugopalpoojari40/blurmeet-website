@@ -131,7 +131,8 @@
   var threshPhoto = threshCard ? threshCard.querySelector(".lp-photo") : null;
   function sizeThresh() {
     if (!threshCard || !threshPhoto) return;
-    threshPhoto.style.height = threshCard.clientHeight + "px";
+    var h = threshCard.clientHeight;
+    threshPhoto.style.height = Math.round(h * 1.5) + "px";
   }
   function updateThresh() {
     if (!threshCard || !threshSection) return;
