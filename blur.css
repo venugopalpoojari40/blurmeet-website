@@ -1202,10 +1202,10 @@ body{
 /* Download brand block: logo mark + wordmark */
 .download__brand{display:flex;align-items:center;gap:clamp(16px,2.8vw,40px);}
 .download__mark{height:clamp(4rem,13vw,10.5rem);width:auto;color:var(--light);flex-shrink:0;}
-.download__name{
-  font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;
-  font-size:clamp(4.5rem,15vw,12rem);line-height:.98;letter-spacing:.02em;color:var(--light);
+.download__brand .wordmark{
+  font-size:clamp(4rem,13vw,10.5rem);line-height:.98;color:var(--light);
 }
+.download__brand .wordmark .dot{color:var(--gold)}
 
 .download__tag{
   font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,3.2vw,2.8rem);
