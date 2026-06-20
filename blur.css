@@ -907,7 +907,7 @@ body{
 .ophase--chat[data-phase="4"] .chat__bubble{padding:6px 13px;}
 .ophase--chat[data-phase="4"] .chat__time{margin-top:2px;}
 .chat__reveal{
-  flex-shrink:0;margin-bottom:14px;
+  flex-shrink:0;margin-bottom:20px;
   border:1px solid rgba(201,169,110,.45);border-radius:15px;
   background:rgba(201,169,110,.07);padding:14px 15px;
   box-shadow:0 0 0 1px rgba(201,169,110,.12),0 0 10px rgba(201,169,110,.32),0 0 26px rgba(201,169,110,.13);
