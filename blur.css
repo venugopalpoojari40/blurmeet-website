@@ -1092,14 +1092,22 @@ body{
     flex:0 0 100%;width:100%;height:100%;
     scroll-snap-align:start;
     display:flex;flex-direction:column;
-    align-items:flex-start;justify-content:center;
+    align-items:center;justify-content:center;
     padding:clamp(24px,5svh,48px) var(--gutter);
     grid-area:unset;min-height:unset;
     opacity:1!important;transform:none!important;pointer-events:auto;
   }
   .order__beat--final{align-items:center;justify-content:center;}
-  .order__before{font-size:clamp(1.8rem,6.5vw,2.8rem);}
-  .order__final{font-size:clamp(2.6rem,6.5vw,3.8rem);text-align:center;}
+  /* zero desktop per-beat padding-top offsets — centered flex handles vertical rhythm */
+  .order__beat[data-beat="1"],.order__beat[data-beat="2"],
+  .order__beat[data-beat="3"],.order__beat[data-beat="4"]{padding-top:0;}
+  .order__word{text-align:center;}
+  .order__before{
+    font-size:clamp(2.6rem,8vw,4rem);
+    text-align:center;
+    margin-top:.7em;
+  }
+  .order__final{font-size:clamp(2.6rem,8vw,4rem);text-align:center;}
   /* Dot indicators */
   .order__dots{
     flex:0 0 auto;display:flex;justify-content:center;align-items:center;
