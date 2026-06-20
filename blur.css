@@ -1201,7 +1201,25 @@ body{
 
 /* Download brand block: logo mark + wordmark */
 .download__brand{display:flex;align-items:center;gap:clamp(16px,2.8vw,40px);}
-.download__mark{height:clamp(4rem,13vw,10.5rem);width:auto;color:var(--light);flex-shrink:0;}
+.download__mark{
+  height:clamp(4rem,13vw,10.5rem);aspect-ratio:78/70;
+  color:var(--light);flex-shrink:0;
+  display:flex;align-items:flex-end;gap:8.97%;
+}
+.lb{
+  display:block;background:currentColor;
+  border-radius:.3em .3em .08em .08em;
+  transform-origin:center bottom;
+  animation:logo-bar-grow 1.4s ease-in-out infinite alternate;
+}
+.lb1{width:20.5%;height:100%;animation-delay:0s}
+.lb2{width:11.5%;height:100%;animation-delay:.12s}
+.lb3{width:24.4%;height:65.7%;animation-delay:.24s}
+.lb4{width:16.7%;height:65.7%;animation-delay:.36s}
+@keyframes logo-bar-grow{
+  0%{transform:scaleY(.18)}
+  100%{transform:scaleY(1)}
+}
 .download__brand .wordmark{
   font-size:clamp(4rem,13vw,10.5rem);line-height:.98;color:var(--light);
 }
