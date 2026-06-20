@@ -288,7 +288,7 @@ body{
 .thresh__stage{display:flex;justify-content:center;perspective:1600px}
 
 /* discover screen */
-.disc{background:#0d0b09;display:flex;flex-direction:column;padding:0}
+.disc{background:#0d0b09;display:flex;flex-direction:column;padding:0;height:100%}
 .disc__top{display:flex;align-items:center;justify-content:space-between;padding:46px 20px 14px}
 .disc__mark{font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;font-size:clamp(.9rem,5.4cqi,1.15rem);color:var(--light);letter-spacing:.01em}
 .disc__mark-2{color:var(--gold)}
