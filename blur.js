@@ -237,6 +237,7 @@
       }
       if (orderVibeEl && orderVibes[phase]) orderVibeEl.textContent = orderVibes[phase];
       if (orderVibeBox) orderVibeBox.style.opacity = (phase === 2 ? "0" : "1");
+      if (beat === 4 && isDesktopWide) markStorySeen();
     }
   }
 
@@ -267,9 +268,14 @@
     }
   }
 
-  /* ---- chapter indicator ---- */
+  /* ---- chapter indicator + story TOC ---- */
   var chapterIndicator = document.getElementById("chapterIndicator");
-  var chapterLabel = document.getElementById("chapterLabel");
+  var chapterLabel     = document.getElementById("chapterLabel");
+  var storyToc         = document.getElementById("storyToc");
+  var skipStoryBtn     = document.getElementById("skipStory");
+  var isDesktopWide    = window.matchMedia("(min-width:1024px)").matches;
+  var storySeen        = false;
+  try { storySeen = localStorage.getItem("blur_story_seen") === "true"; } catch(e) {}
   var chapterSections = [
     { el: document.querySelector(".hero"),     label: "The Mistake" },
     { el: document.querySelector(".thresh"),   label: "Seeing"      },
@@ -300,7 +306,6 @@
   }
 
   function updateChapter() {
-    if (!chapterIndicator) return;
     var mid = vh() * 0.15;
     var found = "";
     for (var ci = 0; ci < chapterSections.length; ci++) {
@@ -309,8 +314,72 @@
         found = chapterSections[ci].label;
       }
     }
-    setChapter(found);
+    if (storySeen && isDesktopWide && storyToc) {
+      var tocItems = storyToc.querySelectorAll(".stoc-item");
+      for (var ti = 0; ti < chapterSections.length && ti < tocItems.length; ti++) {
+        tocItems[ti].classList.toggle("is-active", chapterSections[ti].label === found);
+      }
+    } else {
+      if (!chapterIndicator) return;
+      setChapter(found);
+      if (skipStoryBtn && !storySeen && isDesktopWide && orderTrack) {
+        var or = orderTrack.getBoundingClientRect();
+        var inOrder = or.top <= 4 && or.bottom >= vh() - 4;
+        skipStoryBtn.classList.toggle("is-visible", inOrder);
+      }
+    }
   }
+
+  function markStorySeen() {
+    if (storySeen) return;
+    try { localStorage.setItem("blur_story_seen", "true"); } catch(e) {}
+    storySeen = true;
+    if (isDesktopWide) activateReturnMode();
+  }
+
+  function activateReturnMode() {
+    if (chapterIndicator) { chapterIndicator.classList.remove("is-visible"); chapterIndicator.style.display = "none"; }
+    if (skipStoryBtn) skipStoryBtn.classList.remove("is-visible");
+    if (storyToc) { storyToc.classList.add("is-active"); storyToc.removeAttribute("aria-hidden"); }
+    updateChapter();
+  }
+
+  /* TOC click handlers */
+  if (storyToc) {
+    var tocTargetEls = [
+      document.querySelector(".hero"),
+      document.querySelector(".thresh"),
+      document.querySelector(".living"),
+      document.querySelector(".feeling"),
+      document.querySelector(".order")
+    ];
+    var tocLinks = storyToc.querySelectorAll(".stoc-item");
+    for (var tci = 0; tci < tocLinks.length; tci++) {
+      (function(link, target) {
+        link.addEventListener("click", function(e) {
+          e.preventDefault();
+          if (!target) return;
+          var top = target.getBoundingClientRect().top + (window.scrollY || window.pageYOffset);
+          window.scrollTo({ top: top, behavior: reduce ? "auto" : "smooth" });
+        });
+      })(tocLinks[tci], tocTargetEls[tci]);
+    }
+  }
+
+  /* Skip story button */
+  if (skipStoryBtn) {
+    skipStoryBtn.addEventListener("click", function() {
+      markStorySeen();
+      var dlSection = document.querySelector(".download");
+      if (dlSection) {
+        var top = dlSection.getBoundingClientRect().top + (window.scrollY || window.pageYOffset);
+        window.scrollTo({ top: top, behavior: reduce ? "auto" : "smooth" });
+      }
+    });
+  }
+
+  /* init: activate return mode immediately if returning desktop visitor */
+  if (storySeen && isDesktopWide) activateReturnMode();
 
   /* ---- single scroll pass ---- */
   var firstPass = true;
@@ -566,7 +635,7 @@
     var stops = [];
     for (var i = 0; i < navSections.length; i++) {
       var el = navSections[i];
-      if (orderTrack && el.contains(orderTrack)) {
+      if (orderTrack && el.contains(orderTrack) && !(storySeen && isDesktopWide)) {
         var total = orderTrack.getBoundingClientRect().height - vh();
         var otop = orderTrack.getBoundingClientRect().top + sy;
         for (var b = 0; b < orderBeatP.length; b++) {
@@ -615,6 +684,7 @@
     var acc = 0;
     window.addEventListener("wheel", function (e) {
       if (window.matchMedia("(max-width:860px)").matches) return;
+      if (storySeen && isDesktopWide) return;
       var r = orderTrack.getBoundingClientRect();
       /* only active while the track is pinned (spans the full viewport) */
       if (r.top > 4 || r.bottom < vh() - 4) { acc = 0; return; }
