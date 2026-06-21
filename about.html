@@ -43,20 +43,15 @@ h2{
 }
 p{
   font-family:"Inter",sans-serif;font-weight:300;font-size:.93rem;
-  line-height:1.72;color:var(--muted);margin-bottom:12px;max-width:62ch;text-wrap:pretty;
+  line-height:1.72;color:var(--muted);margin-bottom:14px;max-width:62ch;text-wrap:pretty;
 }
 p:last-child{margin-bottom:0}
-.opener{
-  font-family:"Inter",sans-serif;font-weight:300;font-size:.97rem;
-  line-height:1.9;color:rgba(232,226,217,.6);
-  margin-bottom:12px;max-width:58ch;text-wrap:pretty;
-}
 .pull{
   font-family:var(--serif);font-style:italic;font-weight:300;
-  font-size:clamp(1.6rem,3.8vw,2.4rem);
-  line-height:1.2;color:var(--light);
+  font-size:clamp(1.5rem,3.5vw,2.2rem);
+  line-height:1.22;color:var(--light);
   margin:clamp(22px,3.5vh,32px) 0;
-  max-width:none;
+  max-width:none;display:block;
 }
 ul{margin:10px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px}
 li{
@@ -66,28 +61,28 @@ li{
 }
 li::before{content:"—";position:absolute;left:0;color:var(--gold);opacity:.7}
 hr{border:none;border-top:1px solid rgba(138,130,120,.14);margin:clamp(36px,5vh,52px) 0}
-.founders{
-  display:flex;flex-direction:column;
-  margin-top:clamp(20px,3vh,28px);
-}
-.founder{
-  border-top:1px solid rgba(138,130,120,.14);
-  padding:clamp(18px,2.5vh,24px) 0;
-}
+.founders{display:flex;flex-direction:column;margin-top:clamp(20px,3vh,28px)}
+.founder{border-top:1px solid rgba(138,130,120,.14);padding:clamp(16px,2.5vh,22px) 0}
 .founder:last-child{border-bottom:1px solid rgba(138,130,120,.14)}
 .founder__name{
-  font-family:var(--serif);font-weight:400;font-size:1.18rem;
+  font-family:var(--serif);font-weight:400;font-size:1.15rem;
   color:var(--light);margin-bottom:4px;
 }
 .founder__role{
   font-family:"Inter",sans-serif;font-weight:300;font-size:.78rem;
   letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
 }
-.city-line{
+.city{
   font-family:var(--serif);font-style:italic;font-weight:300;
-  font-size:clamp(1.15rem,2.8vw,1.6rem);
-  color:var(--light);margin-bottom:clamp(12px,2vh,18px);
+  font-size:clamp(1.1rem,2.6vw,1.5rem);
+  color:var(--light);display:block;margin-bottom:clamp(12px,2vh,18px);
 }
+.closing{
+  margin-top:clamp(52px,7vh,72px);
+  padding-top:clamp(36px,5vh,52px);
+  border-top:1px solid rgba(138,130,120,.14);
+}
+.closing p{font-size:.97rem;line-height:1.85}
 </style>
 </head>
 <body>
@@ -101,39 +96,58 @@ hr{border:none;border-top:1px solid rgba(138,130,120,.14);margin:clamp(36px,5vh,
   <h1>Our Story</h1>
 
   <h2>Why Blur Exists</h2>
-  <p class="opener">Online dating taught us to judge people before knowing them.<br>
-  Matrimony taught us to filter people before meeting them.<br>
-  Somewhere in between, people became profiles.</p>
-  <p class="opener">Blur started with a simple question:</p>
-  <p class="pull">What if knowing came before seeing?</p>
+  <p>For thirty years, online relationships have started with a photograph.</p>
+  <p>That seems reasonable enough. You see someone. You decide. You swipe.</p>
+  <p>But somewhere in that sequence, something important got lost.</p>
+  <p>People became profiles. Profiles became photos. Photos became decisions.</p>
+  <p>And gradually, the person on the other side of the screen became secondary to the image they chose to represent them.</p>
+  <p>We do not think photos are the problem. Photos are honest. Photos are real. They are simply not the beginning.</p>
+  <p>The issue is not that photos exist. The issue is that photos arrived first — before a single word was exchanged, before a single question was asked, before anything real had a chance to happen.</p>
+  <p>Blur exists because we believe some of the most important things about a person cannot be understood in a photograph.</p>
+  <span class="pull">Their humour. Their curiosity. Their fears. Their honesty. Their warmth. Their contradictions.</span>
+  <p>These things cannot be photographed. They can only be discovered.</p>
 
   <hr>
 
   <h2>The Name</h2>
-  <p>People are blurry when you first meet them.</p>
-  <p>Not because you can't see them. Because you don't know them yet.</p>
-  <p>The more you talk, the clearer they become.</p>
+  <p>When you first meet someone online, most of who they are is still blurred.</p>
+  <p>Their stories are unclear. Their personality is a guess. Their values are invisible. Their humour is untested. Their kindness is assumed.</p>
+  <p>That is not a flaw in the process. That is the beginning of one.</p>
+  <p>The blur is not something to be fixed immediately. The blur is an invitation — to ask questions, to listen carefully, to let curiosity do what attraction rarely can.</p>
+  <p>Over time, as conversations happen and honesty builds, the person on the other side comes into focus. Not all at once. Gradually.</p>
+  <p>The goal of Blur is not to stay blurred forever.</p>
+  <span class="pull">The goal is to let knowing come before seeing.</span>
 
   <hr>
 
   <h2>The Logo</h2>
-  <p>A silhouette before a face. A signal before an image. A person before a profile.</p>
-  <p>The logo is not decoration. It's part of the philosophy.</p>
+  <p>The logo is four vertical bars, each at a different height.</p>
+  <p>They are not a chart. They are not a signal meter. They represent something simpler: that knowing a person happens in stages.</p>
+  <p>The bars are not identical because people do not reveal themselves uniformly. Some things you learn quickly. Some things take months. Some things you never fully understand.</p>
+  <p>The logo intentionally feels incomplete. Because every person is more than what can be seen immediately.</p>
+  <p>The logo is not about hiding. It is about earning clarity.</p>
 
   <hr>
 
   <h2>What We Believe</h2>
   <ul>
-    <li>Attraction grows.</li>
-    <li>Privacy creates honesty.</li>
-    <li>Curiosity matters more than chemistry.</li>
-    <li>Good conversations deserve time.</li>
-    <li>People are more than profiles.</li>
+    <li>People are more interesting than their profiles suggest.</li>
+    <li>Curiosity is more powerful than attraction.</li>
+    <li>Trust is built in conversation, not photographs.</li>
+    <li>Privacy should be expected, not requested.</li>
+    <li>The best connections rarely happen instantly.</li>
+    <li>First impressions are often wrong.</li>
+    <li>Not every meaningful relationship begins with certainty.</li>
+    <li>Appearance is information, but it is rarely the most important kind.</li>
+    <li>People reveal themselves gradually. That is not a problem. That is the point.</li>
+    <li>Good questions matter more than good photos.</li>
+    <li>Silence, patience, and curiosity are underrated.</li>
   </ul>
 
   <hr>
 
   <h2>Who's Building Blur</h2>
+  <p>Blur is being built by three people.</p>
   <div class="founders">
     <div class="founder">
       <p class="founder__name">VenuGopal</p>
@@ -148,12 +162,26 @@ hr{border:none;border-top:1px solid rgba(138,130,120,.14);margin:clamp(36px,5vh,
       <p class="founder__role">Co-founder · CA & CS</p>
     </div>
   </div>
+  <p style="margin-top:clamp(20px,3vh,28px)">We have spent years watching online relationships become faster, louder, and more performative — while feeling less and less human.</p>
+  <p>We are not researchers or relationship coaches. We are three people who have watched the same cycle repeat, in our own lives and in the lives of people around us.</p>
+  <p>We built Blur because we wanted something different. Not revolutionary. Just honest.</p>
 
   <hr>
 
   <h2>Building In Public</h2>
-  <p class="city-line">Bangalore → Hyderabad → India</p>
-  <p>Currently building.<br>Listening. Learning. Iterating.</p>
+  <span class="city">Bangalore → Hyderabad → India</span>
+  <p>Blur is being built carefully and slowly.</p>
+  <p>We are starting with two cities we understand well — close enough to listen, small enough to learn.</p>
+  <p>We are testing assumptions. Changing things when they do not work. Listening to early users more than we are listening to ourselves.</p>
+  <p>We do not have everything figured out. We are not pretending to.</p>
+  <p>What we do have is a clear belief in what we are building, and a willingness to get it right before we get it everywhere.</p>
+  <p>If you have ever felt that online connections have become too fast, too shallow, or too appearance-driven — this is being built for you.</p>
+
+  <div class="closing">
+    <p>We do not think people are meant to be understood in a glance.</p>
+    <p>That takes time. That takes patience. That takes conversation.</p>
+    <p>That is why we are building Blur.</p>
+  </div>
 
 </div>
 </body>
