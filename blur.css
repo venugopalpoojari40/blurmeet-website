@@ -439,8 +439,11 @@ body{
   display:block;margin-top:.55em;
 }
 
+/* Tighter section padding — base .section value is too generous on large screens */
+.feeling.section{padding-top:clamp(64px,8vh,100px);padding-bottom:clamp(64px,8vh,100px)}
+
 /* Row: no dividers, full breathing room */
-.feeling .row{padding:clamp(80px,16vh,200px) 0;border-top:none}
+.feeling .row{padding:clamp(64px,9vh,110px) 0;border-top:none}
 .feeling .row:first-of-type{border-top:none}
 .feeling .row.right{display:flex;justify-content:flex-end;text-align:right}
 .feeling .row.right .stmt{text-align:right}
@@ -449,7 +452,7 @@ body{
 /* Resolution row — conclusion, then brand promise */
 .feeling .row.resolve{
   display:flex;justify-content:center;text-align:center;
-  padding-top:clamp(72px,13vh,160px);padding-bottom:clamp(80px,14vh,180px);
+  padding-top:clamp(56px,9vh,100px);padding-bottom:clamp(60px,10vh,110px);
 }
 .feeling .resolve__stmt{
   font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;
