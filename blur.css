@@ -838,11 +838,12 @@ body{
 .omc-btlview{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;}
 .omc-btlview__peek{padding:6px 18px 10px;display:flex;flex-wrap:wrap;gap:6px;}
 .omc-btlview .oreflect{margin:0 10px 10px;flex:0 1 auto;overflow:hidden;}
-/* Mobile + desktop: pills top ↔ profile bottom, spacer hidden — matches Seeing section card layout */
+/* Mobile: pills top ↔ profile bottom via space-between (no spacer needed) */
 .order__mslide .ojourney{height:100%;justify-content:space-between;}
 .order__mslide .ojourney__spacer{display:none;}
-.order__device .ojourney{height:100%;justify-content:space-between;}
-.order__device .ojourney__spacer{display:none;}
+/* Desktop: spacer creates silhouette breathing room; BTL section scrolls into view via JS translateY */
+.order__device .ojourney__spacer{height:clamp(140px,67cqi,230px);}
+.ojourney__btl{padding:20px 0 0;}
 
 /* per-beat states, cross-faded */
 .ophase{

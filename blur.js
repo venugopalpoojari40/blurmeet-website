@@ -182,6 +182,8 @@
   var orderJourney = orderPortrait ? orderPortrait.querySelector(".ojourney") : null;
   var orderCard = orderPortrait ? orderPortrait.querySelector(".order__card") : null;
   var orderProfile = orderJourney ? orderJourney.querySelector(".ophase__profile") : null;
+  var orderBtlEl = orderJourney ? orderJourney.querySelector(".ojourney__btl") : null;
+  var orderBtlTop = 0; // cached offsetTop — lazy-measured on first call, reset on resize
   var orderProg = document.querySelector(".order__progress span");
   var orderActive = -1;
   function smoothstep(a, b, t) {
@@ -207,12 +209,20 @@
     orderImg.style.transform = "scale(" + scale.toFixed(4) + ")";
     if (orderProg) orderProg.style.transform = "scaleX(" + p.toFixed(4) + ")";
 
-    // profile drifts up from below as silhouette beat progresses (pills stay pinned at top)
+    // profile drifts into view during silhouette beat; completes before card scroll accelerates
     if (orderProfile) {
-      var jp = (p - 0.18) / (0.40 - 0.18);
+      var jp = (p - 0.18) / (0.28 - 0.18);
       jp = Math.max(0, Math.min(1, jp));
       jp = jp * jp * (3 - 2 * jp);
       orderProfile.style.transform = "translateY(" + ((1 - jp) * 52).toFixed(1) + "px)";
+    }
+    // card scroll: wide range (0.26→0.52) for a cinematic, unhurried reveal of BTL content
+    if (orderJourney) {
+      if (!orderBtlTop && orderBtlEl) orderBtlTop = orderBtlEl.offsetTop;
+      var sp = (p - 0.26) / (0.52 - 0.26);
+      sp = Math.max(0, Math.min(1, sp));
+      sp = sp * sp * sp * (sp * (sp * 6 - 15) + 10); // smootherstep: zero velocity + acceleration at ends
+      orderJourney.style.transform = "translateY(-" + (sp * orderBtlTop).toFixed(1) + "px)";
     }
 
     // opening statement fades out as the silhouette fades in
@@ -230,13 +240,14 @@
       for (var i = 0; i < orderBeats.length; i++) {
         orderBeats[i].classList.toggle("is-active", i === beat);
       }
-      // each beat maps to its own phase (0=silhouette, 1=curiosity/btl, 2=connection, 3=trust)
-      var phase = beat;
+      // beats 0+1 both keep journey active (card scroll reveals BTL); beat 2+ shifts to chat
+      var phase = beat <= 1 ? 0 : beat - 1;
       for (var k = 0; k < orderPhases.length; k++) {
         orderPhases[k].classList.toggle("is-active", +orderPhases[k].getAttribute("data-phase") === phase);
       }
-      if (orderVibeEl && orderVibes[phase]) orderVibeEl.textContent = orderVibes[phase];
-      if (orderVibeBox) orderVibeBox.style.opacity = (phase === 2 ? "0" : "1");
+      var vibeIdx = Math.max(0, beat);
+      if (orderVibeEl && orderVibes[vibeIdx]) orderVibeEl.textContent = orderVibes[vibeIdx];
+      if (orderVibeBox) orderVibeBox.style.opacity = (beat >= 2 ? "0" : "1");
       if (beat === 4 && isDesktopWide) markStorySeen();
     }
   }
@@ -413,6 +424,7 @@
   }
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll);
+  window.addEventListener("resize", function() { orderBtlTop = 0; }); // re-measure after reflow
   window.addEventListener("load", check);
   // immediate + a couple of settle passes (fonts / layout)
   check();
