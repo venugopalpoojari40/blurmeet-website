@@ -389,6 +389,11 @@ body{
 .lp-track{position:relative;will-change:transform;transition:transform .18s linear}
 .lp-photo{position:relative;width:100%;min-height:800px;overflow:hidden;display:flex;flex-direction:column}
 .lp-photo .disc__photo{position:absolute;inset:0;background:url("portrait.webp") 50% 26%/cover;filter:blur(26px) brightness(.7);transform:scale(1.18)}
+/* Seeing + Knowing sections — real silhouette, no blur */
+#threshCard .disc__photo{background:url("silhouette.png") 50% 20%/cover;filter:none;transform:none}
+#lpCard .disc__photo{background:url("silhouette.png") 50% 20%/cover;filter:none;transform:none}
+/* Meeting — Silhouette beat only (desktop: :has() tracks active phase; mobile: static slide 1) */
+.order__card:has(.ophase--journey.is-active) .order__img{background:url("silhouette.png") 50% 20%/cover!important;filter:none!important;transform:none!important;}
 .lp-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,11,9,.34) 0%,rgba(13,11,9,.08) 24%,rgba(13,11,9,.5) 52%,rgba(13,11,9,.95) 100%)}
 
 /* static profile details on the silhouette */
@@ -834,7 +839,9 @@ body{
 .omc-btlview__peek{padding:6px 18px 10px;display:flex;flex-wrap:wrap;gap:6px;}
 .omc-btlview .oreflect{margin:0 10px 10px;flex:0 1 auto;overflow:hidden;}
 .order__mslide .ojourney__spacer{height:130px;}
-.order__device .ojourney__spacer{height:130px;}
+/* Desktop device: fill card, pills top ↔ profile bottom — matches Seeing section card layout */
+.order__device .ojourney{height:100%;justify-content:space-between;}
+.order__device .ojourney__spacer{display:none;}
 
 /* per-beat states, cross-faded */
 .ophase{
@@ -875,13 +882,15 @@ body{
 .ophase__handle{align-self:center;text-align:center;font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;font-size:1.75rem;letter-spacing:.01em;color:rgba(232,226,217,.72);}
 .ophase[data-phase="0"]{justify-content:flex-start;}
 .ophase__profile{padding:4px 18px 10px;background:#0d0b09;}
+/* Desktop device: gradient reaches 95% at bottom so solid bg not needed */
+.order__device .ophase__profile{background:transparent;}
 .lp-chips--row{flex-wrap:nowrap;}
 .lp-chips--row .lp-chip{white-space:nowrap;}
 
 /* silhouette -> curiosity: one continuous scroll inside the phone */
 .ophase--journey{
   overflow:hidden;
-  background:linear-gradient(180deg,transparent 0%,rgba(13,11,9,.35) 30%,rgba(13,11,9,.72) 55%);
+  background:linear-gradient(180deg,rgba(13,11,9,.34) 0%,rgba(13,11,9,.08) 24%,rgba(13,11,9,.5) 52%,rgba(13,11,9,.95) 100%);
 }
 /* curiosity beat: BTL card anchored to bottom of card */
 .ophase--btl{
