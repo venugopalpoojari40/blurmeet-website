@@ -993,36 +993,32 @@ body{
   overflow:hidden;
 }
 
-/* Two flex halves share the stage equally.
-   Each renders the SVG as a CSS mask on a coloured background — the
-   SVG fill (#000) becomes the mask alpha; the cream background-color
-   shows through.  mask-size:cover scales the square SVG to the full
-   container *height*, giving 90%+ phone-height coverage on every
-   viewport.  mask-position-x controls which horizontal strip is
-   visible — tuned so the face profile sits near the centre gap. */
 .match__stage{
   position:absolute;inset:0;
   display:flex;
   align-items:stretch;
   gap:6px;
 }
-/* Each half clips its silhouette image; the container itself carries
-   the approach animation so no gap appears at the inner edge. */
 .match__half{
   flex:1;
   position:relative;
   overflow:hidden;
 }
-/* img fills the half, cover-scaled to the full container height.
-   filter:invert(1) turns the black SVG paths to white on the dark overlay.
-   object-position crops the square SVG to show the face near the inner edge. */
+/* Warm amber backlight — glow from the inner edge (where the faces meet) */
+.match__half:first-child{
+  background:radial-gradient(ellipse 130% 65% at 105% 30%,rgba(201,163,90,.55) 0%,rgba(180,130,50,.18) 42%,transparent 65%);
+}
+.match__half:last-child{
+  background:radial-gradient(ellipse 130% 65% at -5% 30%,rgba(201,163,90,.55) 0%,rgba(180,130,50,.18) 42%,transparent 65%);
+}
+/* Pure black SVG cutout — warmth comes from the pane backgrounds, not the silhouette.
+   Same backlit-candle technique as the Curiosity silhouette cards. */
 .match__sil{
   position:absolute;
   inset:0;
   width:100%;height:100%;
   object-fit:cover;
   user-select:none;pointer-events:none;
-  filter:invert(1) sepia(.12) brightness(.86);
 }
 /* Queen SVG is naturally RIGHT-FACING (nose at ~65–68 % of SVG width).
    At 61 % the nose sat right at the visible-strip boundary and was invisible.
@@ -1033,15 +1029,18 @@ body{
    object-position 34 % places the face at the left (inner) edge of the right pane. */
 .match__sil--king { object-position:34% top; }
 
-/* Gold bloom at the gap — face-height level */
+/* Focused golden orb between the two faces — screen blend adds warm light to the
+   dark silhouettes in the centre, matching the candle-backlit look of the
+   Curiosity silhouette cards. */
 .match__bloom{
   position:absolute;
-  left:50%;top:26%;
-  width:clamp(100px,52cqi,150px);height:clamp(120px,60cqi,170px);
+  left:50%;top:27%;
+  width:clamp(110px,55cqi,148px);height:clamp(135px,67cqi,178px);
   transform:translate(-50%,-50%);
   border-radius:50%;
-  background:radial-gradient(circle,rgba(201,169,110,.7) 0%,rgba(201,169,110,.26) 36%,rgba(201,169,110,.06) 60%,transparent 76%);
-  filter:blur(22px);
+  background:radial-gradient(circle,rgba(201,169,110,.88) 0%,rgba(201,169,110,.48) 18%,rgba(201,169,110,.14) 50%,transparent 70%);
+  filter:blur(18px);
+  mix-blend-mode:screen;
   opacity:0;pointer-events:none;
 }
 
