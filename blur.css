@@ -838,8 +838,9 @@ body{
 .omc-btlview{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;}
 .omc-btlview__peek{padding:6px 18px 10px;display:flex;flex-wrap:wrap;gap:6px;}
 .omc-btlview .oreflect{margin:0 10px 10px;flex:0 1 auto;overflow:hidden;}
-.order__mslide .ojourney__spacer{height:130px;}
-/* Desktop device: fill card, pills top ↔ profile bottom — matches Seeing section card layout */
+/* Mobile + desktop: pills top ↔ profile bottom, spacer hidden — matches Seeing section card layout */
+.order__mslide .ojourney{height:100%;justify-content:space-between;}
+.order__mslide .ojourney__spacer{display:none;}
 .order__device .ojourney{height:100%;justify-content:space-between;}
 .order__device .ojourney__spacer{display:none;}
 
@@ -881,9 +882,8 @@ body{
 .ophase__loc{font-family:"Plus Jakarta Sans",sans-serif;font-size:.66rem;letter-spacing:.04em;color:rgba(232,226,217,.66);margin-top:4px;}
 .ophase__handle{align-self:center;text-align:center;font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;font-size:1.75rem;letter-spacing:.01em;color:rgba(232,226,217,.72);}
 .ophase[data-phase="0"]{justify-content:flex-start;}
-.ophase__profile{padding:4px 18px 10px;background:#0d0b09;}
-/* Desktop device: gradient reaches 95% at bottom so solid bg not needed */
-.order__device .ophase__profile{background:transparent;}
+/* Profile pinned to bottom of card; gradient is 95% dark there — no solid fill needed on any viewport */
+.ophase__profile{padding:4px 18px 10px;background:transparent;}
 .lp-chips--row{flex-wrap:nowrap;}
 .lp-chips--row .lp-chip{white-space:nowrap;}
 
@@ -1205,8 +1205,6 @@ body{
   }
   .order__device .phone{width:clamp(280px,30vw,360px);}
   .living__grid{grid-template-columns:1.3fr 0.7fr;}
-  .manifesto .mf-hero{white-space:nowrap;text-wrap:nowrap;}
-  .belief .bf-q{white-space:nowrap;text-wrap:nowrap;}
 }
 
 /* reduced motion / no-scrub fallback: a calm static reveal */
@@ -1675,6 +1673,7 @@ html[data-display="playfair"]{--serif:"Plus Jakarta Sans",system-ui,sans-serif}
 .belief .bf-q[data-reveal].in{transform:translateY(0);}
 
 @media(min-width:1200px){
+  .manifesto .mf-sub{white-space:nowrap;text-wrap:nowrap;}
   .manifesto .mf-hero{white-space:nowrap;text-wrap:nowrap;}
   .belief .bf-q{white-space:nowrap;text-wrap:nowrap;}
 }
@@ -1845,4 +1844,19 @@ html[data-display="playfair"]{--serif:"Plus Jakarta Sans",system-ui,sans-serif}
 
 @media (prefers-reduced-motion:reduce){
   .ea,.ea__dialog{transition:none;}
+}
+
+/* ============================================================
+   XL — TOC breathing room
+   At 1440px+ the fixed topbar nav (wordmark + chapter indicator
+   or full TOC) occupies var(--gutter) + ~147px from the left.
+   Push left-anchored content past that footprint with a
+   proportional offset that tracks --gutter at every breakpoint.
+   Only hero and feeling have left-anchored large type that
+   shares this horizontal origin; all other sections are safe.
+   ============================================================ */
+@media (min-width:1440px){
+  .hero{padding-left:calc(var(--gutter) + 180px)}
+  .feeling.section{padding-left:calc(var(--gutter) + 180px)}
+  .living__text{padding-left:180px}
 }
