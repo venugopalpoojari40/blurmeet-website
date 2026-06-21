@@ -389,6 +389,8 @@ body{
 .lp-track{position:relative;will-change:transform;transition:transform .18s linear}
 .lp-photo{position:relative;width:100%;min-height:800px;overflow:hidden;display:flex;flex-direction:column}
 .lp-photo .disc__photo{position:absolute;inset:0;background:url("portrait.webp") 50% 26%/cover;filter:blur(26px) brightness(.7);transform:scale(1.18)}
+/* Seeing section — real silhouette, no blur */
+#threshCard .disc__photo{background:url("silhouette.png") 50% 20%/cover;filter:none;transform:none}
 .lp-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,11,9,.34) 0%,rgba(13,11,9,.08) 24%,rgba(13,11,9,.5) 52%,rgba(13,11,9,.95) 100%)}
 
 /* static profile details on the silhouette */
