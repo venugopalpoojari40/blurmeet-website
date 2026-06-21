@@ -186,6 +186,12 @@
   var orderBtlTop = 0; // cached offsetTop — lazy-measured on first call, reset on resize
   var orderProg = document.querySelector(".order__progress span");
   var orderActive = -1;
+  function restartMatchAnim(overlay) {
+    if (!overlay || reduce) return;
+    overlay.classList.remove("match--run");
+    void overlay.offsetWidth; // force reflow so CSS animations restart cleanly
+    overlay.classList.add("match--run");
+  }
   function smoothstep(a, b, t) {
     t = (t - a) / (b - a);
     t = Math.max(0, Math.min(1, t));
@@ -248,6 +254,7 @@
       var vibeIdx = Math.max(0, beat);
       if (orderVibeEl && orderVibes[vibeIdx]) orderVibeEl.textContent = orderVibes[vibeIdx];
       if (orderVibeBox) orderVibeBox.style.opacity = (beat >= 2 ? "0" : "1");
+      if (beat === 2) restartMatchAnim(orderPortrait ? orderPortrait.querySelector(".match__overlay") : null);
       if (beat === 4 && isDesktopWide) markStorySeen();
     }
   }
@@ -274,6 +281,8 @@
         dotNodes[lastDot].classList.remove("is-active");
         dotNodes[idx].classList.add("is-active");
         lastDot = idx;
+        // restart match animation when swiping to the connection slide (6th child, index 5)
+        if (idx === 5) restartMatchAnim(slides[5] ? slides[5].querySelector(".match__overlay") : null);
       }
       carousel.addEventListener("scroll", syncDots, { passive: true });
     }
