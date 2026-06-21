@@ -984,6 +984,118 @@ body{
 }
 .chat__reveal--ready{border-color:rgba(201,169,110,.4);background:rgba(201,169,110,.09);}
 .chat__reveal--ready .chat__reveal-btn{background:#C19A45;color:#1c1408;border-color:transparent;}
+
+/* === match screen animation === */
+.match__overlay{
+  position:absolute;inset:0;z-index:10;
+  background:#0d0b09;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+/* Two flex halves share the stage equally.
+   Each renders the SVG as a CSS mask on a coloured background — the
+   SVG fill (#000) becomes the mask alpha; the cream background-color
+   shows through.  mask-size:cover scales the square SVG to the full
+   container *height*, giving 90%+ phone-height coverage on every
+   viewport.  mask-position-x controls which horizontal strip is
+   visible — tuned so the face profile sits near the centre gap. */
+.match__stage{
+  position:absolute;inset:0;
+  display:flex;
+  align-items:stretch;
+  gap:6px;
+}
+/* Each half clips its silhouette image; the container itself carries
+   the approach animation so no gap appears at the inner edge. */
+.match__half{
+  flex:1;
+  position:relative;
+  overflow:hidden;
+}
+/* img fills the half, cover-scaled to the full container height.
+   filter:invert(1) turns the black SVG paths to white on the dark overlay.
+   object-position crops the square SVG to show the face near the inner edge. */
+.match__sil{
+  position:absolute;
+  inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  user-select:none;pointer-events:none;
+  filter:invert(1) sepia(.12) brightness(.86);
+}
+/* Queen SVG is naturally RIGHT-FACING (nose at ~65–68 % of SVG width).
+   At 61 % the nose sat right at the visible-strip boundary and was invisible.
+   67 % shifts the strip to ~52–74 % of SVG, placing the nose at ~70–73 %
+   from pane left across all phone sizes. No transform needed. */
+.match__sil--queen{ object-position:68% top; }
+/* King faces LEFT — face at ~25 % of SVG width.
+   object-position 34 % places the face at the left (inner) edge of the right pane. */
+.match__sil--king { object-position:34% top; }
+
+/* Gold bloom at the gap — face-height level */
+.match__bloom{
+  position:absolute;
+  left:50%;top:26%;
+  width:clamp(100px,52cqi,150px);height:clamp(120px,60cqi,170px);
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(201,169,110,.7) 0%,rgba(201,169,110,.26) 36%,rgba(201,169,110,.06) 60%,transparent 76%);
+  filter:blur(22px);
+  opacity:0;pointer-events:none;
+}
+
+/* Copy — quiet, lower-third, secondary to the silhouette moment */
+.match__copy{
+  position:absolute;
+  left:50%;top:66%;
+  transform:translate(-50%,-50%);
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  opacity:0;pointer-events:none;text-align:center;
+}
+.match__star{display:block;font-size:.95rem;color:rgba(201,169,110,.6);line-height:1;}
+.match__line{
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-style:italic;font-weight:300;
+  font-size:clamp(.75rem,3.4cqi,.87rem);
+  color:rgba(232,226,217,.52);
+  letter-spacing:.05em;white-space:nowrap;
+}
+
+/* Approach: silhouettes drift inward toward the centre gap */
+@keyframes matchQueen{
+  from{opacity:0;transform:translateX(-34px)}
+  to  {opacity:1;transform:translateX(0)}
+}
+@keyframes matchKing{
+  from{opacity:0;transform:translateX(34px)}
+  to  {opacity:1;transform:translateX(0)}
+}
+@keyframes matchBloom{
+  from{opacity:0}
+  to  {opacity:1}
+}
+@keyframes matchCopy{
+  from{opacity:0;transform:translate(-50%,calc(-50% + 5px))}
+  to  {opacity:1;transform:translate(-50%,-50%)}
+}
+@keyframes matchFadeOut{
+  from{opacity:1}
+  to  {opacity:0}
+}
+
+/* Staggered timeline — total 4 s:
+   0–1.8s   silhouettes approach (cubic ease-out: slow start, resolves gently)
+   1.2–1.8s bloom rises between faces
+   600 ms   hold — composition complete, nothing moves
+   2.4–2.9s copy breathes in
+   3.2–4.0s overlay dissolves, chat emerges underneath              */
+.match--run .match__half:first-child{animation:matchQueen 1.8s cubic-bezier(.25,0,.1,1) both}
+.match--run .match__half:last-child {animation:matchKing  1.8s cubic-bezier(.25,0,.1,1) both}
+.match--run .match__bloom     {animation:matchBloom  .6s ease-out  1.2s both}
+.match--run .match__copy      {animation:matchCopy   .5s ease      2.4s both}
+.match--run .match__overlay   {animation:matchFadeOut .8s ease     3.2s forwards}
+@media(prefers-reduced-motion:reduce){.match__overlay{display:none}}
 .chat__date{display:flex;align-items:center;gap:12px;margin:18px 0 13px;}
 .chat__date::before,.chat__date::after{content:"";flex:1;height:1px;background:rgba(232,226,217,.1);}
 .chat__date span{font-family:"Plus Jakarta Sans",sans-serif;font-size:.62rem;letter-spacing:.04em;color:rgba(232,226,217,.45);}
