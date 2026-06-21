@@ -271,11 +271,12 @@
   var chapterIndicator = document.getElementById("chapterIndicator");
   var chapterLabel = document.getElementById("chapterLabel");
   var chapterSections = [
-    { el: document.querySelector(".thresh"),   label: "Seeing"  },
-    { el: document.querySelector(".living"),   label: "Knowing" },
-    { el: document.querySelector(".feeling"),  label: "Feeling" },
-    { el: document.querySelector(".order"),    label: "Meeting" },
-    { el: document.querySelector(".download"), label: ""        }
+    { el: document.querySelector(".hero"),     label: "The Mistake" },
+    { el: document.querySelector(".thresh"),   label: "Seeing"      },
+    { el: document.querySelector(".living"),   label: "Knowing"     },
+    { el: document.querySelector(".feeling"),  label: "Feeling"     },
+    { el: document.querySelector(".order"),    label: "Meeting"     },
+    { el: document.querySelector(".download"), label: ""            }
   ];
   var activeChapter = "";
   var chapterSwapTimer = null;
