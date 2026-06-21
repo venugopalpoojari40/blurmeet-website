@@ -881,14 +881,14 @@ body{
 .ophase__loc{font-family:"Plus Jakarta Sans",sans-serif;font-size:.66rem;letter-spacing:.04em;color:rgba(232,226,217,.66);margin-top:4px;}
 .ophase__handle{align-self:center;text-align:center;font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;font-size:1.75rem;letter-spacing:.01em;color:rgba(232,226,217,.72);}
 .ophase[data-phase="0"]{justify-content:flex-start;}
-.ophase__profile{padding:4px 18px 10px;background:#0d0b09;}
+.ophase__profile{padding:4px 18px 10px;background:transparent;}
 .lp-chips--row{flex-wrap:nowrap;}
 .lp-chips--row .lp-chip{white-space:nowrap;}
 
 /* silhouette -> curiosity: one continuous scroll inside the phone */
 .ophase--journey{
   overflow:hidden;
-  background:linear-gradient(180deg,transparent 0%,rgba(13,11,9,.35) 30%,rgba(13,11,9,.72) 55%);
+  background:linear-gradient(180deg,rgba(13,11,9,.34) 0%,rgba(13,11,9,.08) 24%,rgba(13,11,9,.5) 52%,rgba(13,11,9,.95) 100%);
 }
 /* curiosity beat: BTL card anchored to bottom of card */
 .ophase--btl{
