@@ -156,6 +156,31 @@ body{
   background:linear-gradient(90deg,rgba(184,148,90,0),#B8945A);
 }
 
+/* Story TOC — replaces chapter indicator on return desktop visits */
+.story-toc{display:none;flex-direction:column;margin-top:14px}
+.story-toc.is-active{display:flex}
+.stoc-item{
+  font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;
+  font-size:clamp(9px,.95vw,11px);letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(245,240,232,.22);
+  text-decoration:none;cursor:pointer;pointer-events:auto;
+  transition:color .3s ease;line-height:2.1;
+}
+.stoc-item.is-active{color:#B8945A}
+
+/* Skip story — first-visit desktop only */
+.skip-story{
+  display:none;
+  position:fixed;bottom:32px;right:var(--gutter);z-index:60;
+  background:none;border:none;padding:0;
+  font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;
+  font-size:clamp(9px,.95vw,11px);letter-spacing:.28em;text-transform:uppercase;
+  color:#B8945A;cursor:pointer;
+  opacity:0;transition:opacity .35s ease;pointer-events:none;
+}
+.skip-story.is-visible{opacity:1;pointer-events:auto}
+@media(min-width:1024px){.skip-story{display:block}}
+
 /* ============================================================
    01 — HERO
    ============================================================ */

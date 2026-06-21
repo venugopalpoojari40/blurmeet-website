@@ -61,13 +61,21 @@
 </head>
 <body>
 
-<!-- fixed wordmark + chapter indicator -->
+<!-- fixed wordmark + chapter indicator / story TOC -->
 <div class="topbar">
   <span class="wordmark">blur<span class="dot">.</span></span>
   <div class="chapter-indicator" id="chapterIndicator" aria-hidden="true">
     <span id="chapterLabel"></span>
   </div>
+  <nav class="story-toc" id="storyToc" aria-hidden="true">
+    <a class="stoc-item" href="#">The Mistake</a>
+    <a class="stoc-item" href="#">Seeing</a>
+    <a class="stoc-item" href="#">Knowing</a>
+    <a class="stoc-item" href="#">Feeling</a>
+    <a class="stoc-item" href="#">Meeting</a>
+  </nav>
 </div>
+<button class="skip-story" id="skipStory" aria-label="Skip story">Skip story →</button>
 
 <!-- ============================================================
      01 — HERO
