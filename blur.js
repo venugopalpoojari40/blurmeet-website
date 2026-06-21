@@ -282,7 +282,7 @@
     { el: document.querySelector(".living"),   label: "Knowing"     },
     { el: document.querySelector(".feeling"),  label: "Feeling"     },
     { el: document.querySelector(".order"),    label: "Meeting"     },
-    { el: document.querySelector(".download"), label: ""            }
+    { el: document.querySelector(".download"), label: "You"         }
   ];
   var activeChapter = "";
   var chapterSwapTimer = null;
@@ -351,7 +351,8 @@
       document.querySelector(".thresh"),
       document.querySelector(".living"),
       document.querySelector(".feeling"),
-      document.querySelector(".order")
+      document.querySelector(".order"),
+      document.querySelector(".download")
     ];
     var tocLinks = storyToc.querySelectorAll(".stoc-item");
     for (var tci = 0; tci < tocLinks.length; tci++) {
