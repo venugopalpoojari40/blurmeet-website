@@ -181,6 +181,7 @@
   var orderBeats = Array.prototype.slice.call(document.querySelectorAll(".order__beat"));
   var orderJourney = orderPortrait ? orderPortrait.querySelector(".ojourney") : null;
   var orderCard = orderPortrait ? orderPortrait.querySelector(".order__card") : null;
+  var orderProfile = orderJourney ? orderJourney.querySelector(".ophase__profile") : null;
   var orderProg = document.querySelector(".order__progress span");
   var orderActive = -1;
   function smoothstep(a, b, t) {
@@ -206,13 +207,12 @@
     orderImg.style.transform = "scale(" + scale.toFixed(4) + ")";
     if (orderProg) orderProg.style.transform = "scaleX(" + p.toFixed(4) + ")";
 
-    // silhouette -> curiosity reads as one continuous scroll within the phone
-    if (orderJourney && orderCard) {
-      var jp = (p - 0.18) / (0.46 - 0.18);
+    // profile drifts up from below as silhouette beat progresses (pills stay pinned at top)
+    if (orderProfile) {
+      var jp = (p - 0.18) / (0.40 - 0.18);
       jp = Math.max(0, Math.min(1, jp));
       jp = jp * jp * (3 - 2 * jp);
-      var over = Math.max(0, orderJourney.scrollHeight - orderCard.clientHeight);
-      orderJourney.style.transform = "translateY(" + (-jp * over).toFixed(1) + "px)";
+      orderProfile.style.transform = "translateY(" + ((1 - jp) * 52).toFixed(1) + "px)";
     }
 
     // opening statement fades out as the silhouette fades in
