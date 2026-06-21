@@ -300,7 +300,7 @@
 
   function updateChapter() {
     if (!chapterIndicator) return;
-    var mid = vh() * 0.5;
+    var mid = vh() * 0.15;
     var found = "";
     for (var ci = 0; ci < chapterSections.length; ci++) {
       if (!chapterSections[ci].el) continue;
