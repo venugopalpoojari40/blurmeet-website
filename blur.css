@@ -1098,7 +1098,7 @@ body{
 .match--run .match__half:last-child {animation:matchKing  1.8s cubic-bezier(.25,0,.1,1) both}
 .match--run .match__bloom     {animation:matchBloom  .6s ease-out  1.2s both}
 .match--run .match__copy      {animation:matchCopy   .5s ease      2.4s both}
-.match--run .match__overlay   {animation:matchFadeOut .8s ease     3.2s forwards}
+.match--run.match__overlay    {animation:matchFadeOut .8s ease     5.0s forwards}
 @media(prefers-reduced-motion:reduce){.match__overlay{display:none}}
 .chat__date{display:flex;align-items:center;gap:12px;margin:18px 0 13px;}
 .chat__date::before,.chat__date::after{content:"";flex:1;height:1px;background:rgba(232,226,217,.1);}
