@@ -358,7 +358,7 @@ body{
 .disc__card{position:relative;flex:1;margin:0 16px 16px;border-radius:17px;overflow:hidden;display:flex;flex-direction:column}
 .disc__photo{
   position:absolute;inset:0;
-  background:url("portrait.webp") 50% 26%/cover;
+  background:url("assets/images/portrait.webp") 50% 26%/cover;
   filter:blur(26px) brightness(.7);transform:scale(1.18);
 }
 .disc__card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,11,9,.32) 0%,rgba(13,11,9,.18) 28%,rgba(13,11,9,.93) 72%)}
@@ -388,12 +388,12 @@ body{
 .lp-card{position:relative;flex:1;margin:0 16px 16px;border-radius:17px;overflow:hidden;background:#0d0b09}
 .lp-track{position:relative;will-change:transform;transition:transform .18s linear}
 .lp-photo{position:relative;width:100%;min-height:800px;overflow:hidden;display:flex;flex-direction:column}
-.lp-photo .disc__photo{position:absolute;inset:0;background:url("portrait.webp") 50% 26%/cover;filter:blur(26px) brightness(.7);transform:scale(1.18)}
+.lp-photo .disc__photo{position:absolute;inset:0;background:url("assets/images/portrait.webp") 50% 26%/cover;filter:blur(26px) brightness(.7);transform:scale(1.18)}
 /* Seeing + Knowing sections — real silhouette, no blur */
-#threshCard .disc__photo{background:url("silhouette.png") 50% 20%/cover;filter:none;transform:none}
-#lpCard .disc__photo{background:url("silhouette.png") 50% 20%/cover;filter:none;transform:none}
+#threshCard .disc__photo{background:url("assets/images/silhouette.png") 50% 20%/cover;filter:none;transform:none}
+#lpCard .disc__photo{background:url("assets/images/silhouette.png") 50% 20%/cover;filter:none;transform:none}
 /* Meeting — Silhouette beat only (desktop: :has() tracks active phase; mobile: static slide 1) */
-.order__card:has(.ophase--journey.is-active) .order__img{background:url("silhouette.png") 50% 20%/cover!important;filter:none!important;transform:none!important;}
+.order__card:has(.ophase--journey.is-active) .order__img{background:url("assets/images/silhouette.png") 50% 20%/cover!important;filter:none!important;transform:none!important;}
 .lp-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,11,9,.34) 0%,rgba(13,11,9,.08) 24%,rgba(13,11,9,.5) 52%,rgba(13,11,9,.95) 100%)}
 
 /* static profile details on the silhouette */
@@ -430,7 +430,7 @@ body{
 
 /* ---- static profile card — thresh phone (fresh, sp-*) ---- */
 .sp-card{position:relative;flex:1;margin:0 16px 16px;border-radius:17px;overflow:hidden;background:#0d0b09;display:flex;flex-direction:column}
-.sp-photo{position:absolute;inset:0;background:url("portrait.webp") 50% 26%/cover;filter:blur(26px) brightness(.65);transform:scale(1.18)}
+.sp-photo{position:absolute;inset:0;background:url("assets/images/portrait.webp") 50% 26%/cover;filter:blur(26px) brightness(.65);transform:scale(1.18)}
 .sp-grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,11,9,.3) 0%,rgba(13,11,9,.06) 22%,rgba(13,11,9,.48) 50%,rgba(13,11,9,.96) 100%)}
 .sp-top{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:14px 14px 0}
 .sp-badge{font-family:"Plus Jakarta Sans",sans-serif;font-size:clamp(.54rem,3cqi,.66rem);font-weight:500;color:rgba(232,226,217,.9);padding:.35em .85em;border:1px solid rgba(232,226,217,.35);border-radius:999px;background:rgba(13,11,9,.5)}
@@ -587,7 +587,7 @@ body{
 }
 .pp__photo{
   position:absolute;inset:0;
-  background-image:url("portrait.webp");background-size:cover;background-position:50% 30%;
+  background-image:url("assets/images/portrait.webp");background-size:cover;background-position:50% 30%;
   filter:blur(calc(var(--blur) * .92)) brightness(.8);
   transform:scale(1.12);
 }
@@ -821,7 +821,7 @@ body{
 .order__device .phone{width:clamp(252px,25vw,318px);}
 .order__img{
   position:absolute;inset:0;
-  background:url("portrait.webp") 50% 26%/cover;
+  background:url("assets/images/portrait.webp") 50% 26%/cover;
   /* filter + transform driven by scroll (JS) */
   filter:blur(34px) brightness(.46);
   transform:scale(1.12);
@@ -1218,7 +1218,7 @@ body{
 .chat__time{align-self:flex-end;font-family:"Plus Jakarta Sans",sans-serif;font-size:.6rem;color:rgba(232,226,217,.45);margin-top:4px;}
 
 /* final beat — the reveal lands in the thread */
-.chat__avatar--photo{background:url("portrait.webp") 50% 22%/cover;color:transparent;}
+.chat__avatar--photo{background:url("assets/images/portrait.webp") 50% 22%/cover;color:transparent;}
 .chat__reveal-card{
   align-self:stretch;border-radius:16px;overflow:hidden;
   background:rgba(232,226,217,.05);border:1px solid rgba(201,169,110,.18);
@@ -1226,7 +1226,7 @@ body{
 }
 .chat__reveal-photo{
   width:100%;aspect-ratio:5/4;
-  background:url("portrait.webp") 50% 24%/cover;
+  background:url("assets/images/portrait.webp") 50% 24%/cover;
 }
 .chat__reveal-meta{padding:11px 14px 13px;}
 .chat__reveal-name{font-family:"Plus Jakarta Sans",sans-serif;font-weight:700;font-size:clamp(1.05rem,5.8cqi,1.35rem);color:var(--light);line-height:1;}
