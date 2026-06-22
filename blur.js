@@ -192,11 +192,19 @@
     void overlay.offsetWidth; // force reflow so CSS animations restart cleanly
     overlay.classList.add("match--run");
   }
+  var trustAnimTimer = null;
   function restartTrustAnim(phase) {
     if (!phase || reduce) return;
     phase.classList.remove("trust--run");
     void phase.offsetWidth;
     phase.classList.add("trust--run");
+  }
+  function scheduleTrustAnim(phase) {
+    if (trustAnimTimer) { clearTimeout(trustAnimTimer); trustAnimTimer = null; }
+    trustAnimTimer = setTimeout(function () { trustAnimTimer = null; restartTrustAnim(phase); }, 520);
+  }
+  function cancelTrustAnim() {
+    if (trustAnimTimer) { clearTimeout(trustAnimTimer); trustAnimTimer = null; }
   }
 
   function smoothstep(a, b, t) {
@@ -262,7 +270,8 @@
       if (orderVibeEl && orderVibes[vibeIdx]) orderVibeEl.textContent = orderVibes[vibeIdx];
       if (orderVibeBox) orderVibeBox.style.opacity = (beat >= 2 ? "0" : "1");
       if (beat === 2) restartMatchAnim(orderPortrait ? orderPortrait.querySelector(".match__overlay") : null);
-      if (beat === 3) restartTrustAnim(orderPortrait ? orderPortrait.querySelector(".ophase[data-phase='2']") : null);
+      if (beat === 3) scheduleTrustAnim(orderPortrait ? orderPortrait.querySelector(".ophase[data-phase='2']") : null);
+      if (beat !== 3) cancelTrustAnim();
       if (beat === 4 && isDesktopWide) markStorySeen();
     }
   }
@@ -292,7 +301,8 @@
         // restart match animation when swiping to the connection slide (6th child, index 5)
         if (idx === 5) restartMatchAnim(slides[5] ? slides[5].querySelector(".match__overlay") : null);
         // restart trust overlay when swiping to the trust slide (8th child, index 7)
-        if (idx === 7) restartTrustAnim(slides[7] ? slides[7].querySelector(".ophase--chat") : null);
+        if (idx === 7) scheduleTrustAnim(slides[7] ? slides[7].querySelector(".ophase--chat") : null);
+        if (idx !== 7) cancelTrustAnim();
       }
       carousel.addEventListener("scroll", syncDots, { passive: true });
     }
@@ -667,7 +677,7 @@
     var stops = [];
     for (var i = 0; i < navSections.length; i++) {
       var el = navSections[i];
-      if (orderTrack && el.contains(orderTrack) && !(storySeen && isDesktopWide)) {
+      if (orderTrack && el.contains(orderTrack)) {
         var total = orderTrack.getBoundingClientRect().height - vh();
         var otop = orderTrack.getBoundingClientRect().top + sy;
         for (var b = 0; b < orderBeatP.length; b++) {
@@ -716,7 +726,6 @@
     var acc = 0;
     window.addEventListener("wheel", function (e) {
       if (window.matchMedia("(max-width:860px)").matches) return;
-      if (storySeen && isDesktopWide) return;
       var r = orderTrack.getBoundingClientRect();
       /* only active while the track is pinned (spans the full viewport) */
       if (r.top > 4 || r.bottom < vh() - 4) { acc = 0; return; }
