@@ -32,7 +32,7 @@ body{
   font-family:"Plus Jakarta Sans",system-ui,sans-serif;
   font-weight:400;
   line-height:1.7;
-  overflow-x:hidden;
+  overflow-x:clip;
 }
 ::selection{background:rgba(201,169,110,.28);color:var(--light)}
 
@@ -1378,7 +1378,6 @@ body{
     -webkit-overflow-scrolling:touch;
     scrollbar-width:none;
     width:100%;
-    touch-action:pan-x;
     overscroll-behavior-x:contain;
   }
   .order__beats::-webkit-scrollbar{display:none;}
