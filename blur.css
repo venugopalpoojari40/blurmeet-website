@@ -1115,6 +1115,7 @@ body{
   position:relative;
   flex-shrink:0;margin-bottom:20px;
   overflow:hidden;border-radius:15px;
+  background:rgba(201,169,110,.07);
   box-shadow:0 0 0 1px rgba(201,169,110,.3),0 0 10px rgba(201,169,110,.32),0 0 26px rgba(201,169,110,.13);
   animation:revealGlow 2.8s ease-in-out infinite;
 }
