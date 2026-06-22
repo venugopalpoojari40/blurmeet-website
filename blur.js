@@ -193,8 +193,18 @@
     overlay.classList.add("match--run");
   }
   var trustAnimTimer = null;
+  function positionTrustHand(phase) {
+    var hand = phase.querySelector('.tov__hand');
+    var btn  = phase.querySelector('.chat__reveal-btn');
+    if (!hand || !btn) return;
+    var pr = phase.getBoundingClientRect();
+    var br = btn.getBoundingClientRect();
+    hand.style.left = Math.round(br.left - pr.left + (br.width - hand.offsetWidth) / 2) + 'px';
+    hand.style.top  = Math.round(br.top  - pr.top) + 'px';
+  }
   function restartTrustAnim(phase) {
     if (!phase || reduce) return;
+    positionTrustHand(phase);
     phase.classList.remove("trust--run");
     void phase.offsetWidth;
     phase.classList.add("trust--run");
