@@ -1118,7 +1118,7 @@ body{
   box-shadow:0 0 0 1px rgba(201,169,110,.3),0 0 10px rgba(201,169,110,.32),0 0 26px rgba(201,169,110,.13);
   animation:revealGlow 2.8s ease-in-out infinite;
 }
-.tov__card-wrap .chat__reveal{border:none;animation:none;box-shadow:none;}
+.tov__card-wrap .chat__reveal{border:none;animation:none;box-shadow:none;margin-bottom:0;border-radius:0;}
 .tov__card-before,.tov__card-after{margin-bottom:0;}
 .tov__card-after{
   position:absolute;
