@@ -1352,10 +1352,10 @@ body{
 
 @media (max-width:860px){
   /* ONE-SCREEN HORIZONTAL CAROUSEL */
-  .order{height:100svh;overflow:hidden;}
+  .order{height:100svh;overflow:clip;}
   .order__track{height:100%;}
   .order__pin{
-    position:relative;height:100%;overflow:hidden;
+    position:relative;height:100%;overflow:clip;
     display:flex;flex-direction:column;padding:0;
   }
   .order__eyebrow{
@@ -1364,7 +1364,7 @@ body{
   /* Intro text lives in the first carousel slide */
   .order__intro{display:none!important;}
   .order__stage{
-    flex:1;min-height:0;overflow:hidden;
+    flex:1;min-height:0;overflow:clip;
     display:flex;flex-direction:column;
     max-width:none;width:100%;margin:0;
     grid-template-columns:unset;
@@ -1378,6 +1378,8 @@ body{
     -webkit-overflow-scrolling:touch;
     scrollbar-width:none;
     width:100%;
+    touch-action:pan-x;
+    overscroll-behavior-x:contain;
   }
   .order__beats::-webkit-scrollbar{display:none;}
   /* Phone hidden — carousel slides handle display */
