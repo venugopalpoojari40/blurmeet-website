@@ -968,6 +968,7 @@ body{
   flex-shrink:0;margin-bottom:20px;
   border:1px solid rgba(201,169,110,.45);border-radius:15px;
   background:rgba(201,169,110,.07);padding:14px 15px;
+  animation:revealGlow 2.8s ease-in-out infinite;
 }
 @keyframes revealGlow{
   0%,100%{border-color:rgba(201,169,110,.38);box-shadow:0 0 0 1px rgba(201,169,110,.1),0 0 8px rgba(201,169,110,.28),0 0 22px rgba(201,169,110,.1)}
