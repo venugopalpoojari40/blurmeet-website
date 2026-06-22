@@ -192,6 +192,13 @@
     void overlay.offsetWidth; // force reflow so CSS animations restart cleanly
     overlay.classList.add("match--run");
   }
+  function restartTrustAnim(phase) {
+    if (!phase || reduce) return;
+    phase.classList.remove("trust--run");
+    void phase.offsetWidth;
+    phase.classList.add("trust--run");
+  }
+
   function smoothstep(a, b, t) {
     t = (t - a) / (b - a);
     t = Math.max(0, Math.min(1, t));
@@ -255,6 +262,7 @@
       if (orderVibeEl && orderVibes[vibeIdx]) orderVibeEl.textContent = orderVibes[vibeIdx];
       if (orderVibeBox) orderVibeBox.style.opacity = (beat >= 2 ? "0" : "1");
       if (beat === 2) restartMatchAnim(orderPortrait ? orderPortrait.querySelector(".match__overlay") : null);
+      if (beat === 3) restartTrustAnim(orderPortrait ? orderPortrait.querySelector(".ophase[data-phase='2']") : null);
       if (beat === 4 && isDesktopWide) markStorySeen();
     }
   }
@@ -283,6 +291,8 @@
         lastDot = idx;
         // restart match animation when swiping to the connection slide (6th child, index 5)
         if (idx === 5) restartMatchAnim(slides[5] ? slides[5].querySelector(".match__overlay") : null);
+        // restart trust overlay when swiping to the trust slide (8th child, index 7)
+        if (idx === 7) restartTrustAnim(slides[7] ? slides[7].querySelector(".ophase--chat") : null);
       }
       carousel.addEventListener("scroll", syncDots, { passive: true });
     }

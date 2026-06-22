@@ -1100,6 +1100,106 @@ body{
 .match--run .match__copy      {animation:matchCopy   .5s ease      2.4s both}
 .match--run.match__overlay    {animation:matchFadeOut .8s ease     5.0s forwards}
 @media(prefers-reduced-motion:reduce){.match__overlay{display:none}}
+
+/* ============================================================
+   Trust Beat — card-swap animation within the same chat screen.
+   The chat screen is identical to Connection. When trust--run
+   fires, a hand taps the button, the toast confirms, then the
+   "before" card cross-fades to the "after" (Photos unlocked) card.
+   trust--run is added to .ophase--chat[data-phase="2/3"] by JS.
+   ============================================================ */
+
+/* card-wrap: provides height from the "before" card;
+   "after" card overlays it absolutely and fades in,
+   then wrap shrinks to the after-card's compact height */
+.tov__card-wrap{
+  position:relative;
+  flex-shrink:0;margin-bottom:20px;
+  overflow:hidden;border-radius:15px;
+}
+.tov__card-before,.tov__card-after{margin-bottom:0;}
+.tov__card-after{
+  position:absolute;
+  top:0;left:0;right:0; /* no bottom — height is content-driven, not wrapper-stretched */
+  opacity:0;
+}
+/* hand pointer */
+.tov__hand{
+  position:absolute;width:36px;height:54px;
+  left:86px;top:204px;
+  pointer-events:none;opacity:0;
+}
+.tov__hand img{width:100%;height:100%;object-fit:contain;}
+/* confirmation toast */
+.tov__toast{
+  position:absolute;
+  top:102px;left:50%;
+  transform:translateX(-50%) translateY(-8px);
+  white-space:nowrap;
+  font-family:"Plus Jakarta Sans",sans-serif;
+  font-size:clamp(.6rem,3.4cqi,.7rem);letter-spacing:.04em;text-align:center;
+  color:rgba(232,226,217,.92);
+  background:rgba(13,11,9,.92);
+  border:1px solid rgba(201,169,110,.3);border-radius:100px;
+  padding:.48em 1.2em;
+  box-shadow:0 0 16px rgba(201,169,110,.12),0 2px 24px rgba(0,0,0,.45);
+  pointer-events:none;opacity:0;
+}
+.tov__toast em{font-style:normal;color:rgba(201,169,110,.9);}
+/* warm flash */
+.tov__flash{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 55% 45% at 50% 45%,rgba(201,169,110,.16) 0%,transparent 68%);
+  pointer-events:none;opacity:0;
+}
+/* keyframes */
+@keyframes tovHandDrift{
+  0%  {opacity:0;transform:translateY(-10px);filter:drop-shadow(0 0 0px rgba(201,169,110,0))}
+  20% {opacity:1;transform:translateY(-10px);filter:drop-shadow(0 0 4px rgba(201,169,110,.28))}
+  72% {opacity:1;transform:translateY(0);   filter:drop-shadow(0 0 5px rgba(201,169,110,.32))}
+  85% {opacity:1;transform:translateY(3px) scale(.93);filter:drop-shadow(0 0 12px rgba(201,169,110,.72))}
+  96% {opacity:0;transform:translateY(0);   filter:drop-shadow(0 0 0px rgba(201,169,110,0))}
+  100%{opacity:0;                           filter:drop-shadow(0 0 0px rgba(201,169,110,0))}
+}
+@keyframes tovBtnTap{
+  0%  {transform:scale(1);   box-shadow:0 0 0 transparent}
+  45% {transform:scale(.95); box-shadow:0 0 10px rgba(201,169,110,.38),0 0 22px rgba(201,169,110,.12)}
+  100%{transform:scale(1);   box-shadow:0 0 8px rgba(201,169,110,.12)}
+}
+@keyframes tovToastIn{
+  from{opacity:0;transform:translateX(-50%) translateY(-8px)}
+  to  {opacity:1;transform:translateX(-50%) translateY(0)}
+}
+@keyframes tovToastOut{from{opacity:1}to{opacity:0}}
+@keyframes tovFlash{0%{opacity:0}45%{opacity:1}100%{opacity:0}}
+@keyframes tovCardOut{to{opacity:0}}
+@keyframes tovCardIn {from{opacity:0}to{opacity:1}}
+/* max-height: before-card ~150px → after-card compact; chat thread glides up */
+@keyframes tovWrapShrink{
+  from{max-height:160px}
+  to  {max-height:116px}
+}
+/* trigger chain — starts when trust--run is added to .ophase--chat */
+.trust--run .tov__hand         {animation:tovHandDrift .85s ease-out 1.0s  both}
+.trust--run .chat__reveal-btn  {animation:tovBtnTap    .55s ease     1.65s both}
+.trust--run .tov__toast{
+  animation:
+    tovToastIn  .45s ease 3.9s both,
+    tovToastOut .4s  ease 5.2s forwards;
+}
+.trust--run .tov__flash        {animation:tovFlash .8s ease 5.3s both}
+/* card cross-fade after toast fully vanishes (5.2s + 0.4s fade = 5.6s) */
+.trust--run .tov__card-before  {animation:revealGlow 2.8s ease-in-out infinite, tovCardOut  .5s ease 5.6s forwards}
+.trust--run .tov__card-after   {animation:revealGlow 2.8s ease-in-out infinite, tovCardIn   .5s ease 5.6s both}
+/* wrapper shrinks in sync with cross-fade → chat thread glides up */
+.trust--run .tov__card-wrap    {animation:tovWrapShrink .5s cubic-bezier(.4,0,.2,1) 5.6s forwards}
+@media(prefers-reduced-motion:reduce){
+  .tov__hand,.tov__toast,.tov__flash{display:none}
+  .tov__card-after{opacity:1;position:static}
+  .tov__card-before{display:none}
+  .tov__card-wrap{max-height:116px}
+}
+
 .chat__date{display:flex;align-items:center;gap:12px;margin:18px 0 13px;}
 .chat__date::before,.chat__date::after{content:"";flex:1;height:1px;background:rgba(232,226,217,.1);}
 .chat__date span{font-family:"Plus Jakarta Sans",sans-serif;font-size:.62rem;letter-spacing:.04em;color:rgba(232,226,217,.45);}
