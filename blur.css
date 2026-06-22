@@ -968,14 +968,12 @@ body{
   flex-shrink:0;margin-bottom:20px;
   border:1px solid rgba(201,169,110,.45);border-radius:15px;
   background:rgba(201,169,110,.07);padding:14px 15px;
-  box-shadow:0 0 0 1px rgba(201,169,110,.12),0 0 10px rgba(201,169,110,.32),0 0 26px rgba(201,169,110,.13);
-  animation:revealGlow 2.8s ease-in-out infinite;
 }
 @keyframes revealGlow{
   0%,100%{border-color:rgba(201,169,110,.38);box-shadow:0 0 0 1px rgba(201,169,110,.1),0 0 8px rgba(201,169,110,.28),0 0 22px rgba(201,169,110,.1)}
   50%{border-color:rgba(201,169,110,.68);box-shadow:0 0 0 1px rgba(201,169,110,.22),0 0 14px rgba(201,169,110,.48),0 0 32px rgba(201,169,110,.22)}
 }
-@media(prefers-reduced-motion:reduce){.chat__reveal{animation:none}}
+@media(prefers-reduced-motion:reduce){.chat__reveal{animation:none}.tov__card-wrap{animation:none}}
 .chat__reveal-h{font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;font-size:.78rem;color:var(--gold);margin-bottom:6px;}
 .chat__reveal-p{margin:0 0 12px;font-family:"Plus Jakarta Sans",sans-serif;font-size:.72rem;line-height:1.42;color:rgba(232,226,217,.72);}
 .chat__reveal-btn{
@@ -1116,11 +1114,14 @@ body{
   position:relative;
   flex-shrink:0;margin-bottom:20px;
   overflow:hidden;border-radius:15px;
+  box-shadow:0 0 0 1px rgba(201,169,110,.3),0 0 10px rgba(201,169,110,.32),0 0 26px rgba(201,169,110,.13);
+  animation:revealGlow 2.8s ease-in-out infinite;
 }
+.tov__card-wrap .chat__reveal{border:none;}
 .tov__card-before,.tov__card-after{margin-bottom:0;}
 .tov__card-after{
   position:absolute;
-  top:0;left:0;right:0; /* no bottom — height is content-driven, not wrapper-stretched */
+  inset:0;
   opacity:0;
 }
 /* hand pointer */
@@ -1131,10 +1132,17 @@ body{
 }
 .tov__hand img{width:100%;height:100%;object-fit:contain;}
 /* confirmation toast */
+.tov__overlay{
+  position:absolute;inset:0;
+  background:rgba(27,19,11,.72);
+  pointer-events:none;opacity:0;
+  z-index:3;
+}
 .tov__toast{
   position:absolute;
-  top:102px;left:50%;
-  transform:translateX(-50%) translateY(-8px);
+  top:50%;left:50%;
+  z-index:4;
+  transform:translateX(-50%) translateY(-50%);
   white-space:nowrap;
   font-family:"Plus Jakarta Sans",sans-serif;
   font-size:clamp(.6rem,3.4cqi,.7rem);letter-spacing:.04em;text-align:center;
@@ -1167,10 +1175,11 @@ body{
   100%{transform:scale(1);   box-shadow:0 0 8px rgba(201,169,110,.12)}
 }
 @keyframes tovToastIn{
-  from{opacity:0;transform:translateX(-50%) translateY(-8px)}
-  to  {opacity:1;transform:translateX(-50%) translateY(0)}
+  from{opacity:0;transform:translateX(-50%) translateY(calc(-50% - 8px))}
+  to  {opacity:1;transform:translateX(-50%) translateY(-50%)}
 }
 @keyframes tovToastOut{from{opacity:1}to{opacity:0}}
+@keyframes tovOverlayIn{from{opacity:0}to{opacity:1}}
 @keyframes tovFlash{0%{opacity:0}45%{opacity:1}100%{opacity:0}}
 @keyframes tovCardOut{to{opacity:0}}
 @keyframes tovCardIn {from{opacity:0}to{opacity:1}}
@@ -1179,22 +1188,48 @@ body{
   from{max-height:160px}
   to  {max-height:116px}
 }
+/* conversation scroll-in before hand tap */
+.tov__scroll-area{flex:1;overflow:hidden;min-height:0;}
+.tov__convo{display:flex;flex-direction:column;}
+.tov__new-msgs{display:flex;flex-direction:column;align-items:flex-end;gap:8px;margin-top:8px;}
+.tov__msg{opacity:0;}
+@keyframes tovMsgIn{
+  from{opacity:0;transform:translateY(6px)}
+  to  {opacity:1;transform:translateY(0)}
+}
+@keyframes tovScrollUp{to{transform:translateY(-175px)}}
 /* trigger chain — starts when trust--run is added to .ophase--chat */
-.trust--run .tov__hand         {animation:tovHandDrift .85s ease-out 1.0s  both}
-.trust--run .chat__reveal-btn  {animation:tovBtnTap    .55s ease     1.65s both}
+/* 1. new messages animate in staggered (0.3s–4.1s) */
+.trust--run .tov__new-msgs .tov__msg:nth-child(1){animation:tovMsgIn .4s ease  .3s both}
+.trust--run .tov__new-msgs .tov__msg:nth-child(2){animation:tovMsgIn .4s ease 1.5s both}
+.trust--run .tov__new-msgs .tov__msg:nth-child(3){animation:tovMsgIn .4s ease 2.7s both}
+.trust--run .tov__new-msgs .tov__msg:nth-child(4){animation:tovMsgIn .4s ease 3.8s both}
+.trust--run .tov__new-msgs .tov__msg:nth-child(5){animation:tovMsgIn .3s ease 4.4s both}
+/* 2. chat scrolls up as new messages appear */
+.trust--run .tov__convo{animation:tovScrollUp 3.2s cubic-bezier(.4,0,.2,1) .8s forwards}
+/* 3. hand taps button after conversation settles */
+.trust--run .tov__hand         {animation:tovHandDrift .85s ease-out 6.0s  both}
+.trust--run .chat__reveal-btn  {animation:tovBtnTap    .55s ease     6.65s both}
+.trust--run .tov__overlay{
+  animation:
+    tovOverlayIn  .45s ease 8.7s both,
+    tovToastOut   .4s  ease 11.7s forwards;
+}
 .trust--run .tov__toast{
   animation:
-    tovToastIn  .45s ease 3.9s both,
-    tovToastOut .4s  ease 5.2s forwards;
+    tovToastIn  .45s ease 8.9s both,
+    tovToastOut .4s  ease 11.7s forwards;
 }
-.trust--run .tov__flash        {animation:tovFlash .8s ease 5.3s both}
-/* card cross-fade after toast fully vanishes (5.2s + 0.4s fade = 5.6s) */
-.trust--run .tov__card-before  {animation:revealGlow 2.8s ease-in-out infinite, tovCardOut  .5s ease 5.6s forwards}
-.trust--run .tov__card-after   {animation:revealGlow 2.8s ease-in-out infinite, tovCardIn   .5s ease 5.6s both}
-/* wrapper shrinks in sync with cross-fade → chat thread glides up */
-.trust--run .tov__card-wrap    {animation:tovWrapShrink .5s cubic-bezier(.4,0,.2,1) 5.6s forwards}
+.trust--run .tov__flash        {animation:tovFlash .8s ease 11.8s both}
+/* card cross-fade after toast fully vanishes (11.7s + 0.4s fade = 12.1s) */
+.trust--run .tov__card-before  {animation:tovCardOut  .5s ease 12.1s forwards}
+.trust--run .tov__card-after   {animation:tovCardIn   .5s ease 12.1s both}
+/* wrapper keeps glow and shrinks in sync with cross-fade */
+.trust--run .tov__card-wrap    {animation:revealGlow 2.8s ease-in-out infinite, tovWrapShrink .5s cubic-bezier(.4,0,.2,1) 12.1s forwards}
 @media(prefers-reduced-motion:reduce){
-  .tov__hand,.tov__toast,.tov__flash{display:none}
+  .tov__hand,.tov__toast,.tov__flash,.tov__overlay{display:none}
+  .tov__msg{opacity:1}
+  .tov__convo{transform:translateY(-175px)}
   .tov__card-after{opacity:1;position:static}
   .tov__card-before{display:none}
   .tov__card-wrap{max-height:116px}
@@ -1277,6 +1312,7 @@ body{
   /* message thread */
   .chat__scroll{padding:10px 12px 0;}
   .chat__thread{gap:6px;}
+  .tov__new-msgs{gap:6px;}
   .chat__bubble{font-size:.70rem;padding:6px 10px;}
   .chat__time{font-size:.50rem;}
   .chat__date span{font-size:.50rem;}
