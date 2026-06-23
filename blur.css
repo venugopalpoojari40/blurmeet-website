@@ -39,7 +39,7 @@ body{
 /* ---------- type primitives ---------- */
 .display{
   font-family:var(--serif);
-  font-weight:400;
+  font-weight:700;
   letter-spacing:-.01em;
   line-height:1.08;
   font-optical-sizing:auto;
