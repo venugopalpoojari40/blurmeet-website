@@ -2172,3 +2172,20 @@ html[data-display="playfair"]{--serif:"Plus Jakarta Sans",system-ui,sans-serif}
   .feeling.section{padding-left:calc(var(--gutter) + 180px)}
   .living__text{padding-left:180px}
 }
+
+/* ============================================================
+   HERO — left-side background image (desktop only)
+   ============================================================ */
+@media (min-width:901px){
+  .hero::before{
+    content:"";
+    position:absolute;
+    top:0;left:0;bottom:0;
+    width:58%;
+    z-index:1;
+    background:
+      linear-gradient(90deg,transparent 55%,var(--dark) 100%),
+      linear-gradient(rgba(26,23,20,.68),rgba(26,23,20,.68)),
+      url('assets/images/landing-leftside-background.png') center/cover no-repeat;
+  }
+}
