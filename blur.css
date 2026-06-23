@@ -2197,7 +2197,7 @@ html[data-display="playfair"]{--serif:"Plus Jakarta Sans",system-ui,sans-serif}
     grid-column:2;
     grid-row:1;
     align-self:center;
-    justify-self:center;
+    justify-self:end;
     width:clamp(280px,30vw,440px);
     transform:none;
   }
