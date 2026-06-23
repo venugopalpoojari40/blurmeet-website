@@ -2189,14 +2189,17 @@ html[data-display="playfair"]{--serif:"Plus Jakarta Sans",system-ui,sans-serif}
       url('assets/images/landing-leftside-background.png') center/cover no-repeat;
   }
 
-  /* Right-side card image — 25–30% width, vertically centered */
+  /* Right-side card image — grid item in column 2, centered by grid align-items */
+  .hero__copy{grid-column:1;grid-row:1;}
   .hero__portrait{
-    top:50vh;
-    bottom:auto;
-    right:auto;
-    left:70%;
-    width:clamp(280px,32vw,480px);
-    transform:translateY(-50%);
+    position:relative;
+    top:auto;right:auto;bottom:auto;
+    grid-column:2;
+    grid-row:1;
+    align-self:center;
+    justify-self:center;
+    width:clamp(280px,30vw,440px);
+    transform:none;
   }
   .hero__portrait img{
     width:100%;
