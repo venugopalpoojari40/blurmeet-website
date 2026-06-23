@@ -689,9 +689,9 @@
      Trust / final each advance with a single keypress. */
   var navSections = [
     document.querySelector(".hero"),
-    document.querySelector(".thresh"),
     document.querySelector(".living"),
     document.querySelector(".feeling"),
+    document.querySelector(".thresh"),
     document.querySelector(".order"),
     document.querySelector(".download")
   ].filter(Boolean);
