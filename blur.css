@@ -787,6 +787,12 @@ body{
   font-size:clamp(3.2rem,6.2vw,5.8rem);
   line-height:1.18;letter-spacing:-.01em;
   color:rgba(255,255,255,.92);text-wrap:balance;
+  opacity:0;transform:translateY(10px);
+  transition:opacity .6s ease,transform .6s ease;
+}
+.order__beat.is-active .order__before{opacity:1;transform:translateY(0);}
+@media(prefers-reduced-motion:reduce){
+  .order__before{opacity:1;transform:none;transition:none;}
 }
 
 /* Per-beat vertical position — composition carries the progression */
@@ -1465,6 +1471,7 @@ body{
     font-size:clamp(2.6rem,8vw,4rem);
     text-align:center;
     margin-top:.7em;
+    opacity:1;transform:none;transition:none;
   }
   .order__final{font-size:clamp(2.6rem,8vw,4rem);text-align:center;}
   .order__know{text-align:center;}
