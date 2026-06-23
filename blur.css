@@ -2172,3 +2172,27 @@ html[data-display="playfair"]{--serif:"Plus Jakarta Sans",system-ui,sans-serif}
   .feeling.section{padding-left:calc(var(--gutter) + 180px)}
   .living__text{padding-left:180px}
 }
+
+/* ============================================================
+   HERO — right-side composite image (desktop only, mobile unchanged)
+   ============================================================ */
+@media (min-width:901px){
+  .hero__portrait{
+    top:50%;
+    bottom:auto;
+    width:58%;
+    transform:translateY(-50%);
+  }
+  .hero__portrait img{
+    width:100%;
+    height:auto;
+    object-fit:contain;
+    object-position:center right;
+    filter:none;
+    transform:none;
+  }
+  .hero__portrait::after{
+    background:linear-gradient(90deg,var(--dark) 0%,rgba(26,23,20,.35) 18%,rgba(26,23,20,0) 42%);
+  }
+  .hero__portrait::before{display:none;}
+}
