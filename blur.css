@@ -799,6 +799,36 @@ body{
 .order__final span:first-child{margin-bottom:.5em;}
 .order__final em{font-style:italic;color:var(--gold);}
 
+/* Pre-reveal known items */
+.order__know{margin-bottom:clamp(1.6rem,3.5vh,3rem);text-align:center;}
+.order__know-intro{
+  margin:0 0 .65em;
+  font-family:var(--serif);font-style:italic;font-weight:400;
+  font-size:clamp(1.3rem,2.2vw,2rem);
+  color:rgba(255,255,255,.45);
+  letter-spacing:-.01em;
+}
+.order__know-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.25em;}
+.order__know-item{
+  font-family:var(--serif);font-style:italic;font-weight:400;
+  font-size:clamp(1.5rem,2.8vw,2.6rem);
+  color:rgba(255,255,255,.78);
+  letter-spacing:-.01em;
+  opacity:0;
+}
+.order__beat--final.is-active .order__know-item{animation:knowItem .65s ease forwards;}
+.order__beat--final.is-active .order__know-item:nth-child(1){animation-delay:.15s;}
+.order__beat--final.is-active .order__know-item:nth-child(2){animation-delay:.45s;}
+.order__beat--final.is-active .order__know-item:nth-child(3){animation-delay:.75s;}
+@keyframes knowItem{
+  from{opacity:0;transform:translateY(7px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@media(prefers-reduced-motion:reduce){
+  .order__know-item{opacity:1}
+  .order__beat--final.is-active .order__know-item{animation:none}
+}
+
 /* Final beat active: stage fills the pin absolutely (same pattern as order__intro),
    flex centers the beats container in the full 100vh */
 .order__stage:has(.order__beat--final.is-active){
@@ -1421,6 +1451,8 @@ body{
     margin-top:.7em;
   }
   .order__final{font-size:clamp(2.6rem,8vw,4rem);text-align:center;}
+  .order__know{text-align:center;}
+  .order__know-item{opacity:1;animation:none!important;}
   /* Dot indicators */
   .order__dots{
     flex:0 0 auto;display:flex;justify-content:center;align-items:center;
