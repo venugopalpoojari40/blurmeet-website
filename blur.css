@@ -200,7 +200,7 @@ body{
   position:relative;
   overflow:hidden;
 }
-.hero__copy{position:relative;z-index:3;max-width:580px;padding:96px 0;margin-top:clamp(40px,6vh,80px);}
+.hero__copy{position:relative;z-index:3;max-width:580px;padding:96px 0;margin-top:200px;}
 .hero h1{
   font-size:clamp(3.6rem,9vw,9.6rem);
   margin-bottom:.9em;
