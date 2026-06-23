@@ -274,6 +274,7 @@
     if (orderIntro) {
       orderIntro.style.opacity = introO.toFixed(3);
       orderIntro.style.transform = "translateY(" + ((1 - introO) * -16).toFixed(1) + "px)";
+      orderIntro.classList.toggle("is-active", p < 0.13);
     }
     if (orderPortrait) orderPortrait.style.opacity = smoothstep(0.05, 0.16, p).toFixed(3);
 
