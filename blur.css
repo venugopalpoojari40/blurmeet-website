@@ -2215,3 +2215,20 @@ html[data-display="playfair"]{--serif:"Plus Jakarta Sans",system-ui,sans-serif}
   }
   .hero__portrait::before{display:none;}
 }
+
+/* ============================================================
+   HERO — entrance sequence (desktop first load)
+   1. right image  2. heading  3. left bg  4. sub + cta + scrollcue
+   ============================================================ */
+@media (min-width:901px) and (prefers-reduced-motion:no-preference){
+  .hero__portrait{animation:heroReveal .65s ease both;animation-delay:.05s;}
+  .hero h1{animation:heroReveal .75s ease both;animation-delay:.5s;}
+  .hero::before{animation:heroReveal 1s ease both;animation-delay:.95s;}
+  .hero__sub{animation:heroReveal .65s ease both;animation-delay:1.45s;}
+  .hero .cta{animation:heroReveal .65s ease both;animation-delay:1.65s;}
+  .scrollcue{animation:heroReveal .65s ease both;animation-delay:1.85s;}
+}
+@keyframes heroReveal{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
