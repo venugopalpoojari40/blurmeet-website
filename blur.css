@@ -39,7 +39,7 @@ body{
 /* ---------- type primitives ---------- */
 .display{
   font-family:var(--serif);
-  font-weight:700;
+  font-weight:400;
   letter-spacing:-.01em;
   line-height:1.08;
   font-optical-sizing:auto;
@@ -202,9 +202,9 @@ body{
 }
 .hero__copy{position:relative;z-index:3;max-width:580px;padding:96px 0}
 .hero h1{
-  font-size:clamp(3.6rem,7vw,7.2rem);
+  font-size:clamp(3.6rem,9vw,9.6rem);
   margin-bottom:.9em;
-  font-style:italic;font-weight:500;
+  font-style:italic;font-weight:700;
   text-rendering:geometricPrecision;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
