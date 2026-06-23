@@ -1777,6 +1777,7 @@ footer{
   .hero__copy{padding:108px 0 72px;max-width:none;margin-top:0}
   .hero h1{font-size:clamp(2.6rem,6vw,4.8rem);font-weight:500}
   .hero__portrait{width:100%;opacity:.5}
+  .hero__portrait-caption{display:none;}
   .hero__portrait::after{background:linear-gradient(0deg,var(--dark) 18%,rgba(26,23,20,.5) 60%,rgba(26,23,20,.7))}
   .belief__grid{grid-template-columns:1fr}
   .living__grid{grid-template-columns:1fr;gap:72px}
@@ -2188,4 +2189,61 @@ html[data-display="playfair"]{--serif:"Plus Jakarta Sans",system-ui,sans-serif}
       linear-gradient(rgba(26,23,20,.82),rgba(26,23,20,.82)),
       url('assets/images/landing-leftside-background.png') center/cover no-repeat;
   }
+
+  /* Right-side card image — grid item in column 2, centered by grid align-items */
+  .hero__copy{grid-column:1;grid-row:1;}
+  .hero__portrait{
+    position:relative;
+    top:auto;right:auto;bottom:auto;
+    grid-column:2;
+    grid-row:1;
+    align-self:center;
+    justify-self:end;
+    width:clamp(280px,30vw,440px);
+    transform:none;
+  }
+  .hero__portrait img{
+    width:100%;
+    height:auto;
+    object-fit:contain;
+    filter:none;
+    transform:none;
+  }
+  /* Subtle dark edge overlay — blends image edges into dark background */
+  .hero__portrait::after{
+    background:
+      linear-gradient(to right, var(--dark) 0%, transparent 28%),
+      linear-gradient(to bottom, var(--dark) 0%, transparent 18%),
+      linear-gradient(to top, var(--dark) 0%, transparent 18%),
+      linear-gradient(to left, var(--dark) 0%, transparent 22%);
+  }
+  .hero__portrait::before{display:none;}
+  .hero__portrait-caption{
+    position:absolute;
+    top:0;left:0;right:0;
+    z-index:3;
+    font-size:clamp(.72rem,.85vw,.88rem);
+    line-height:1.55;
+    color:rgba(255,255,255,.52);
+    text-align:center;
+    padding:.6em 1em;
+    pointer-events:none;
+  }
+}
+
+/* ============================================================
+   HERO — entrance sequence (desktop first load)
+   1. right image  2. heading  3. left bg  4. sub + cta + scrollcue
+   ============================================================ */
+@media (min-width:901px) and (prefers-reduced-motion:no-preference){
+  .hero__portrait{animation:heroReveal .65s ease both;animation-delay:.05s;}
+  .hero h1{animation:heroReveal .75s ease both;animation-delay:.5s;}
+  .hero::before{animation:heroReveal 1s ease both;animation-delay:.95s;}
+  .hero__sub{animation:heroReveal .65s ease both;animation-delay:1.45s;}
+  .hero .cta{animation:heroReveal .65s ease both;animation-delay:1.65s;}
+  .scrollcue{animation:heroReveal .65s ease both;animation-delay:1.85s;}
+}
+@keyframes heroReveal{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
 }
