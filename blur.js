@@ -93,9 +93,21 @@
   /* ---- download payoff ---- */
   var dl = document.getElementById("download");
   var dlDone = false;
+  var youAudio = document.getElementById("youAudio");
+  var youAudioStarted = false;
   function revealDownload() {
     if (dlDone || !dl) return; dlDone = true;
     setTimeout(function () { dl.classList.add("revealed"); }, reduce ? 0 : 320);
+  }
+  function tickYouAudio() {
+    if (!youAudio || reduce) return;
+    var inDl = dl && inView(dl, 0.45);
+    if (inDl) {
+      if (!youAudioStarted) { youAudio.volume = 0.65; youAudio.loop = true; youAudioStarted = true; }
+      if (youAudio.paused) youAudio.play().catch(function () {});
+    } else {
+      if (!youAudio.paused) youAudio.pause();
+    }
   }
 
   /* ---- living profile: scroll-to-know-more reflections reveal ---- */
@@ -448,6 +460,7 @@
     if (whyItems.length && inView(whyItems[0], 0.7)) lightWhy();
     if (th && inView(th, 0.45)) startTyping();
     if (dl && inView(dl, 0.55)) revealDownload();
+    tickYouAudio();
     updateLP();
     updateThresh();
     updateOrder();
