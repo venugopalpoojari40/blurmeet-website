@@ -2194,7 +2194,7 @@ html[data-display="playfair"]{--serif:"Plus Jakarta Sans",system-ui,sans-serif}
     top:50%;
     bottom:auto;
     right:auto;
-    left:58%;
+    left:64%;
     width:clamp(280px,32vw,480px);
     transform:translateY(-50%);
   }
