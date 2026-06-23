@@ -742,6 +742,7 @@ body{
 }
 .order__intro-l2{margin-top:.16em;}
 .order__intro-gold{color:var(--gold);}
+.order__intro-gap{display:block;margin-top:.7em;}
 
 .order__stage{
   width:100%;max-width:var(--maxw);margin:0 auto;
