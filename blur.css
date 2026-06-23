@@ -2199,14 +2199,12 @@ html[data-display="playfair"]{--serif:"Plus Jakarta Sans",system-ui,sans-serif}
     grid-row:1;
     align-self:center;
     justify-self:end;
+    width:clamp(280px,30vw,440px);
     transform:none;
   }
   .hero__portrait img{
-    display:block;
-    width:auto;
+    width:100%;
     height:auto;
-    max-width:clamp(220px,28vw,420px);
-    max-height:calc(100vh - 120px);
     object-fit:contain;
     filter:none;
     transform:none;
