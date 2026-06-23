@@ -2185,7 +2185,7 @@ html[data-display="playfair"]{--serif:"Plus Jakarta Sans",system-ui,sans-serif}
     z-index:1;
     background:
       linear-gradient(90deg,transparent 55%,var(--dark) 100%),
-      linear-gradient(rgba(26,23,20,.68),rgba(26,23,20,.68)),
+      linear-gradient(rgba(26,23,20,.82),rgba(26,23,20,.82)),
       url('assets/images/landing-leftside-background.png') center/cover no-repeat;
   }
 }
