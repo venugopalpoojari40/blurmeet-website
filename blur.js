@@ -342,9 +342,9 @@
   try { storySeen = localStorage.getItem("blur_story_seen") === "true"; } catch(e) {}
   var chapterSections = [
     { el: document.querySelector(".hero"),     label: "The Mistake" },
-    { el: document.querySelector(".thresh"),   label: "Seeing"      },
     { el: document.querySelector(".living"),   label: "Knowing"     },
     { el: document.querySelector(".feeling"),  label: "Feeling"     },
+    { el: document.querySelector(".thresh"),   label: "Seeing"      },
     { el: document.querySelector(".order"),    label: "Meeting"     },
     { el: document.querySelector(".download"), label: "You"         }
   ];
@@ -412,9 +412,9 @@
   if (storyToc) {
     var tocTargetEls = [
       document.querySelector(".hero"),
-      document.querySelector(".thresh"),
       document.querySelector(".living"),
       document.querySelector(".feeling"),
+      document.querySelector(".thresh"),
       document.querySelector(".order"),
       document.querySelector(".download")
     ];
@@ -689,9 +689,9 @@
      Trust / final each advance with a single keypress. */
   var navSections = [
     document.querySelector(".hero"),
-    document.querySelector(".thresh"),
     document.querySelector(".living"),
     document.querySelector(".feeling"),
+    document.querySelector(".thresh"),
     document.querySelector(".order"),
     document.querySelector(".download")
   ].filter(Boolean);
