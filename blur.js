@@ -93,9 +93,14 @@
   /* ---- download payoff ---- */
   var dl = document.getElementById("download");
   var dlDone = false;
+  var youAudio = document.getElementById("youAudio");
   function revealDownload() {
     if (dlDone || !dl) return; dlDone = true;
     setTimeout(function () { dl.classList.add("revealed"); }, reduce ? 0 : 320);
+    if (youAudio && !reduce) {
+      youAudio.volume = 0.65;
+      youAudio.play().catch(function () {});
+    }
   }
 
   /* ---- living profile: scroll-to-know-more reflections reveal ---- */
