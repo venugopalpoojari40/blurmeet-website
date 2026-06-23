@@ -101,9 +101,10 @@
   }
   function tickYouAudio() {
     if (!youAudio || reduce) return;
+    if (window.matchMedia("(max-width:860px)").matches) return;
     var inDl = dl && inView(dl, 0.45);
     if (inDl) {
-      if (!youAudioStarted) { youAudio.volume = 0.07; youAudio.loop = true; youAudioStarted = true; }
+      if (!youAudioStarted) { youAudio.volume = 0.04; youAudio.loop = true; youAudioStarted = true; }
       if (youAudio.paused) youAudio.play().catch(function () {});
     } else {
       if (!youAudio.paused) youAudio.pause();
