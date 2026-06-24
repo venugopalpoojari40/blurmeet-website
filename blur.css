@@ -2219,14 +2219,13 @@ html[data-display="playfair"]{--serif:"Plus Jakarta Sans",system-ui,sans-serif}
   }
   .hero__portrait::before{display:none;}
   .hero__portrait-caption{
-    position:absolute;
-    top:0;left:0;right:0;
-    z-index:3;
+    display:block;
     font-size:clamp(.72rem,.85vw,.88rem);
     line-height:1.55;
     color:rgba(255,255,255,.52);
     text-align:center;
-    padding:.6em 1em;
+    padding:.6em 1em 0;
+    margin-bottom:1em;
     pointer-events:none;
   }
 }
