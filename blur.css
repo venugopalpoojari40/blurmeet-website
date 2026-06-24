@@ -274,6 +274,22 @@ body{
   pointer-events:none;
   user-select:none;
   -webkit-user-drag:none;
+  /* override the global hero__portrait img blur */
+  filter:none!important;
+  transform:none!important;
+}
+/* Edge-only vignette inside each card */
+.cstack__card::before{
+  content:"";
+  position:absolute;inset:0;
+  z-index:3;
+  pointer-events:none;
+  border-radius:inherit;
+  background:
+    linear-gradient(to right, rgba(26,23,20,.65) 0%, transparent 22%),
+    linear-gradient(to left,  rgba(26,23,20,.5)  0%, transparent 16%),
+    linear-gradient(to bottom,rgba(26,23,20,.55) 0%, transparent 18%),
+    linear-gradient(to top,   rgba(26,23,20,.55) 0%, transparent 18%);
 }
 .cstack__sheen{
   position:absolute;inset:0;z-index:2;
@@ -2269,11 +2285,12 @@ html[data-display="playfair"]{--serif:"Plus Jakarta Sans",system-ui,sans-serif}
     transform:none;
     z-index:2;
   }
-  /* keep only the left-edge blend; let cards handle their own depth */
-  .hero__portrait::after{
-    background:linear-gradient(to right,var(--dark) 0%,transparent 30%);
-  }
+  /* cards handle their own edge fading — suppress portrait overlays */
+  .hero__portrait::after{display:none;}
   .hero__portrait::before{display:none;}
+  /* CSS initial slant — visible before JS breathing loop fires */
+  #cCardA{transform:translateZ(40px) rotateY(-10deg) rotateX(2deg) scale(1);}
+  #cCardB{transform:translateX(-40px) translateY(20px) translateZ(-80px) rotateY(-16deg) rotateX(3deg) scale(.92);opacity:.75;}
   .hero__portrait-caption{
     position:absolute;
     top:0;left:0;right:0;

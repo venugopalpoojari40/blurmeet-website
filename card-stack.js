@@ -191,8 +191,7 @@
     return;
   }
 
-  /* Delay init until hero entrance animation completes (~0.8 s)
-     so the parent opacity transition does not flatten preserve-3d */
+  /* Small defer so CSS initial slant renders first, then JS takes over */
   setTimeout(function () {
     cardA.style.transition = 'none';
     cardB.style.transition = 'none';
@@ -200,6 +199,6 @@
     applyState(cardB, cp(BACK));
     requestAnimationFrame(tick);
     startAuto();
-  }, 820);
+  }, 50);
 
 }());
