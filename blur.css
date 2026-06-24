@@ -286,12 +286,15 @@ body{
   pointer-events:none;
   border-radius:inherit;
   background:
-    /* Right cover: phone mockup clear up to 44%, then fade to dark by 62% */
+    /* Right: stats start at ~52% — keep phone mockup clear, fade stats from 52% */
     linear-gradient(to right,
-      rgba(26,23,20,.5) 0%, transparent 16%,
-      transparent 44%, rgba(26,23,20,.7) 54%, var(--dark) 63%),
-    linear-gradient(to bottom,rgba(26,23,20,.45) 0%, transparent 14%),
-    linear-gradient(to top,   rgba(26,23,20,.45) 0%, transparent 14%);
+      rgba(26,23,20,.5) 0%, transparent 15%,
+      transparent 52%, rgba(26,23,20,.8) 58%, var(--dark) 65%),
+    /* Bottom: editorial text at ~73% from top (27% from bottom) — cover firmly */
+    linear-gradient(to top,
+      var(--dark) 0%, var(--dark) 20%,
+      rgba(26,23,20,.6) 27%, rgba(26,23,20,.15) 34%, transparent 40%),
+    linear-gradient(to bottom, rgba(26,23,20,.4) 0%, transparent 12%);
 }
 .cstack__sheen{
   position:absolute;inset:0;z-index:2;
