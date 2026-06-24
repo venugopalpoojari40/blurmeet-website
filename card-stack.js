@@ -11,10 +11,10 @@
   var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches);
   function mob() { return window.innerWidth <= 900; }
 
-  /* ---- Base states -------------------------------------------------- */
-  var FRONT = { tx: 0,   ty: 0,  tz: 40,  rx: 2, ry: -10, s: 1,   o: 1    };
-  var BACK  = { tx: -40, ty: 20, tz: -80, rx: 3, ry: -16, s: .92, o: .75  };
-  var EXIT  = { tx: 120, ty: 0,  tz: -100,rx: 2, ry: -18, s: .92, o: 0    };
+  /* ---- Base states (fan layout: front near-upright, back fans right) -- */
+  var FRONT = { tx: -10, ty: 0,  tz: 30,  rx: 1, ry: -5,  s: 1,   o: 1   };
+  var BACK  = { tx:  50, ty:-8,  tz: -40, rx: 1, ry:  14, s: .88, o: .88 };
+  var EXIT  = { tx: 140, ty: 10, tz: -80, rx: 1, ry:  22, s: .85, o: 0   };
 
   /* ---- Runtime state ------------------------------------------------- */
   var frontIdx  = 0;
