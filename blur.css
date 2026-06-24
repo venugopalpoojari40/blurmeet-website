@@ -247,8 +247,8 @@ body{
   position:relative;
   transform-style:preserve-3d;
   width:100%;
-  height:clamp(400px,52vw,660px);
-  max-height:calc(90vh - 120px);
+  height:clamp(520px,78vh,900px);
+  max-height:calc(100vh - 60px);
 }
 .cstack__card{
   position:absolute;
