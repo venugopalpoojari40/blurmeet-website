@@ -11,10 +11,10 @@
   var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches);
   function mob() { return window.innerWidth <= 900; }
 
-  /* ---- Base states — fan LEFT so back card's portrait side is visible --- */
-  var FRONT = { tx:   0, ty:  0, tz:  20, rx: 0, ry:  -8, s: 1,   o: 1  };
-  var BACK  = { tx: -38, ty:-12, tz: -30, rx: 0, ry: -24, s: .88, o: .9  };
-  var EXIT  = { tx:-150, ty:  0, tz: -60, rx: 0, ry: -38, s: .8,  o: 0   };
+  /* ---- Base states — fan right, images cropped to portrait side --------- */
+  var FRONT = { tx:  0,  ty:  0, tz:  20, rx: 0, ry:  -8, s: 1,   o: 1  };
+  var BACK  = { tx: 40,  ty: -8, tz: -30, rx: 0, ry:  22, s: .88, o: .9  };
+  var EXIT  = { tx: 140, ty:  0, tz: -60, rx: 0, ry:  38, s: .8,  o: 0   };
 
   /* ---- Runtime state ------------------------------------------------- */
   var frontIdx  = 0;

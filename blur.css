@@ -270,6 +270,7 @@ body{
 .cstack__card img{
   width:100%;height:100%;
   object-fit:cover;
+  object-position:left top;
   display:block;
   pointer-events:none;
   user-select:none;
@@ -2288,9 +2289,9 @@ html[data-display="playfair"]{--serif:"Plus Jakarta Sans",system-ui,sans-serif}
   /* cards handle their own edge fading — suppress portrait overlays */
   .hero__portrait::after{display:none;}
   .hero__portrait::before{display:none;}
-  /* CSS initial slant — fan left: back card shows portrait side, not text-stats side */
+  /* CSS initial slant — fan right, portrait cropped to phone mockup side */
   #cCardA{transform:translateX(0px) translateZ(20px) rotateY(-8deg) scale(1);}
-  #cCardB{transform:translateX(-38px) translateY(-12px) translateZ(-30px) rotateY(-24deg) scale(.88);opacity:.9;}
+  #cCardB{transform:translateX(40px) translateY(-8px) translateZ(-30px) rotateY(22deg) scale(.88);opacity:.9;}
   .hero__portrait-caption{
     position:absolute;
     top:0;left:0;right:0;
