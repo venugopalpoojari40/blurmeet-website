@@ -2273,8 +2273,6 @@ html[data-display="playfair"]{--serif:"Plus Jakarta Sans",system-ui,sans-serif}
   }
 
   /* Right-side card image — grid item in column 2, centered by grid align-items */
-  /* allow fanned cards to overflow their column without clipping */
-  .hero{overflow:visible;}
   .hero__copy{grid-column:1;grid-row:1;}
   .hero__portrait{
     position:relative;
@@ -2286,7 +2284,6 @@ html[data-display="playfair"]{--serif:"Plus Jakarta Sans",system-ui,sans-serif}
     width:clamp(260px,28vw,400px);
     transform:none;
     z-index:2;
-    overflow:visible;
   }
   /* cards handle their own edge fading — suppress portrait overlays */
   .hero__portrait::after{display:none;}
