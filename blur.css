@@ -268,14 +268,18 @@ body{
     0 0 80px rgba(201,169,110,.15);
 }
 .cstack__card img{
-  width:100%;height:100%;
-  object-fit:cover;
-  object-position:left top;
+  /* Images are 1086×1448 composites: portrait left ~50%, stats right ~50%.
+     position:absolute + width:200% displays image at 2× card width so
+     overflow:hidden clips the stats column — only portrait half visible. */
+  position:absolute;
+  top:0;left:0;
+  width:200%;
+  height:auto;
+  max-width:none;
   display:block;
   pointer-events:none;
   user-select:none;
   -webkit-user-drag:none;
-  /* override the global hero__portrait img blur */
   filter:none!important;
   transform:none!important;
 }
@@ -1860,7 +1864,7 @@ footer{
   .cstack__scene{height:auto;transform:none!important;}
   .cstack__card{position:relative;inset:auto;transform:none!important;opacity:1!important;transition:none!important;}
   #cCardB{display:none;}
-  .cstack__card img{height:auto;}
+  .cstack__card img{position:relative;width:100%;height:auto;max-width:100%;}
   .hero__portrait::after{background:linear-gradient(0deg,var(--dark) 18%,rgba(26,23,20,.5) 60%,rgba(26,23,20,.7))}
   .belief__grid{grid-template-columns:1fr}
   .living__grid{grid-template-columns:1fr;gap:72px}
