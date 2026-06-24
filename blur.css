@@ -211,7 +211,7 @@ body{
 }
 .hero h1 .line{display:block;overflow:hidden}
 .hero .lede{font-size:clamp(.88rem,1.1vw,1.05rem);max-width:30ch;opacity:.72}
-.hero__sub{margin-bottom:2.6em;max-width:none;white-space:nowrap}
+.hero__sub{margin-bottom:2.6em;max-width:42ch;}
 @media (max-width:900px){.hero__sub{white-space:normal}}
 
 .hero__portrait{
