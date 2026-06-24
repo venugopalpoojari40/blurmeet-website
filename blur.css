@@ -2288,9 +2288,9 @@ html[data-display="playfair"]{--serif:"Plus Jakarta Sans",system-ui,sans-serif}
   /* cards handle their own edge fading — suppress portrait overlays */
   .hero__portrait::after{display:none;}
   .hero__portrait::before{display:none;}
-  /* CSS initial slant — strong fan angles matching JS base states */
+  /* CSS initial slant — fan left: back card shows portrait side, not text-stats side */
   #cCardA{transform:translateX(0px) translateZ(20px) rotateY(-8deg) scale(1);}
-  #cCardB{transform:translateX(55px) translateY(-5px) translateZ(-30px) rotateY(28deg) scale(.85);opacity:.9;}
+  #cCardB{transform:translateX(-38px) translateY(-12px) translateZ(-30px) rotateY(-24deg) scale(.88);opacity:.9;}
   .hero__portrait-caption{
     position:absolute;
     top:0;left:0;right:0;
