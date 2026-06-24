@@ -84,7 +84,18 @@
 <header class="hero" data-screen-label="01 Hero">
   <div class="hero__portrait" id="heroPortrait">
     <p class="hero__portrait-caption">For 3 decades, relationships started with a photograph.</p>
-    <img src="assets/images/landing-rightside-man.png" alt="" fetchpriority="high">
+    <div class="cstack" id="cStack">
+      <div class="cstack__scene" id="cStackScene">
+        <div class="cstack__card" id="cCardA">
+          <div class="cstack__sheen"></div>
+          <img src="assets/images/landing-rightside-man.png" alt="" draggable="false" fetchpriority="high">
+        </div>
+        <div class="cstack__card" id="cCardB">
+          <div class="cstack__sheen"></div>
+          <img src="assets/images/landing-rightside-woman.png" alt="" draggable="false">
+        </div>
+      </div>
+    </div>
   </div>
   <div class="hero__copy">
     <h1 class="display" data-reveal><span class="nowrap">Know them.</span><br><span class="nowrap">Before you <em>see</em> them.</span></h1>
@@ -914,6 +925,7 @@
 
 <audio id="youAudio" src="you.wav" preload="none"></audio>
 <script src="blur.js"></script>
+<script src="card-stack.js" defer></script>
 
 </body>
 </html>
