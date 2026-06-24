@@ -239,8 +239,8 @@ body{
    CARD STACK — premium 3D floating card pair
    ============================================================ */
 .cstack{
-  perspective:1800px;
-  perspective-origin:50% 45%;
+  perspective:650px;
+  perspective-origin:50% 50%;
   width:100%;
 }
 .cstack__scene{
@@ -256,7 +256,7 @@ body{
   border-radius:14px;
   overflow:hidden;
   cursor:pointer;
-  will-change:transform,opacity;
+  will-change:transform;
   box-shadow:
     0 40px 80px rgba(0,0,0,.55),
     0 0 60px rgba(201,169,110,.08);
@@ -2273,6 +2273,8 @@ html[data-display="playfair"]{--serif:"Plus Jakarta Sans",system-ui,sans-serif}
   }
 
   /* Right-side card image — grid item in column 2, centered by grid align-items */
+  /* allow fanned cards to overflow their column without clipping */
+  .hero{overflow:visible;}
   .hero__copy{grid-column:1;grid-row:1;}
   .hero__portrait{
     position:relative;
@@ -2281,16 +2283,17 @@ html[data-display="playfair"]{--serif:"Plus Jakarta Sans",system-ui,sans-serif}
     grid-row:1;
     align-self:center;
     justify-self:end;
-    width:clamp(280px,30vw,440px);
+    width:clamp(260px,28vw,400px);
     transform:none;
     z-index:2;
+    overflow:visible;
   }
   /* cards handle their own edge fading — suppress portrait overlays */
   .hero__portrait::after{display:none;}
   .hero__portrait::before{display:none;}
-  /* CSS initial slant — fan layout matching JS base states */
-  #cCardA{transform:translateX(-10px) translateZ(30px) rotateX(1deg) rotateY(-5deg) scale(1);}
-  #cCardB{transform:translateX(50px) translateY(-8px) translateZ(-40px) rotateX(1deg) rotateY(14deg) scale(.88);opacity:.88;}
+  /* CSS initial slant — strong fan angles matching JS base states */
+  #cCardA{transform:translateX(0px) translateZ(20px) rotateY(-8deg) scale(1);}
+  #cCardB{transform:translateX(55px) translateY(-5px) translateZ(-30px) rotateY(28deg) scale(.85);opacity:.9;}
   .hero__portrait-caption{
     position:absolute;
     top:0;left:0;right:0;
