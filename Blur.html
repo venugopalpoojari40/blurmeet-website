@@ -60,7 +60,7 @@
 <noscript><style>[data-reveal]{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
-
+<div class="premium-webgl" aria-hidden="true"><canvas id="premiumScene"></canvas></div>
 <!-- fixed wordmark + chapter indicator / story TOC -->
 <div class="topbar">
   <span class="wordmark">blur<span class="dot">.</span></span>
@@ -82,12 +82,82 @@
      01 — HERO
      ============================================================ -->
 <header class="hero" data-screen-label="01 Hero">
+  <!--
   <div class="hero__portrait" id="heroPortrait">
-    <!-- <p class="hero__portrait-caption">For 3 decades, relationships started with a photograph.</p> -->
-    <img src="assets/images/landing-rightside-man.png" alt="" fetchpriority="high">
+    <div class="cstack" id="cStack">
+      <div class="cstack__scene" id="cStackScene">
+        <div class="cstack__card" id="cCardA">
+          <div class="cstack__sheen"></div>
+          <div class="cstack__card-inner">
+            <div class="cstack__card-photo">
+              <img src="assets/images/landing-rightside-man-solo.png" alt="" draggable="false" fetchpriority="high">
+            </div>
+            <div class="cstack__card-stats">
+              <div class="cstack__stat">
+                <span class="cstack__stat-lbl">Height</span>
+                <span class="cstack__stat-val">6'2"</span>
+              </div>
+              <div class="cstack__stat">
+                <span class="cstack__stat-lbl">Salary</span>
+                <span class="cstack__stat-val">24 LPA</span>
+              </div>
+              <div class="cstack__stat">
+                <span class="cstack__stat-lbl">Education</span>
+                <span class="cstack__stat-val">Bachelor of Design</span>
+              </div>
+              <div class="cstack__stat">
+                <span class="cstack__stat-lbl">Character</span>
+                <span class="cstack__stat-val cstack__stat-val--red">Unknown.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cstack__card" id="cCardB">
+          <div class="cstack__sheen"></div>
+          <div class="cstack__card-inner">
+            <div class="cstack__card-photo">
+              <img src="assets/images/landing-rightside-woman-solo.png" alt="" draggable="false">
+            </div>
+            <div class="cstack__card-stats">
+              <div class="cstack__stat">
+                <span class="cstack__stat-val">243 photos,<br>2 seconds each.</span>
+              </div>
+              <div class="cstack__stat">
+                Another match.<br><span class="cstack__stat-val--accent">No connection.</span>
+              </div>
+              <div class="cstack__stat">
+                Everyone learned how to look <span class="cstack__stat-val--accent">interesting.</span>
+              </div>
+              <div class="cstack__stat">
+                The photos got better.<br><span class="cstack__stat-val--red">The connections didn't.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cstack__editorial-wrap">
+      <div class="cstack__editorial is-active" id="cEditA">
+        <p class="cstack__editorial-quote">You <em>trusted</em> this one <em>photograph.</em><br>To decide who <em>deserves</em> a chance.</p>
+        <div class="cstack__editorial-box">
+          <p class="cstack__editorial-heading">WE BUILT A SYSTEM<br>THAT TREATS HUMANS LIKE PRODUCTS.</p>
+          <p class="cstack__editorial-sub">And wondered why love felt impossible.</p>
+        </div>
+      </div>
+      <div class="cstack__editorial" id="cEditB">
+        <p class="cstack__editorial-quote">We solved<br>the <em>wrong problem.</em></p>
+        <div class="cstack__editorial-box">
+          <p class="cstack__editorial-heading">WE SPENT YEARS<br>PERFECTING THE CAMERAS, FILTERS, ANGLES.</p>
+          <p class="cstack__editorial-sub">The connections stayed blurry.</p>
+        </div>
+      </div>
+    </div>
   </div>
+  -->
   <div class="hero__copy">
     <h1 class="display" data-reveal><span class="nowrap">Know them.</span><br><span class="nowrap">Before you <em>see</em> them.</span></h1>
+  </div>
+  <div class="hero__aside">
     <p class="lede hero__sub" data-reveal data-delay="1">The next generation won't choose partners the way the last generation scrolled.</p>
     <button class="cta" type="button" data-reveal data-delay="2">Join the waitlist <span class="arrow">→</span></button>
   </div>
@@ -107,7 +177,7 @@
     <div class="living__grid">
       <div class="living__text manifesto">
         <p class="mf-sub" data-reveal>Attraction was never the problem.</p>
-        <h2 class="mf-hero" data-reveal>Knowing them was.</h2>
+        <h2 class="mf-hero" data-reveal><span class="order__intro-gold">Knowing</span> them was.</h2>
       </div>
 
       <div class="phone__stage" data-reveal data-delay="1">
@@ -257,7 +327,7 @@
 
     <div class="thresh__text belief">
       <h2 class="bf-hero" data-reveal>People are not static.</h2>
-      <p class="bf-q" data-reveal>Profiles are.</p>
+      <p class="bf-q" data-reveal><span class="order__intro-gold">Profiles</span> are.</p>
     </div>
   </div>
 </section>
@@ -367,7 +437,7 @@
 
           <div class="order__beat" data-beat="1">
             <span class="order__word">Silhouette</span>
-            <span class="order__before">I <span class="order__intro-gold">don't know</span> what they look like.</span>
+            <span class="order__before">I fell for who they were. Now I know their <span class="order__intro-gold">face</span>.</span>
           </div>
 
           <!-- Mobile phone slide 2: between the lines -->
@@ -769,7 +839,7 @@
     <div class="stores" data-reveal data-delay="2">
       <button class="cta" type="button">Join the waitlist <span class="arrow">→</span></button>
     </div>
-    <p class="download__note" data-reveal data-delay="3">Bangalore & Hyderabad first · 2026</p>
+    <p class="download__note" data-reveal data-delay="3">Bangalore @ 2026</p>
 
   </div>
   <footer>
@@ -913,7 +983,13 @@
 </div>
 
 <audio id="youAudio" src="you.wav" preload="none"></audio>
+<script src="https://cdn.jsdelivr.net/npm/three@0.159.0/build/three.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
 <script src="blur.js"></script>
+<script src="card-stack.js" defer></script>
+<script src="premium-experience.js" defer></script>
 
 </body>
 </html>
