@@ -2725,6 +2725,75 @@ body::after{
   .hero::before,.living::before,.feeling::before,.thresh::before,.order::before,.download::before{opacity:.28}
 }
 
+/* ============================================================
+   MOBILE — disable blur-based premium reveals (max-width:900px)
+   ============================================================ */
+@media(max-width:900px){
+  /* Meeting intro blur */
+  .order__intro-l2{filter:none;letter-spacing:-.02em;transition:none;}
+  .order__intro.is-active .order__intro-l2{filter:none;}
+
+  /* Meeting beat word + statement */
+  .order__word{filter:none;}
+  .order__beat.is-active .order__word{animation:none;}
+  .order__before{filter:none;}
+  .order__beat.is-active .order__before{animation:none;}
+
+  /* Final beat & intro stmts — use no-blur version of knowItem */
+  .order__beat--final.is-active .order__final{animation:knowItemMobile .75s ease forwards;animation-delay:.1s;}
+  .order__beat--final.is-active .order__know-intro{animation:knowItemMobile .65s ease forwards;animation-delay:.9s;}
+  .order__beat--final.is-active .order__know-item{animation:knowItemMobile .65s ease forwards;}
+  .order__beat--final.is-active .order__know-item:nth-child(1){animation-delay:1.4s;}
+  .order__beat--final.is-active .order__know-item:nth-child(2){animation-delay:1.75s;}
+  .order__beat--final.is-active .order__know-item:nth-child(3){animation-delay:2.1s;}
+  .order__intro.is-active .order__intro-stmt1{animation:knowItemMobile .6s ease forwards;animation-delay:.1s;}
+  .order__intro.is-active .order__intro-stmt2{animation:knowItemMobile .6s ease forwards;animation-delay:.65s;}
+}
+@keyframes knowItemMobile{
+  from{opacity:0;transform:translateY(7px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* ============================================================
+   MOBILE BACKGROUND IMAGES — portrait versions (max-width:900px)
+   ============================================================ */
+@media(max-width:900px){
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:1;
+    background:
+      linear-gradient(180deg,transparent 40%,var(--dark) 100%),
+      linear-gradient(rgba(26,23,20,.72),rgba(26,23,20,.72)),
+      url('assets/images/landing-leftside-background-mobile.PNG') center/cover no-repeat;
+  }
+  .living{
+    background:
+      linear-gradient(to bottom,#100d0b 0%,transparent 10%,transparent 90%,#100d0b 100%),
+      linear-gradient(rgba(16,13,11,calc(.94 - var(--sectionGlow,0)*.14)),rgba(16,13,11,calc(.94 - var(--sectionGlow,0)*.14))),
+      url('assets/images/knowing-section-background-mobile.PNG') center/cover no-repeat;
+  }
+  .feeling{
+    background:
+      linear-gradient(to bottom,#100d0b 0%,transparent 10%,transparent 90%,#100d0b 100%),
+      linear-gradient(rgba(16,13,11,calc(.94 - var(--sectionGlow,0)*.14)),rgba(16,13,11,calc(.94 - var(--sectionGlow,0)*.14))),
+      url('assets/images/feeling-section-background-mobile.PNG') center/cover no-repeat;
+  }
+  .thresh{
+    background:
+      linear-gradient(to bottom,#100d0b 0%,transparent 10%,transparent 90%,#100d0b 100%),
+      linear-gradient(rgba(16,13,11,calc(.94 - var(--sectionGlow,0)*.14)),rgba(16,13,11,calc(.94 - var(--sectionGlow,0)*.14))),
+      url('assets/images/seeing-section-background-mobile.PNG') center/cover no-repeat;
+  }
+  .order{
+    background:
+      linear-gradient(to bottom,#100d0b 0%,transparent 10%,transparent 90%,#100d0b 100%),
+      linear-gradient(rgba(16,13,11,calc(.94 - var(--sectionGlow,0)*.14)),rgba(16,13,11,calc(.94 - var(--sectionGlow,0)*.14))),
+      url('assets/images/meeting-section-background-mobile.PNG') center/cover no-repeat;
+  }
+}
+
 @media (prefers-reduced-motion:reduce){
   .premium-webgl{display:none!important}
   body::before,body::after{display:none}

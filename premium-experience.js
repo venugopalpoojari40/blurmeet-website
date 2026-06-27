@@ -9,6 +9,7 @@
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var finePointer = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
   var mobile = window.matchMedia && window.matchMedia('(max-width: 760px)').matches;
+  var smallScreen = window.matchMedia && window.matchMedia('(max-width: 900px)').matches;
   var root = document.documentElement;
   var mouse = { x: 0, y: 0, tx: 0, ty: 0 };
   var scrollY = 0;
@@ -40,7 +41,7 @@
     if (window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
     gsap.defaults({ ease: 'power3.out', duration: 0.9 });
 
-    if (!reduce) {
+    if (!reduce && !smallScreen) {
       /* Hero entrance — data-reveal owns opacity/transform; GSAP owns filter+tracking */
       gsap.fromTo('.hero h1',
         { filter: 'blur(10px)', letterSpacing: '0.022em' },
@@ -56,7 +57,7 @@
       );
     }
 
-    if (!reduce && window.ScrollTrigger) {
+    if (!reduce && !smallScreen && window.ScrollTrigger) {
       gsap.utils.toArray('.section, .thresh, .order, .download').forEach(function (section) {
         gsap.fromTo(section, { '--sectionGlow': 0 }, {
           '--sectionGlow': 1,
