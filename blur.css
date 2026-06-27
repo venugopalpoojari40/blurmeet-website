@@ -2794,6 +2794,7 @@ body::after{
   }
 }
 
+
 @media (prefers-reduced-motion:reduce){
   .premium-webgl{display:none!important}
   body::before,body::after{display:none}
