@@ -2727,6 +2727,41 @@ body::after{
 }
 
 /* ============================================================
+   DEVICE NOTICE TOAST (mobile only)
+   ============================================================ */
+.device-notice{
+  display:none;
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
+  z-index:9999;
+  background:rgba(26,23,20,.92);
+  border:1px solid rgba(201,169,110,.22);
+  border-radius:100px;
+  padding:12px 18px 12px 20px;
+  gap:14px;
+  align-items:center;
+  max-width:calc(100vw - 32px);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  opacity:0;transition:opacity .5s ease;
+  pointer-events:none;
+}
+.device-notice--visible{opacity:1;pointer-events:auto;}
+.device-notice__text{
+  font-size:.72rem;letter-spacing:.04em;line-height:1.45;
+  color:rgba(245,240,232,.78);
+  white-space:normal;
+}
+.device-notice__close{
+  flex-shrink:0;
+  background:none;border:none;padding:0;
+  font-size:.78rem;color:rgba(245,240,232,.45);
+  cursor:pointer;line-height:1;
+}
+.device-notice__close:hover{color:rgba(245,240,232,.9);}
+@media(max-width:900px){
+  .device-notice{display:flex;}
+}
+
+/* ============================================================
    MOBILE — disable blur-based premium reveals (max-width:900px)
    ============================================================ */
 @media(max-width:900px){

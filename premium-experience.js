@@ -25,7 +25,7 @@
     /* --mx/--my/--mxd/--myd intentionally not set here — global cursor tracking removed */
   }
 
-  if (!reduce && window.Lenis) {
+  if (!reduce && !smallScreen && window.Lenis) {
     var lenis = new Lenis({
       duration: 1.08,
       easing: function (t) { return 1 - Math.pow(1 - t, 4); },
