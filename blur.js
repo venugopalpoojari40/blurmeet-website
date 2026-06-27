@@ -7,6 +7,7 @@
 (function () {
   "use strict";
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var isMobileDevice = window.matchMedia("(max-width:900px)").matches;
   var vh = function () { return window.innerHeight || document.documentElement.clientHeight; };
 
   function inView(el, ratio) {
@@ -118,12 +119,14 @@
   var lpPhoto = document.getElementById("lpPhoto");
   var lpReflect = document.querySelector(".lp-reflect");
   var lpHint = document.getElementById("lpHint");
+  var lpCurrentP = 0;
 
   /* ---- thresh (static profile problem): scroll to reveal profile ---- */
   var threshSection = document.querySelector(".thresh");
   var threshCard = document.getElementById("threshCard");
   var threshTrack = document.getElementById("threshTrack");
   var threshPhoto = threshCard ? threshCard.querySelector(".lp-photo") : null;
+  var threshCurrentP = 0;
 
   /* Precomputed document-relative offsets — avoids stale getBoundingClientRect
      during iOS momentum scroll where layout position lags visual position */
@@ -149,13 +152,15 @@
     if (!lpPhoto.style.height || lpPhoto.offsetHeight < lpCard.clientHeight - 1) sizeLP();
     var vhh = vh();
     var scrollY = window.pageYOffset || 0;
-    // equivalent to r.top from getBoundingClientRect but uses live pageYOffset
     var rTop = lpSectionDocTop - scrollY;
-    var p = (vhh * 0.42 - rTop) / (vhh * 0.7);
-    p = Math.max(0, Math.min(1, p));
+    // extended range (1.4×vh) so content scrolls over a longer page distance
+    var targetP = (vhh * 0.42 - rTop) / (vhh * 1.4);
+    targetP = Math.max(0, Math.min(1, targetP));
+    // lerp on mobile for smooth deceleration; instant on desktop (Lenis handles it)
+    lpCurrentP += (targetP - lpCurrentP) * (isMobileDevice ? 0.12 : 1);
     var maxScroll = Math.max(0, lpTrack.scrollHeight - lpCard.clientHeight);
-    lpTrack.style.transform = "translateY(" + (-p * maxScroll).toFixed(1) + "px)";
-    lpHint.style.opacity = p > 0.05 ? "0" : "1";
+    lpTrack.style.transform = "translateY(" + (-lpCurrentP * maxScroll).toFixed(1) + "px)";
+    lpHint.style.opacity = lpCurrentP > 0.05 ? "0" : "1";
   }
 
   function sizeThresh() {
@@ -169,10 +174,11 @@
     var vhh = vh();
     var scrollY = window.pageYOffset || 0;
     var rTop = threshSectionDocTop - scrollY;
-    var p = (vhh * 0.42 - rTop) / (vhh * 0.7);
-    p = Math.max(0, Math.min(1, p));
+    var targetP = (vhh * 0.42 - rTop) / (vhh * 1.4);
+    targetP = Math.max(0, Math.min(1, targetP));
+    threshCurrentP += (targetP - threshCurrentP) * (isMobileDevice ? 0.12 : 1);
     var maxScroll = Math.max(0, threshTrack.scrollHeight - threshCard.clientHeight);
-    threshTrack.style.transform = "translateY(" + (-p * maxScroll).toFixed(1) + "px)";
+    threshTrack.style.transform = "translateY(" + (-threshCurrentP * maxScroll).toFixed(1) + "px)";
   }
 
   /* ---- editorial parallax: the words drift; devices stay still ---- */
