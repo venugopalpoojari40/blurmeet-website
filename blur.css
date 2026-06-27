@@ -131,6 +131,7 @@ body{
   color:var(--light);
   font-size:1.4rem;
   line-height:1;
+  text-decoration:none;
 }
 .wordmark .dot{color:var(--gold)}
 
