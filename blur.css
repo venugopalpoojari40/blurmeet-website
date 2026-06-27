@@ -2002,7 +2002,8 @@ footer{
 @media (max-width:900px){
   .hero{grid-template-columns:1fr;min-height:auto;padding-top:76px;padding-bottom:48px;align-items:start;gap:28px;}
   .hero__copy{grid-column:1;padding:20px 0 20px;max-width:none;margin-top:0;}
-  .hero__aside{position:relative!important;transform:none;left:auto;right:auto;top:auto;padding-bottom:40px;}
+  .hero__aside{position:relative!important;transform:none;left:auto;right:auto;top:auto;padding-bottom:24px;}
+  .scrollcue{position:relative!important;bottom:auto;left:auto;right:auto;align-items:center;padding-top:4px;padding-bottom:8px;}
   .hero h1{font-size:clamp(2.6rem,6vw,4.8rem);font-weight:500}
   /* portrait in-flow on mobile — unified card */
   .hero__portrait{position:relative;top:auto;right:auto;bottom:auto;width:100%;opacity:1;grid-column:1;grid-row:1;}
