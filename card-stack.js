@@ -8,6 +8,9 @@
   if (!cardA || !cardB) return;
   var cards = [cardA, cardB];
 
+  /* Editorial panels below card — crossfade on swap */
+  var editPanels = [document.getElementById('cEditA'), document.getElementById('cEditB')];
+
   var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches);
   function mob() { return window.innerWidth <= 900; }
 
@@ -106,6 +109,13 @@
     /* Front exits, back rises — overlap start */
     applyState(fc, cp(EXIT));
     applyState(bc, Object.assign(cp(FRONT), { o: 1 }));
+
+    /* Crossfade editorial panels at mid-transition */
+    var prevIdx = frontIdx;
+    setTimeout(function () {
+      if (editPanels[prevIdx]) editPanels[prevIdx].classList.remove('is-active');
+      if (editPanels[bi])      editPanels[bi].classList.add('is-active');
+    }, 350);
 
     setTimeout(function () {
       frontIdx = bi;
