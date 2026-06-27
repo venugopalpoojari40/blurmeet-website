@@ -2839,6 +2839,35 @@ body::after{
 }
 
 
+/* ============================================================
+   SITE PRELOADER
+   ============================================================ */
+.preloader{
+  position:fixed;inset:0;z-index:99999;
+  background:var(--dark,#100d0b);
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity .65s ease;
+}
+.preloader--hidden{opacity:0;pointer-events:none;}
+.preloader--done{display:none;}
+.preloader__inner{
+  display:flex;align-items:center;
+  gap:clamp(10px,2.4vw,28px);
+}
+.preloader__mark{
+  height:clamp(2.4rem,7vw,5rem);aspect-ratio:78/70;
+  color:var(--light);flex-shrink:0;
+  display:flex;align-items:flex-end;gap:8.97%;
+}
+.preloader__word{
+  font-family:"Plus Jakarta Sans",sans-serif;
+  font-weight:600;letter-spacing:.02em;
+  color:var(--light);
+  font-size:clamp(2.4rem,7vw,5rem);
+  line-height:1;
+}
+.preloader__word .dot{color:var(--gold);}
+
 @media (prefers-reduced-motion:reduce){
   .premium-webgl{display:none!important}
   body::before,body::after{display:none}

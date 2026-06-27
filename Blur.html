@@ -60,6 +60,38 @@
 <noscript><style>[data-reveal]{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
+<!-- ============================================================
+     SITE PRELOADER — shown until window.onload, then fades out
+     ============================================================ -->
+<div id="sitePreloader" class="preloader" aria-label="Loading" role="status">
+  <div class="preloader__inner">
+    <div class="preloader__mark" aria-hidden="true">
+      <span class="lb lb1"></span>
+      <span class="lb lb2"></span>
+      <span class="lb lb3"></span>
+      <span class="lb lb4"></span>
+    </div>
+    <span class="preloader__word">blur<span class="dot">.</span></span>
+  </div>
+</div>
+<script>
+(function(){
+  var pl = document.getElementById('sitePreloader');
+  var gone = false;
+  function dismiss(){
+    if(gone) return; gone = true;
+    pl.classList.add('preloader--hidden');
+    pl.addEventListener('transitionend', function(){ pl.classList.add('preloader--done'); }, {once:true});
+  }
+  if(document.readyState === 'complete'){
+    setTimeout(dismiss, 300);
+  } else {
+    window.addEventListener('load', function(){ setTimeout(dismiss, 300); });
+  }
+  setTimeout(dismiss, 6000);
+})();
+</script>
+
 <div class="premium-webgl" aria-hidden="true"><canvas id="premiumScene"></canvas></div>
 <!-- fixed wordmark + chapter indicator / story TOC -->
 <div class="topbar">
