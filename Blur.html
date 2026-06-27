@@ -992,7 +992,7 @@
 <script src="premium-experience.js" defer></script>
 
 <div class="device-notice" id="deviceNotice" aria-live="polite" aria-atomic="true">
-  <span class="device-notice__text">Best experienced on a larger screen. Open on desktop for the full blur effect.</span>
+  <span class="device-notice__text">Best on a larger screen. Open on desktop for the full experience.</span>
   <button class="device-notice__close" id="deviceNoticeClose" aria-label="Dismiss">✕</button>
 </div>
 <script>
@@ -1003,8 +1003,12 @@
   var hideTimer;
   function hide() {
     clearTimeout(hideTimer);
+    el.classList.add('device-notice--hiding');
     el.classList.remove('device-notice--visible');
-    sessionStorage.setItem('blurNoticeShown', '1');
+    setTimeout(function(){
+      el.classList.remove('device-notice--hiding');
+      sessionStorage.setItem('blurNoticeShown', '1');
+    }, 320);
   }
   setTimeout(function(){
     el.classList.add('device-notice--visible');
