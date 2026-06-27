@@ -471,17 +471,12 @@
     firstPass = false;
   }
 
-  var ticking = false;
-  function onScroll() {
-    if (ticking) return; ticking = true;
-    requestAnimationFrame(function () { check(); ticking = false; });
-  }
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", onScroll);
-  window.addEventListener("resize", function() { orderBtlTop = 0; }); // re-measure after reflow
+  window.addEventListener("resize", function() { check(); orderBtlTop = 0; });
   window.addEventListener("load", check);
-  // immediate + a couple of settle passes (fonts / layout)
-  check();
+  // continuous RAF loop — keeps phone-scroll parallax smooth on iOS
+  // where scroll events are batched during momentum
+  (function loop() { check(); requestAnimationFrame(loop); })();
+  // settle passes for fonts / layout
   setTimeout(check, 120);
   setTimeout(check, 600);
 
