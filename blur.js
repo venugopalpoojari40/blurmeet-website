@@ -118,6 +118,26 @@
   var lpPhoto = document.getElementById("lpPhoto");
   var lpReflect = document.querySelector(".lp-reflect");
   var lpHint = document.getElementById("lpHint");
+
+  /* ---- thresh (static profile problem): scroll to reveal profile ---- */
+  var threshSection = document.querySelector(".thresh");
+  var threshCard = document.getElementById("threshCard");
+  var threshTrack = document.getElementById("threshTrack");
+  var threshPhoto = threshCard ? threshCard.querySelector(".lp-photo") : null;
+
+  /* Precomputed document-relative offsets — avoids stale getBoundingClientRect
+     during iOS momentum scroll where layout position lags visual position */
+  var lpSectionDocTop = 0, threshSectionDocTop = 0;
+  function docOffsetTop(el) {
+    var t = 0;
+    while (el) { t += el.offsetTop; el = el.offsetParent; }
+    return t;
+  }
+  function measureSectionOffsets() {
+    if (livingSection) lpSectionDocTop = docOffsetTop(livingSection);
+    if (threshSection) threshSectionDocTop = docOffsetTop(threshSection);
+  }
+
   function sizeLP() {
     if (!lpCard || !lpPhoto) return;
     var h = lpCard.clientHeight;
@@ -128,20 +148,16 @@
     if (!lpCard || !livingSection) return;
     if (!lpPhoto.style.height || lpPhoto.offsetHeight < lpCard.clientHeight - 1) sizeLP();
     var vhh = vh();
-    var r = livingSection.getBoundingClientRect();
-    // 0 while the phone sits centered (photo + hint), 1 once you've scrolled a little further
-    var p = (vhh * 0.42 - r.top) / (vhh * 0.7);
+    var scrollY = window.pageYOffset || 0;
+    // equivalent to r.top from getBoundingClientRect but uses live pageYOffset
+    var rTop = lpSectionDocTop - scrollY;
+    var p = (vhh * 0.42 - rTop) / (vhh * 0.7);
     p = Math.max(0, Math.min(1, p));
     var maxScroll = Math.max(0, lpTrack.scrollHeight - lpCard.clientHeight);
     lpTrack.style.transform = "translateY(" + (-p * maxScroll).toFixed(1) + "px)";
     lpHint.style.opacity = p > 0.05 ? "0" : "1";
   }
 
-  /* ---- thresh (static profile problem): scroll to reveal profile ---- */
-  var threshSection = document.querySelector(".thresh");
-  var threshCard = document.getElementById("threshCard");
-  var threshTrack = document.getElementById("threshTrack");
-  var threshPhoto = threshCard ? threshCard.querySelector(".lp-photo") : null;
   function sizeThresh() {
     if (!threshCard || !threshPhoto) return;
     var h = threshCard.clientHeight;
@@ -151,8 +167,9 @@
     if (!threshCard || !threshSection) return;
     if (!threshPhoto.style.height || threshPhoto.offsetHeight < threshCard.clientHeight - 1) sizeThresh();
     var vhh = vh();
-    var r = threshSection.getBoundingClientRect();
-    var p = (vhh * 0.42 - r.top) / (vhh * 0.7);
+    var scrollY = window.pageYOffset || 0;
+    var rTop = threshSectionDocTop - scrollY;
+    var p = (vhh * 0.42 - rTop) / (vhh * 0.7);
     p = Math.max(0, Math.min(1, p));
     var maxScroll = Math.max(0, threshTrack.scrollHeight - threshCard.clientHeight);
     threshTrack.style.transform = "translateY(" + (-p * maxScroll).toFixed(1) + "px)";
@@ -471,14 +488,13 @@
     firstPass = false;
   }
 
-  window.addEventListener("resize", function() { check(); orderBtlTop = 0; });
-  window.addEventListener("load", check);
+  window.addEventListener("resize", function() { measureSectionOffsets(); check(); orderBtlTop = 0; });
+  window.addEventListener("load", function() { measureSectionOffsets(); check(); });
   // continuous RAF loop — keeps phone-scroll parallax smooth on iOS
-  // where scroll events are batched during momentum
   (function loop() { check(); requestAnimationFrame(loop); })();
   // settle passes for fonts / layout
-  setTimeout(check, 120);
-  setTimeout(check, 600);
+  setTimeout(function() { measureSectionOffsets(); check(); }, 120);
+  setTimeout(function() { measureSectionOffsets(); check(); }, 600);
 
   /* ---- early access modal ---- */
   var ea = document.getElementById("ea");
