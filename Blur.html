@@ -1032,7 +1032,7 @@
   var isMobile = window.matchMedia && window.matchMedia('(max-width:900px)').matches;
   if (!isMobile || sessionStorage.getItem('blurNoticeShown')) return;
   var el = document.getElementById('deviceNotice');
-  var hideTimer;
+  var hideTimer, shown = false;
   function hide() {
     clearTimeout(hideTimer);
     el.classList.add('device-notice--hiding');
@@ -1042,10 +1042,19 @@
       sessionStorage.setItem('blurNoticeShown', '1');
     }, 320);
   }
-  setTimeout(function(){
+  function show() {
+    if (shown) return; shown = true;
     el.classList.add('device-notice--visible');
     hideTimer = setTimeout(hide, 3000);
-  }, 1500);
+  }
+  var pl = document.getElementById('sitePreloader');
+  if (pl && !pl.classList.contains('preloader--done')) {
+    // Wait for preloader fade to finish, then drop toast 800ms later
+    pl.addEventListener('transitionend', function(){ setTimeout(show, 800); }, {once:true});
+    setTimeout(show, 7500); // hard fallback if transitionend never fires
+  } else {
+    setTimeout(show, 800); // preloader already gone
+  }
   document.getElementById('deviceNoticeClose').addEventListener('click', hide);
 })();
 </script>
