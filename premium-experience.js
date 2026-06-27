@@ -105,7 +105,7 @@
     });
   }
 
-  Array.prototype.forEach.call(document.querySelectorAll('.phone, .foot__card, .ea__dialog'), function (el) { bindTilt(el, 5); });
+  Array.prototype.forEach.call(document.querySelectorAll('.foot__card, .ea__dialog'), function (el) { bindTilt(el, 5); });
   Array.prototype.forEach.call(document.querySelectorAll('.cta, .ea__submit, .store, .soc, .foot__row'), function (el) { bindTilt(el, 3); });
 
   /* bindMagnet removed — physical button movement on cursor was unwanted */

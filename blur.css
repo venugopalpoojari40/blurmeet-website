@@ -2604,17 +2604,18 @@ body::after{
 }
 .cta.is-lit::after,.ea__submit.is-lit::after,.store.is-lit::after{opacity:1}
 
-.phone,.foot__card,.ea__dialog{
+.foot__card,.ea__dialog{
   transform-style:preserve-3d;
   transform:rotateX(var(--tiltX,0deg)) rotateY(var(--tiltY,0deg));
   will-change:transform,filter;
 }
-.phone::before,.ea__dialog::before{
+.phone{will-change:transform,filter;}
+.ea__dialog::before{
   content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:5;
   background:radial-gradient(260px 220px at var(--cardMx,50%) var(--cardMy,50%),rgba(255,255,255,.15),transparent 64%);
   opacity:0;transition:opacity .35s var(--ease);mix-blend-mode:screen;
 }
-.phone.is-lit::before,.ea__dialog.is-lit::before{opacity:1}
+.ea__dialog.is-lit::before{opacity:1}
 .phone{
   box-shadow:
     0 38px 100px rgba(0,0,0,.46),
@@ -2871,6 +2872,6 @@ body::after{
   .premium-webgl{display:none!important}
   body::before,body::after{display:none}
   .hero__portrait,.phone,.foot__card,.ea__dialog,.cta,.store,.ea__submit,.foot__row,.soc{transform:none!important;transition:none!important}
-  .phone::before,.ea__dialog::before,.cta::after,.ea__submit::after,.store::after{display:none}
+  .ea__dialog::before,.cta::after,.ea__submit::after,.store::after{display:none}
   .lb{animation:none;transform:scaleY(1)}
 }
