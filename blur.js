@@ -9,6 +9,8 @@
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var isMobileDevice = window.matchMedia("(max-width:900px)").matches;
   var vh = function () { return window.innerHeight || document.documentElement.clientHeight; };
+  var lastFrameTime = 0;
+  var prevScrollY = -1;
 
   function inView(el, ratio) {
     var r = el.getBoundingClientRect();
@@ -119,14 +121,14 @@
   var lpPhoto = document.getElementById("lpPhoto");
   var lpReflect = document.querySelector(".lp-reflect");
   var lpHint = document.getElementById("lpHint");
-  var lpCurrentP = 0;
+  var lpCurrentP = 0, lpMaxScroll = 0;
 
   /* ---- thresh (static profile problem): scroll to reveal profile ---- */
   var threshSection = document.querySelector(".thresh");
   var threshCard = document.getElementById("threshCard");
   var threshTrack = document.getElementById("threshTrack");
   var threshPhoto = threshCard ? threshCard.querySelector(".lp-photo") : null;
-  var threshCurrentP = 0;
+  var threshCurrentP = 0, threshMaxScroll = 0;
 
   /* Precomputed document-relative offsets — avoids stale getBoundingClientRect
      during iOS momentum scroll where layout position lags visual position */
@@ -146,20 +148,19 @@
     var h = lpCard.clientHeight;
     lpPhoto.style.height = h + "px";
     if (lpReflect) lpReflect.style.minHeight = h + "px";
+    lpMaxScroll = lpTrack ? Math.max(0, lpTrack.scrollHeight - h) : 0;
   }
-  function updateLP() {
+  function updateLP(dt) {
     if (!lpCard || !livingSection) return;
-    if (!lpPhoto.style.height || lpPhoto.offsetHeight < lpCard.clientHeight - 1) sizeLP();
+    if (!lpPhoto.style.height) sizeLP(); // first-call only — no per-frame offsetHeight read
     var vhh = vh();
     var scrollY = window.pageYOffset || 0;
     var rTop = lpSectionDocTop - scrollY;
-    // extended range (1.4×vh) so content scrolls over a longer page distance
-    var targetP = (vhh * 0.42 - rTop) / (vhh * 1.4);
-    targetP = Math.max(0, Math.min(1, targetP));
-    // lerp on mobile for smooth deceleration; instant on desktop (Lenis handles it)
-    lpCurrentP += (targetP - lpCurrentP) * (isMobileDevice ? 0.12 : 1);
-    var maxScroll = Math.max(0, lpTrack.scrollHeight - lpCard.clientHeight);
-    lpTrack.style.transform = "translateY(" + (-lpCurrentP * maxScroll).toFixed(1) + "px)";
+    var targetP = Math.max(0, Math.min(1, (vhh * 0.42 - rTop) / (vhh * 1.4)));
+    // frame-rate-independent lerp via exp decay; instant on desktop (Lenis handles it)
+    var lerpF = isMobileDevice ? 1 - Math.exp(-dt * 6) : 1;
+    lpCurrentP += (targetP - lpCurrentP) * lerpF;
+    lpTrack.style.transform = "translateY(" + (-lpCurrentP * lpMaxScroll).toFixed(1) + "px)";
     lpHint.style.opacity = lpCurrentP > 0.05 ? "0" : "1";
   }
 
@@ -167,18 +168,23 @@
     if (!threshCard || !threshPhoto) return;
     var h = threshCard.clientHeight;
     threshPhoto.style.height = Math.round(h * 1.5) + "px";
+    threshMaxScroll = threshTrack ? Math.max(0, threshTrack.scrollHeight - h) : 0;
   }
-  function updateThresh() {
+  function updateThresh(dt) {
     if (!threshCard || !threshSection) return;
-    if (!threshPhoto.style.height || threshPhoto.offsetHeight < threshCard.clientHeight - 1) sizeThresh();
+    if (!threshPhoto.style.height) sizeThresh();
     var vhh = vh();
     var scrollY = window.pageYOffset || 0;
     var rTop = threshSectionDocTop - scrollY;
-    var targetP = (vhh * 0.42 - rTop) / (vhh * 1.4);
-    targetP = Math.max(0, Math.min(1, targetP));
-    threshCurrentP += (targetP - threshCurrentP) * (isMobileDevice ? 0.12 : 1);
-    var maxScroll = Math.max(0, threshTrack.scrollHeight - threshCard.clientHeight);
-    threshTrack.style.transform = "translateY(" + (-threshCurrentP * maxScroll).toFixed(1) + "px)";
+    var targetP = Math.max(0, Math.min(1, (vhh * 0.42 - rTop) / (vhh * 1.4)));
+    var lerpF = isMobileDevice ? 1 - Math.exp(-dt * 6) : 1;
+    threshCurrentP += (targetP - threshCurrentP) * lerpF;
+    threshTrack.style.transform = "translateY(" + (-threshCurrentP * threshMaxScroll).toFixed(1) + "px)";
+  }
+
+  function measureMaxScrolls() {
+    sizeLP();
+    sizeThresh();
   }
 
   /* ---- editorial parallax: the words drift; devices stay still ---- */
@@ -471,7 +477,13 @@
 
   /* ---- single scroll pass ---- */
   var firstPass = true;
-  function check() {
+  function check(dt) {
+    dt = dt || 0.016;
+    var scrollY = window.pageYOffset || 0;
+    var scrollChanged = scrollY !== prevScrollY;
+    prevScrollY = scrollY;
+
+    // Reveals — exits instantly once array is empty
     for (var i = reveals.length - 1; i >= 0; i--) {
       if (inView(reveals[i])) {
         // anything already on-screen at load reveals instantly (never stuck hidden);
@@ -481,26 +493,40 @@
         reveals.splice(i, 1);
       }
     }
+
+    // One-shot checks — guard with flags to skip getBoundingClientRect once done
     if (phone) { pVisible = inView(phone, 0.7); if (pVisible) ensureRotation(); }
-    if (whyItems.length && inView(whyItems[0], 0.7)) lightWhy();
-    if (th && inView(th, 0.45)) startTyping();
-    if (dl && inView(dl, 0.55)) revealDownload();
+    if (!whyLit && whyItems.length && inView(whyItems[0], 0.7)) lightWhy();
+    if (!typeStarted && th && inView(th, 0.45)) startTyping();
+    if (!dlDone && dl && inView(dl, 0.55)) revealDownload();
     tickYouAudio();
-    updateLP();
-    updateThresh();
-    updateOrder();
-    manifestoParallax();
-    updateChapter();
+
+    // Phone inner-scroll lerp — always runs so it converges after scroll stops
+    updateLP(dt);
+    updateThresh(dt);
+
+    // Scroll-driven parallax/chapter — skip when page is idle (no layout reads needed)
+    if (scrollChanged || firstPass) {
+      updateOrder();
+      manifestoParallax();
+      updateChapter();
+    }
+
     firstPass = false;
   }
 
-  window.addEventListener("resize", function() { measureSectionOffsets(); check(); orderBtlTop = 0; });
-  window.addEventListener("load", function() { measureSectionOffsets(); check(); });
-  // continuous RAF loop — keeps phone-scroll parallax smooth on iOS
-  (function loop() { check(); requestAnimationFrame(loop); })();
+  window.addEventListener("resize", function() { measureSectionOffsets(); measureMaxScrolls(); check(); orderBtlTop = 0; });
+  window.addEventListener("load", function() { measureSectionOffsets(); measureMaxScrolls(); check(); });
+  // continuous RAF loop with delta-time — frame-rate-independent lerp
+  (function loop(t) {
+    var dt = lastFrameTime > 0 ? Math.min((t - lastFrameTime) / 1000, 0.1) : 0.016;
+    lastFrameTime = t;
+    check(dt);
+    requestAnimationFrame(loop);
+  })(0);
   // settle passes for fonts / layout
-  setTimeout(function() { measureSectionOffsets(); check(); }, 120);
-  setTimeout(function() { measureSectionOffsets(); check(); }, 600);
+  setTimeout(function() { measureSectionOffsets(); measureMaxScrolls(); check(); }, 120);
+  setTimeout(function() { measureSectionOffsets(); measureMaxScrolls(); check(); }, 600);
 
   /* ---- early access modal ---- */
   var ea = document.getElementById("ea");
