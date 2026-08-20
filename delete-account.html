@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delete Your Account — blur</title>
+<meta name="description" content="Permanently delete your Blur account and its data.">
+<meta name="robots" content="index,follow">
+<link rel="icon" type="image/png" href="assets/icons/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --dark:#1A1714;--light:#F5F0E8;--gold:#C9A96E;
+  --text:#E8E2D9;--muted:#8A8278;--dark-2:#2A2520;
+  --danger:#E05A4A;--success:#8FCF88;
+  --serif:"Cormorant Garamond",Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{background:var(--dark);color:var(--text);font-family:"Inter",system-ui,sans-serif;font-weight:300;line-height:1.7}
+.page{max-width:680px;margin:0 auto;padding:clamp(72px,10vh,120px) clamp(24px,6vw,52px) clamp(80px,12vh,140px)}
+.back{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:"Inter",sans-serif;font-size:.82rem;letter-spacing:.06em;
+  color:var(--muted);text-decoration:none;margin-bottom:clamp(48px,7vh,80px);
+  transition:color .2s;
+}
+.back:hover{color:var(--text)}
+.back-mark{font-family:var(--serif);font-weight:400;font-size:1.1rem;color:var(--light)}
+.back-mark span{color:var(--gold)}
+h1{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(2.4rem,5.5vw,3.6rem);
+  line-height:1.08;letter-spacing:-.01em;color:var(--light);
+  margin-bottom:clamp(10px,1.5vh,18px);
+}
+.meta{
+  font-family:"Inter",sans-serif;font-size:.74rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);
+  margin-bottom:clamp(36px,5vh,56px);
+}
+.summary{
+  border:1px solid rgba(201,169,110,.22);border-radius:12px;
+  padding:clamp(18px,2.5vh,26px) clamp(20px,3vw,28px);
+  background:rgba(201,169,110,.05);
+  margin-bottom:clamp(36px,5vh,54px);
+}
+.summary p{
+  font-family:"Inter",sans-serif;font-weight:300;font-size:.94rem;
+  line-height:1.65;color:var(--text);margin:0;text-wrap:pretty;
+}
+h2{
+  font-family:var(--serif);font-weight:400;font-size:1.4rem;
+  color:var(--light);letter-spacing:.005em;
+  margin:clamp(36px,5vh,52px) 0 14px;
+}
+p{
+  font-family:"Inter",sans-serif;font-weight:300;font-size:.93rem;
+  line-height:1.72;color:var(--muted);margin-bottom:14px;max-width:62ch;text-wrap:pretty;
+}
+p:last-child{margin-bottom:0}
+a{color:var(--gold);text-decoration:none;transition:opacity .2s}
+a:hover{opacity:.72}
+ul{margin:10px 0 14px;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+li{
+  font-family:"Inter",sans-serif;font-weight:300;font-size:.93rem;
+  line-height:1.6;color:var(--muted);padding-left:1.6em;position:relative;
+  max-width:60ch;text-wrap:pretty;
+}
+li::before{content:"—";position:absolute;left:0;color:var(--gold);opacity:.7}
+li strong{color:var(--text);font-weight:400}
+hr{border:none;border-top:1px solid rgba(138,130,120,.14);margin:clamp(36px,5vh,52px) 0}
+.foot-note{font-size:.82rem;color:rgba(138,130,120,.8)}
+
+/* Functional card — sign in + delete */
+.card{
+  border:1px solid rgba(201,169,110,.22);border-radius:12px;
+  padding:clamp(20px,3vh,28px) clamp(20px,3vw,28px);
+  background:rgba(255,255,255,.02);
+  margin:clamp(36px,5vh,52px) 0;
+}
+.card h3{
+  font-family:var(--serif);font-weight:400;font-size:1.2rem;
+  color:var(--light);margin-bottom:8px;
+}
+.card > p{font-size:.88rem;margin-bottom:0}
+label{
+  display:block;font-family:"Inter",sans-serif;font-size:.78rem;font-weight:600;
+  letter-spacing:.03em;color:var(--muted);margin:18px 0 7px;
+}
+input[type="email"],input[type="password"]{
+  width:100%;padding:11px 13px;font-size:.92rem;font-family:"Inter",sans-serif;
+  border-radius:8px;border:1px solid rgba(255,255,255,.14);
+  background:var(--dark-2);color:var(--text);
+}
+input[type="email"]:focus,input[type="password"]:focus{outline:1px solid var(--gold);border-color:var(--gold)}
+button{
+  font:inherit;font-family:"Inter",sans-serif;font-weight:600;font-size:.9rem;
+  letter-spacing:.02em;padding:12px 18px;border-radius:999px;border:none;
+  cursor:pointer;width:100%;margin-top:16px;transition:opacity .2s;
+}
+button:hover:not(:disabled){opacity:.88}
+button:disabled{opacity:.45;cursor:default}
+.btn-primary{background:var(--gold);color:var(--dark)}
+.btn-danger{background:var(--danger);color:#1a0f0c}
+.btn-secondary{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,.14)}
+.status{
+  font-family:"Inter",sans-serif;font-size:.85rem;margin-top:14px;
+  padding:11px 13px;border-radius:8px;display:none;line-height:1.5;
+}
+.status.show{display:block}
+.status.error{background:rgba(224,90,74,.12);color:var(--danger)}
+.status.success{background:rgba(143,207,136,.12);color:var(--success)}
+.status.info{background:rgba(255,255,255,.05);color:var(--text)}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <a href="/" class="back">
+    <span aria-label="back">←</span>
+    <span class="back-mark">blur<span>.</span></span>
+  </a>
+
+  <h1>Delete Your Account</h1>
+  <p class="meta">Available without the app installed</p>
+
+  <div class="summary">
+    <p>You can permanently delete your Blur account and its data from this page. Deletion of your profile, photos, and access is immediate. This cannot be undone.</p>
+  </div>
+
+  <h2>What happens immediately</h2>
+  <ul>
+    <li><strong>Your profile disappears</strong> from Discover, matches, and search right away.</li>
+    <li><strong>Your photos are deleted</strong> from our storage.</li>
+    <li><strong>You're signed out everywhere</strong> — every device, every session, immediately revoked.</li>
+    <li><strong>Pending requests end</strong> — any reveal requests, vibe replies, or active matches involving you are cancelled.</li>
+    <li><strong>Existing conversations become read-only</strong> for whoever you were talking to — history stays visible to them, but no further messages can be sent by either side.</li>
+  </ul>
+
+  <h2>What's retained, and why</h2>
+  <p>A small amount of information is kept for up to <strong style="color:var(--text)">30 days</strong> after deletion, then permanently anonymized or removed by an automated process. This includes your account record, message history, and any identity verification documents you submitted.</p>
+  <p>This window exists for legitimate reasons only: resolving fraud or safety reports that were already in progress, keeping other users' own records (like a report they filed, or a shared match) intact rather than orphaned, and meeting legal retention obligations. Nothing in this window is used to keep operating your profile — Blur cannot be un-deleted, and no one can see or match with you during it.</p>
+  <p>After 30 days, your identifying details (name, bio, email) are replaced with a non-identifying marker and your message content is removed. See our <a href="https://blur-profile-releases-980195620602.s3.ap-south-2.amazonaws.com/legal/privacy.html">Privacy Policy</a> for the full data-handling policy.</p>
+
+  <div class="card" id="login-card">
+    <h3>Confirm it's you</h3>
+    <p>Sign in with your Blur account. This page only ever deletes the account you sign in as — there's no way to specify a different one.</p>
+    <label for="email">Email</label>
+    <input type="email" id="email" autocomplete="email" required>
+    <label for="password">Password</label>
+    <input type="password" id="password" autocomplete="current-password" required>
+    <button class="btn-primary" id="login-btn" type="button">Sign In</button>
+    <div class="status" id="login-status"></div>
+  </div>
+
+  <div class="card hidden" id="confirm-card">
+    <h3>Delete your account</h3>
+    <p>Signed in as <strong style="color:var(--text)" id="confirmed-email"></strong>. This is the final step — deletion happens immediately when you press the button below.</p>
+    <button class="btn-danger" id="delete-btn" type="button">Permanently Delete My Account</button>
+    <button class="btn-secondary" id="cancel-btn" type="button">Cancel</button>
+    <div class="status" id="delete-status"></div>
+  </div>
+
+  <h2>Prefer not to delete?</h2>
+  <p>You can pause or log out of your profile from within the app instead — deletion is meant for when you're certain. Accounts with two-factor authentication enabled must delete from the Blur app; this page doesn't yet support the 2FA step.</p>
+
+  <hr>
+  <p class="foot-note">Need help instead? <a href="mailto:support@blurapp.in">support@blurapp.in</a> &nbsp;·&nbsp; <a href="/privacy">Privacy Policy</a> &nbsp;·&nbsp; <a href="/terms">Terms of Use</a> &nbsp;·&nbsp; <a href="/">← blur.</a></p>
+
+</div>
+
+<script>
+(function () {
+  // Production gateway only — this page has one job (delete a Blur account) and is
+  // deployed as a single static file, not built per-environment like the app.
+  var API_BASE = 'https://api.blurmeet.com';
+
+  var emailInput = document.getElementById('email');
+  var passwordInput = document.getElementById('password');
+  var loginBtn = document.getElementById('login-btn');
+  var loginStatus = document.getElementById('login-status');
+  var loginCard = document.getElementById('login-card');
+
+  var confirmCard = document.getElementById('confirm-card');
+  var confirmedEmail = document.getElementById('confirmed-email');
+  var deleteBtn = document.getElementById('delete-btn');
+  var cancelBtn = document.getElementById('cancel-btn');
+  var deleteStatus = document.getElementById('delete-status');
+
+  // Held only in memory for the lifetime of this page load — never written to
+  // localStorage/sessionStorage/cookies. Closing or refreshing the tab discards it.
+  var accessToken = null;
+
+  function showStatus(el, kind, message) {
+    el.className = 'status show ' + kind;
+    el.textContent = message;
+  }
+
+  function setLoading(btn, loading, label) {
+    btn.disabled = loading;
+    btn.textContent = loading ? 'Please wait…' : label;
+  }
+
+  loginBtn.addEventListener('click', function () {
+    var email = emailInput.value.trim();
+    var password = passwordInput.value;
+    if (!email || !password) {
+      showStatus(loginStatus, 'error', 'Enter your email and password.');
+      return;
+    }
+
+    setLoading(loginBtn, true, 'Sign In');
+    loginStatus.className = 'status';
+
+    fetch(API_BASE + '/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, password: password }),
+    })
+      .then(function (res) {
+        return res.json().then(function (body) { return { ok: res.ok, status: res.status, body: body }; });
+      })
+      .then(function (result) {
+        setLoading(loginBtn, false, 'Sign In');
+        if (!result.ok) {
+          showStatus(loginStatus, 'error', 'Sign-in failed. Check your email and password and try again.');
+          return;
+        }
+        if (result.body && result.body.mfaRequired) {
+          // This page does not implement a second-factor challenge — accounts
+          // with 2FA enabled must delete from the mobile app instead, where the
+          // MFA flow already exists and is fully tested.
+          showStatus(loginStatus, 'info',
+            'Your account has two-factor authentication enabled. Please delete your account from the Blur app instead — this page does not yet support the 2FA step.');
+          return;
+        }
+        if (!result.body || !result.body.accessToken) {
+          showStatus(loginStatus, 'error', 'Sign-in failed. Please try again.');
+          return;
+        }
+
+        accessToken = result.body.accessToken;
+        passwordInput.value = ''; // never held longer than needed to submit the request
+        confirmedEmail.textContent = result.body.email || email;
+        loginCard.classList.add('hidden');
+        confirmCard.classList.remove('hidden');
+      })
+      .catch(function () {
+        setLoading(loginBtn, false, 'Sign In');
+        showStatus(loginStatus, 'error', 'Could not reach Blur. Check your connection and try again.');
+      });
+  });
+
+  cancelBtn.addEventListener('click', function () {
+    accessToken = null;
+    confirmCard.classList.add('hidden');
+    loginCard.classList.remove('hidden');
+    emailInput.value = '';
+    passwordInput.value = '';
+    loginStatus.className = 'status';
+    deleteStatus.className = 'status';
+  });
+
+  deleteBtn.addEventListener('click', function () {
+    if (!accessToken) {
+      showStatus(deleteStatus, 'error', 'Your session expired. Please sign in again.');
+      confirmCard.classList.add('hidden');
+      loginCard.classList.remove('hidden');
+      return;
+    }
+    if (!window.confirm('This permanently deletes your Blur account and cannot be undone. Continue?')) {
+      return;
+    }
+
+    setLoading(deleteBtn, true, 'Permanently Delete My Account');
+    cancelBtn.disabled = true;
+
+    // DELETE /profiles/me — the exact same endpoint the app itself calls, scoped
+    // entirely by the JWT this page obtained by signing in above. There is no
+    // account-ID parameter anywhere in this request for the backend to trust or
+    // for this page to get wrong — it is architecturally impossible for this flow
+    // to delete anyone other than whoever just authenticated.
+    fetch(API_BASE + '/profile/profiles/me', {
+      method: 'DELETE',
+      headers: { 'Authorization': 'Bearer ' + accessToken },
+    })
+      .then(function (res) {
+        if (res.status === 204 || res.ok) {
+          accessToken = null;
+          confirmCard.classList.add('hidden');
+          showStatus(deleteStatus, 'success', 'Your account has been deleted.');
+          deleteStatus.classList.remove('hidden');
+        } else {
+          setLoading(deleteBtn, false, 'Permanently Delete My Account');
+          cancelBtn.disabled = false;
+          showStatus(deleteStatus, 'error', 'Something went wrong. Please try again, or contact support.');
+        }
+      })
+      .catch(function () {
+        setLoading(deleteBtn, false, 'Permanently Delete My Account');
+        cancelBtn.disabled = false;
+        showStatus(deleteStatus, 'error', 'Could not reach Blur. Check your connection and try again.');
+      });
+  });
+})();
+</script>
+</body>
+</html>
