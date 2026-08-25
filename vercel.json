@@ -4,6 +4,7 @@
     { "source": "/our-story", "destination": "/about.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
     { "source": "/terms", "destination": "/terms.html" },
-    { "source": "/delete-account", "destination": "/delete-account.html" }
+    { "source": "/delete-account", "destination": "/delete-account.html" },
+    { "source": "/child-safety", "destination": "/child-safety.html" }
   ]
 }
