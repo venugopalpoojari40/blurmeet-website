@@ -129,32 +129,33 @@ button:disabled{opacity:.45;cursor:default}
   <p class="meta">Available without the app installed</p>
 
   <div class="summary">
-    <p>You can permanently delete your Blur account from this page. Your account is shut down immediately, and deletion can't be undone.</p>
+    <p>You can permanently delete your Blur account from this page. Your profile is hidden right away, and deletion can't be undone.</p>
   </div>
 
-  <h2>What happens immediately</h2>
+  <h2>What happens right away</h2>
   <ul>
     <li><strong>Your profile disappears</strong> from Discover, matches, and Auto Match right away.</li>
-    <li><strong>Your photos are deleted</strong> from our storage.</li>
-    <li><strong>You're signed out everywhere</strong> — every device, every session, immediately revoked.</li>
+    <li><strong>Your photos stop being shown</strong> to anyone. They're erased with the rest of your data (below).</li>
+    <li><strong>You're signed out everywhere</strong> — every device and every session. Your sign-in stops working at once, or shortly after if our sign-in service is briefly unreachable.</li>
     <li><strong>Pending requests end</strong> — any reveal requests, vibe replies, or active matches involving you are cancelled.</li>
     <li><strong>Your conversations are removed for both people</strong> — from your chats and from the chats of everyone you talked to.</li>
+    <li><strong>Your name is removed</strong> from other members' notifications in Blur.</li>
   </ul>
 
   <h2>What happens next</h2>
-  <p>We then erase your profile, messages, matches, verification material and the rest of your Blur data from our active systems. This runs on our side; you don't need to sign in again.</p>
+  <p>We'll then erase your profile, photos, messages, matches, verification material and the rest of your Blur data from our active systems. This happens on our side; you don't need to sign in again.</p>
   <p>You can create a new account later. Your old profile, photos, chats and matches don't carry over — though some safety protections can (see below).</p>
-  <p>Subscribed through the App Store or Google Play? Cancel it there — deleting your account doesn't cancel an app-store subscription.</p>
+  <p>Blur doesn't sell subscriptions or purchases in the app. If you bought anything through Google Play or the App Store, deleting your account doesn't cancel it — manage it in the Google Play app under Payments &amp; subscriptions › Subscriptions, or on iPhone in Settings › your name › Subscriptions.</p>
 
   <h2>What we keep, and why</h2>
   <ul>
     <li>A minimal record that the account was deleted (no name or email), so the deletion stays applied even if a backup is ever restored.</li>
     <li>A record that you accepted our terms, and security logs of sign-ins and account changes, for a limited time.</li>
-    <li>If there's a safety report about you, erasing your data waits until a reviewer has decided on it. Safety reports that involve you, and moderators' decisions about them, stay with those cases.</li>
-    <li>If another member blocked you, or your account was restricted or reported, we keep a protected record of your sign-in details for a limited time, so those safety protections can still apply if you sign up again.</li>
-    <li>For a limited time, the people you talked to see a placeholder where your conversation was, so they can still report it.</li>
+    <li>If there's a safety report about you, erasing your data waits until a decision has been made on it. Safety reports that involve you, and moderators' decisions about them, stay with those cases — including any copies of messages or files kept as part of a report.</li>
+    <li>If another member blocked you, or your account was restricted or reported, we keep a protected record of your verified sign-in details for a limited time, so those safety protections can still apply if you sign up again.</li>
+    <li>For a limited time, the people you talked to see a placeholder where your conversation was — without your name or photo — so they can still report it.</li>
     <li>Copies in backups aren't erased instantly. If a backup is ever restored, your deletion is applied again.</li>
-    <li>Copies outside Blur — screenshots, saved photos, or notifications and emails already delivered — can't be recalled.</li>
+    <li>Copies outside Blur — screenshots, saved photos, or push notifications and emails already delivered — can't be recalled.</li>
   </ul>
   <p>Questions about your data: <a href="mailto:privacy@blurmeet.com">privacy@blurmeet.com</a>. See our <a href="/privacy">Privacy Policy</a> for the full data-handling policy.</p>
 
@@ -163,7 +164,8 @@ button:disabled{opacity:.45;cursor:default}
 
   <div class="card" id="login-card">
     <h3>Confirm it's you</h3>
-    <p>Sign in with your Blur account. This page only ever deletes the account you sign in as — there's no way to specify a different one.</p>
+    <p>Sign in with your Blur email and password. This page only ever deletes the account you sign in as — there's no way to specify a different one.</p>
+    <p>Signed up with Google or Apple? Your account has no Blur password, so it can't be signed in to here. Delete it in the app instead: Profile › Settings › Delete account &amp; data.</p>
     <label for="email">Email</label>
     <input type="email" id="email" autocomplete="email" required>
     <label for="password">Password</label>
@@ -184,10 +186,19 @@ button:disabled{opacity:.45;cursor:default}
 
   <div class="card hidden" id="confirm-card">
     <h3>Delete your account</h3>
-    <p>Signed in as <strong style="color:var(--text)" id="confirmed-email"></strong>. This is the final step — deletion happens immediately when you press the button below.</p>
+    <p>Signed in as <strong style="color:var(--text)" id="confirmed-email"></strong>. This is the final step — pressing the button below deletes your account.</p>
     <button class="btn-danger" id="delete-btn" type="button">Permanently Delete My Account</button>
     <button class="btn-secondary" id="cancel-btn" type="button">Cancel</button>
     <div class="status" id="delete-status"></div>
+  </div>
+
+  <!-- Shown once the server accepted the deletion — outside the cards it replaces, which are
+       hidden (the old success line lived inside the hidden confirm card and was never seen). -->
+  <div class="card hidden" id="done-card" role="status">
+    <h3>Your account has been deleted</h3>
+    <p id="done-access"></p>
+    <p>We'll erase your data from our active systems. If a safety report involves you, part of it waits for a decision on that report first. This happens on our side — you don't need to sign in or do anything else.</p>
+    <p class="hidden" id="done-reference-line">Your deletion reference: <strong style="color:var(--text)" id="done-reference"></strong>. Keep it if you contact us about this deletion.</p>
   </div>
 
   <h2>Prefer not to delete?</h2>
@@ -241,6 +252,41 @@ button:disabled{opacity:.45;cursor:default}
     restrictedCard.classList.add('hidden');
     loginCard.classList.remove('hidden');
     if (message) showStatus(loginStatus, 'error', message); else loginStatus.className = 'status';
+  }
+
+  var doneCard = document.getElementById('done-card');
+  var doneAccess = document.getElementById('done-access');
+  var doneReferenceLine = document.getElementById('done-reference-line');
+  var doneReference = document.getElementById('done-reference');
+
+  // The server's answer to an accepted deletion: 204 (older servers), or 202 with
+  // {"status":"ACCESS_REVOKED"|"PENDING","reference":"…"}. Never rejects: a body that does not
+  // parse is an answer without a reference, not a failure — the deletion was accepted.
+  function readDeletionAnswer(res) {
+    if (res.status !== 202) return Promise.resolve({});
+    return res.json().then(
+      function (b) { return b && typeof b === 'object' ? b : {}; },
+      function () { return {}; });
+  }
+
+  // PENDING: the sign-in shutdown is still being retried (auth was briefly unreachable), so the
+  // page says the sign-in stops shortly rather than claiming it already has. The reference is
+  // set as text, never as markup.
+  function showDeleted(answer) {
+    loginCard.classList.add('hidden');
+    confirmCard.classList.add('hidden');
+    restrictedCard.classList.add('hidden');
+    doneAccess.textContent = answer.status === 'PENDING'
+      ? 'Your profile is no longer on Blur, and your sign-in will stop working shortly.'
+      : 'Your profile is no longer on Blur, and you\'ve been signed out on every device.';
+    var ref = typeof answer.reference === 'string' ? answer.reference.trim() : '';
+    if (ref && ref.length <= 128) {
+      doneReference.textContent = ref;
+      doneReferenceLine.classList.remove('hidden');
+    } else {
+      doneReferenceLine.classList.add('hidden');
+    }
+    doneCard.classList.remove('hidden');
   }
 
   function showStatus(el, kind, message) {
@@ -329,7 +375,7 @@ button:disabled{opacity:.45;cursor:default}
       backToSignIn('For your security, this step has timed out. Please sign in again.');
       return;
     }
-    if (!window.confirm('This permanently deletes your Blur account and cannot be undone. Continue?')) {
+    if (!window.confirm('Delete your Blur account? This is permanent and can\'t be undone.')) {
       return;
     }
 
@@ -351,7 +397,7 @@ button:disabled{opacity:.45;cursor:default}
           forgetDeletionToken();
           restrictedDeleteBtn.classList.add('hidden');
           restrictedCancelBtn.classList.add('hidden');
-          showStatus(restrictedStatus, 'success', 'Your account has been deleted.');
+          return readDeletionAnswer(res).then(showDeleted);
         } else if (res.status === 401) {
           backToSignIn('For your security, this step has timed out. Please sign in again.');
         } else {
@@ -382,7 +428,7 @@ button:disabled{opacity:.45;cursor:default}
       loginCard.classList.remove('hidden');
       return;
     }
-    if (!window.confirm('This permanently deletes your Blur account and cannot be undone. Continue?')) {
+    if (!window.confirm('Delete your Blur account? This is permanent and can\'t be undone.')) {
       return;
     }
 
@@ -401,9 +447,7 @@ button:disabled{opacity:.45;cursor:default}
       .then(function (res) {
         if (res.status === 204 || res.ok) {
           accessToken = null;
-          confirmCard.classList.add('hidden');
-          showStatus(deleteStatus, 'success', 'Your account has been deleted.');
-          deleteStatus.classList.remove('hidden');
+          return readDeletionAnswer(res).then(showDeleted);
         } else {
           setLoading(deleteBtn, false, 'Permanently Delete My Account');
           cancelBtn.disabled = false;
