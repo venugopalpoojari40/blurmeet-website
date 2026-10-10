@@ -169,6 +169,16 @@ button:disabled{opacity:.45;cursor:default}
     <div class="status" id="login-status"></div>
   </div>
 
+  <!-- A SUSPENDED or BANNED member who signed in with the right password: no session, only the
+       short-lived deletion token the sign-in earned (kept in a script variable, never stored). -->
+  <div class="card hidden" id="restricted-card">
+    <h3>Your account is restricted</h3>
+    <p>Your account is restricted. You can still delete it permanently. Deleting it doesn't lift the restriction or restore access.</p>
+    <button class="btn-danger" id="restricted-delete-btn" type="button">Permanently Delete My Account</button>
+    <button class="btn-secondary" id="restricted-cancel-btn" type="button">Cancel</button>
+    <div class="status" id="restricted-status"></div>
+  </div>
+
   <div class="card hidden" id="confirm-card">
     <h3>Delete your account</h3>
     <p>Signed in as <strong style="color:var(--text)" id="confirmed-email"></strong>. This is the final step — deletion happens immediately when you press the button below.</p>
@@ -207,6 +217,29 @@ button:disabled{opacity:.45;cursor:default}
   // localStorage/sessionStorage/cookies. Closing or refreshing the tab discards it.
   var accessToken = null;
 
+  // A restricted (suspended or banned) member gets no session from signing in — only a
+  // short-lived deletion token that can ask for this account's deletion and nothing else.
+  // Same rule as the access token: this variable only, never storage, never the URL, never
+  // logged; forgotten on cancel, on success, on a refusal, and when it expires.
+  var restrictedCard = document.getElementById('restricted-card');
+  var restrictedDeleteBtn = document.getElementById('restricted-delete-btn');
+  var restrictedCancelBtn = document.getElementById('restricted-cancel-btn');
+  var restrictedStatus = document.getElementById('restricted-status');
+  var deletionToken = null;
+  var deletionTokenTimer = null;
+
+  function forgetDeletionToken() {
+    deletionToken = null;
+    if (deletionTokenTimer) { clearTimeout(deletionTokenTimer); deletionTokenTimer = null; }
+  }
+
+  function backToSignIn(message) {
+    forgetDeletionToken();
+    restrictedCard.classList.add('hidden');
+    loginCard.classList.remove('hidden');
+    if (message) showStatus(loginStatus, 'error', message); else loginStatus.className = 'status';
+  }
+
   function showStatus(el, kind, message) {
     el.className = 'status show ' + kind;
     el.textContent = message;
@@ -238,6 +271,21 @@ button:disabled{opacity:.45;cursor:default}
       })
       .then(function (result) {
         setLoading(loginBtn, false, 'Sign In');
+        // The right password on a restricted account: no session, but the offer to delete it.
+        if (result.status === 403 && result.body && result.body.code === 'ACCOUNT_RESTRICTED'
+            && typeof result.body.deletionToken === 'string' && result.body.deletionToken) {
+          forgetDeletionToken();
+          deletionToken = result.body.deletionToken;
+          var ttl = Number(result.body.deletionTokenExpiresIn);
+          deletionTokenTimer = setTimeout(forgetDeletionToken, (ttl > 0 && ttl <= 600 ? ttl : 600) * 1000);
+          passwordInput.value = ''; // never held longer than needed to submit the request
+          loginCard.classList.add('hidden');
+          restrictedStatus.className = 'status';
+          restrictedDeleteBtn.classList.remove('hidden');
+          restrictedCancelBtn.classList.remove('hidden');
+          restrictedCard.classList.remove('hidden');
+          return;
+        }
         if (!result.ok) {
           showStatus(loginStatus, 'error', 'Sign-in failed. Check your email and password and try again.');
           return;
@@ -264,6 +312,53 @@ button:disabled{opacity:.45;cursor:default}
       .catch(function () {
         setLoading(loginBtn, false, 'Sign In');
         showStatus(loginStatus, 'error', 'Could not reach Blur. Check your connection and try again.');
+      });
+  });
+
+  restrictedCancelBtn.addEventListener('click', function () {
+    emailInput.value = '';
+    passwordInput.value = '';
+    backToSignIn(null);
+  });
+
+  restrictedDeleteBtn.addEventListener('click', function () {
+    if (!deletionToken) {
+      backToSignIn('For your security, this step has timed out. Please sign in again.');
+      return;
+    }
+    if (!window.confirm('This permanently deletes your Blur account and cannot be undone. Continue?')) {
+      return;
+    }
+
+    setLoading(restrictedDeleteBtn, true, 'Permanently Delete My Account');
+    restrictedCancelBtn.disabled = true;
+
+    // POST /profiles/deletion-requests — the deletion endpoint for an account with no session.
+    // The token in the body is the whole credential: it names the one account whose password was
+    // just proven, and there is no account parameter anywhere for this page to get wrong.
+    fetch(API_BASE + '/profile/profiles/deletion-requests', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ deletionToken: deletionToken }),
+    })
+      .then(function (res) {
+        setLoading(restrictedDeleteBtn, false, 'Permanently Delete My Account');
+        restrictedCancelBtn.disabled = false;
+        if (res.status === 204 || res.ok) {
+          forgetDeletionToken();
+          restrictedDeleteBtn.classList.add('hidden');
+          restrictedCancelBtn.classList.add('hidden');
+          showStatus(restrictedStatus, 'success', 'Your account has been deleted.');
+        } else if (res.status === 401) {
+          backToSignIn('For your security, this step has timed out. Please sign in again.');
+        } else {
+          showStatus(restrictedStatus, 'error', 'Something went wrong. Please try again, or contact support.');
+        }
+      })
+      .catch(function () {
+        setLoading(restrictedDeleteBtn, false, 'Permanently Delete My Account');
+        restrictedCancelBtn.disabled = false;
+        showStatus(restrictedStatus, 'error', 'Could not reach Blur. Check your connection and try again.');
       });
   });
 
