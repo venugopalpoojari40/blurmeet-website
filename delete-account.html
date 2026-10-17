@@ -144,7 +144,7 @@ button:disabled{opacity:.45;cursor:default}
 
   <h2>What happens next</h2>
   <p>We'll erase the rest of your Blur data — your profile, messages, photos you sent in chats, matches, verification material and everything else — from our active systems later. This happens on our side; you don't need to sign in again.</p>
-  <p>You can create a new account later. The email address and any Google or Apple sign-in you registered with stay locked for 180 days after the deletion: they can't be used to sign in or to sign up again until then, and are then removed. Your phone number and password are removed at once. Your old profile, photos, chats and matches don't carry over — though some safety protections can (see below).</p>
+  <p>You can create a new account straight away, with the same email or Google or Apple sign-in or a different one: a new, empty profile; your old profile, photos, chats and matches don't carry over — though some safety protections can (see below). We keep the email address and any Google or Apple sign-in you registered with, and the date you joined, in a separate restricted record for 180 days after the deletion, then delete it; it's never used to sign you in or to show you to anyone. Your phone number and password are removed at once.</p>
   <p>Blur doesn't sell subscriptions or purchases in the app. If you bought anything through Google Play or the App Store, deleting your account doesn't cancel it — manage it in the Google Play app under Payments &amp; subscriptions › Subscriptions, or on iPhone in Settings › your name › Subscriptions.</p>
 
   <h2>What we keep, and why</h2>
@@ -230,6 +230,16 @@ button:disabled{opacity:.45;cursor:default}
   // Held only in memory for the lifetime of this page load — never written to
   // localStorage/sessionStorage/cookies. Closing or refreshing the tab discards it.
   var accessToken = null;
+  // The signed-in deletion needs fresh proof too (WP-R): right after a proven sign-in this page asks
+  // auth for the short-lived deletion token with the password just typed, and DELETE /profiles/me
+  // carries it. Same rules as the tokens above: memory only, forgotten on cancel, success and expiry.
+  var sessionDeletionToken = null;
+  var sessionDeletionTimer = null;
+
+  function forgetSessionDeletionToken() {
+    sessionDeletionToken = null;
+    if (sessionDeletionTimer) { clearTimeout(sessionDeletionTimer); sessionDeletionTimer = null; }
+  }
 
   // A restricted (suspended or banned) member gets no session from signing in — only a
   // short-lived deletion token that can ask for this account's deletion and nothing else.
@@ -354,9 +364,36 @@ button:disabled{opacity:.45;cursor:default}
 
         accessToken = result.body.accessToken;
         passwordInput.value = ''; // never held longer than needed to submit the request
-        confirmedEmail.textContent = result.body.email || email;
-        loginCard.classList.add('hidden');
-        confirmCard.classList.remove('hidden');
+        var signedInEmail = result.body.email || email;
+        // POST /me/deletion-token — the session alone no longer deletes: the password just proven is
+        // sent once more, for the deletion token. Never stored; the local copy ends with this request.
+        setLoading(loginBtn, true, 'Sign In');
+        return fetch(API_BASE + '/auth/me/deletion-token', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + accessToken },
+          body: JSON.stringify({ stepUp: { currentPassword: password } }),
+        })
+          .then(function (res) {
+            return res.json().then(
+              function (body) { return { ok: res.ok, body: body }; },
+              function () { return { ok: false, body: null }; });
+          })
+          .then(function (issued) {
+            setLoading(loginBtn, false, 'Sign In');
+            password = null;
+            if (!issued.ok || !issued.body || typeof issued.body.deletionToken !== 'string' || !issued.body.deletionToken) {
+              accessToken = null;
+              showStatus(loginStatus, 'error', 'We couldn\'t confirm it\'s you. Nothing was deleted. Please sign in again.');
+              return;
+            }
+            forgetSessionDeletionToken();
+            sessionDeletionToken = issued.body.deletionToken;
+            var ttl = Number(issued.body.deletionTokenExpiresIn);
+            sessionDeletionTimer = setTimeout(forgetSessionDeletionToken, (ttl > 0 && ttl <= 600 ? ttl : 600) * 1000);
+            confirmedEmail.textContent = signedInEmail;
+            loginCard.classList.add('hidden');
+            confirmCard.classList.remove('hidden');
+          });
       })
       .catch(function () {
         setLoading(loginBtn, false, 'Sign In');
@@ -413,6 +450,7 @@ button:disabled{opacity:.45;cursor:default}
 
   cancelBtn.addEventListener('click', function () {
     accessToken = null;
+    forgetSessionDeletionToken();
     confirmCard.classList.add('hidden');
     loginCard.classList.remove('hidden');
     emailInput.value = '';
@@ -422,8 +460,10 @@ button:disabled{opacity:.45;cursor:default}
   });
 
   deleteBtn.addEventListener('click', function () {
-    if (!accessToken) {
-      showStatus(deleteStatus, 'error', 'Your session expired. Please sign in again.');
+    if (!accessToken || !sessionDeletionToken) {
+      accessToken = null;
+      forgetSessionDeletionToken();
+      showStatus(loginStatus, 'error', 'For your security, this step has timed out. Please sign in again.');
       confirmCard.classList.add('hidden');
       loginCard.classList.remove('hidden');
       return;
@@ -440,14 +480,26 @@ button:disabled{opacity:.45;cursor:default}
     // account-ID parameter anywhere in this request for the backend to trust or
     // for this page to get wrong — it is architecturally impossible for this flow
     // to delete anyone other than whoever just authenticated.
+    // WP-R: the body carries the deletion token the sign-in's step-up earned; without it the server
+    // refuses (403 REAUTH_REQUIRED) and deletes nothing.
     fetch(API_BASE + '/profile/profiles/me', {
       method: 'DELETE',
-      headers: { 'Authorization': 'Bearer ' + accessToken },
+      headers: { 'Authorization': 'Bearer ' + accessToken, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ deletionToken: sessionDeletionToken }),
     })
       .then(function (res) {
         if (res.status === 204 || res.ok) {
           accessToken = null;
+          forgetSessionDeletionToken();
           return readDeletionAnswer(res).then(showDeleted);
+        } else if (res.status === 403 || res.status === 401) {
+          accessToken = null;
+          forgetSessionDeletionToken();
+          setLoading(deleteBtn, false, 'Permanently Delete My Account');
+          cancelBtn.disabled = false;
+          confirmCard.classList.add('hidden');
+          loginCard.classList.remove('hidden');
+          showStatus(loginStatus, 'error', 'For your security, this step has timed out. Nothing was deleted. Please sign in again.');
         } else {
           setLoading(deleteBtn, false, 'Permanently Delete My Account');
           cancelBtn.disabled = false;
